@@ -123,7 +123,7 @@ local function template(data)
       -- '<link rel="stylesheet" href="https://code.cdn.mozilla.net/fonts/fira.css">',
      h.link {rel="alternate",  type="application/rss+xml", href= T "feed.rss"},
       h.link{rel="stylesheet", type="text/css", href="/mini-knihovna.css"},
-      h.link{rel="stylesheet", type="text/css", href="/style.css"},
+      h.link{rel="stylesheet", type="text/css", href="/css/style.css"},
       h.link{rel="stylesheet", type="text/css", href="/media.css"},
       custom_styles(data),
       [[
