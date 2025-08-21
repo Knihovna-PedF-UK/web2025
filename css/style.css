@@ -1,1 +1,132 @@
-body {max-width: 80rem; margin: 0 auto;}
+
+@font-face {
+  font-family: "Moderat";
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://ktv.pedf.cuni.cz/wp-content/uploads/sites/6/2023/02/Moderat-Regular-1.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: "Moderat";
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://ktv.pedf.cuni.cz/wp-content/uploads/sites/6/2023/02/Moderat-Medium-1.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: "Moderat";
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://ktv.pedf.cuni.cz/wp-content/uploads/sites/6/2023/02/Moderat-Bold-1.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: "Moderat";
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://ktv.pedf.cuni.cz/wp-content/uploads/sites/6/2023/02/Moderat-Black-1.woff2) format("woff2");
+}
+
+body {
+  font-family: "Moderat", Moderat, Arial, Helvetica, sans-serif;
+  max-width: 120ch; 
+  margin: 0 auto; 
+  border: 1px solid black;
+  line-height: 1.6;
+  font-size: 1rem; /* 16px */
+  color: #222;
+  background-color: #fff;
+  padding: 1rem;
+  margin: 0 auto;
+}
+header, main, footer {border: 1px solid black;}
+
+
+/* === CSS Reset === */
+/* Odstranění výchozích marginů/paddingů a sjednocení box modelu */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Odstranění defaultních stylů seznamů */
+ul,
+ol {
+  list-style: none;
+  padding-left: 1.5rem;
+}
+
+/* Odstranění podtržení odkazů v resetu (vrátíme později) */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Obrázky a média max. na šířku rodiče */
+img,
+video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Tabulky bez mezírek */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* === Typografie === */
+html {
+  font-size: 100%; /* 16px jako základ (1rem = 16px) */
+  -webkit-text-size-adjust: 100%; /* lepší zoom na mobilech */
+}
+
+
+/* Nadpisy */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.25;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+h1 { font-size: 2rem; }   /* 32px */
+h2 { font-size: 1.5rem; } /* 24px */
+h3 { font-size: 1.25rem; }/* 20px */
+h4 { font-size: 1.125rem; }
+h5 { font-size: 1rem; }
+h6 { font-size: 0.875rem; }
+
+/* Odstavce a seznamy */
+p, ul, ol, blockquote {
+  margin-bottom: 1rem;
+}
+
+/* Odkazy */
+a {
+  color: #0055cc;
+}
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+
+/* Formuláře */
+input, button, textarea, select {
+  font: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+/* Zvýraznění */
+strong {
+  font-weight: 600;
+}
+em {
+  font-style: italic;
+}
+

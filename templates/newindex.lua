@@ -66,6 +66,44 @@ local function print_updates(T, data)
   return " (" ..data[1].date .."): " .. table.concat(t , ", ")
 end
 
+local function search_box(h, T)
+  return div {class="top-searchbox",
+  div{class="tabs searchbox", 
+  tab("ukaz-sbox", T "UKAŽ", 
+  h.form{ id="ebscohostCustomSearchBox",  action="https://cuni.primo.exlibrisgroup.com/discovery/search", onsubmit="searchPrimo()", method="get",enctype="application/x-www-form-urlencoded; charset=utf-8", target="_blank",
+  h.input{ type="hidden", name="vid", value="420CKIS_INST:UKAZ"},
+  h.input{ type="hidden", name="tab", value="Everything"},
+  h.input{ type="hidden", name="search_scope", value="MyInst_and_CI"},
+  h.input{ type="hidden", name="lang", value= T "cs"},
+  h.input{ type="hidden", name="mode", value="basic"},
+  h.input{ type="hidden", name="query", id="primoQuery"},
+  h.input{ type="hidden", name="pcAvailabiltyMode", value="true"},
+  -- tak nakonec fakt nechceme omezovat hledání jen na pedf
+  -- h.input{ type="hidden", name="mfacet", value="library,include,6986–112118530006986,1"},
+  h.input{type="search", id="primoQueryTemp", placeholder=T "Hledat knihy a články", style="max-width:12rem;width:95%;"},
+  -- h.input{id="go", title=T "hledat", onclick="searchPrimo()", type="button", value= T "hledat" ,alt= T "hledat"},
+  -- h.input{id="go", title=T "hledat", type="submit", class="small", value= T "?" ,alt= T "hledat"},
+  h.input{id="go", title=T "hledat", type="image", class="small", src="/img/search.svg" ,alt= T "hledat"},
+  -- h.div{class="bottom", T "<a href='https://knihovna.cuni.cz/rozcestnik/ukaz/'>Více informací</a> o vyhledávací službě Ukaž.", "<br />", T "<a href='eiz.htm#upozorneni'>Podmínky pro užití el. zdrojů</a>."},
+},"checked"
+      ),
+      tab("web-knihovny-sbox", T "Web knihovny", 
+      h.form{role="search", method="get", id="duckduckgo-search", action="https://duckduckgo.com/", target="_blank", 
+      h.input{type="hidden", name="sites" , value="knihovna.pedf.cuni.cz"},
+      h.input{type="hidden", name="k8" , value="#444444"},
+      h.input{type="hidden", name="k9" , value="#D51920"},
+      h.input{type="hidden", name="kt" , value="h"},
+      h.input{type="search", name="q" , maxlength="255", style="max-width:12rem;width:95%;", placeholder=T "Hledat na tomto webu"},
+      -- h.input{id="go", title=T "hledat", type="submit", class="small", value= T "?" ,alt= T "hledat"},
+      h.input{id="go", title=T "hledat", type="image", class="small", src="/img/search.svg" ,alt= T "hledat"},
+    }
+
+    -- h.iframe{src="https://duckduckgo.com/search.html?site=knihovna.pedf.cuni.cz&prefill=Search DuckDuckGo&kl=cs-cz&kae=t&ks=s",
+    -- style="overflow:hidden;margin:0;padding:0;width:408px;height:40px;"}
+  )
+}}
+  end
+
 -- function column
 local function template(doc )
   local title = doc.title
@@ -81,6 +119,8 @@ local function template(doc )
     -- close_element = div{class="closed", h.strong {T "Dnes má knihovna zavřeno: "}, T(close_comment)}
   end
   local contents = {
+    h.main {
+      search_box(h, T),
     row{
       medium(9,{
         medium(12, card(row{
@@ -317,7 +357,7 @@ medium(3,
     -- row{
     medium(12, card(
           h.div{ h.b {T "Nejnovější aktualizace"}, print_updates(T,doc.updates), "/",  h.a{href= T "aktualizace.html",  T "Starší"}}))
-},
+}},
 
 -- h.div{class="row", h.div {class="col-sm-12 col-md-10 col-md-offset-1",
 -- h.div{class="card", h.section {class="section ",
