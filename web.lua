@@ -278,6 +278,26 @@ local function html_builder(lang)
   )
 end
 
+local markdown_filter = make_filter("md$")
+local function markdown_builder(lang, aktual_root)
+  local lang_func = get_lang_func(lang)
+  local update_path = make_transformer(function(doc)
+    doc.relative_filepath = aktual_root .. "/" .. doc.relative_filepath:gsub("md$", "html")
+    doc.contents = discount(doc.contents)
+    return doc
+  end)
+  return comp(
+    apply_template,
+    -- archiv_items, 
+    update_path,
+    add_defaults,
+    lang_func,
+    markdown_filter,
+    only_root,
+    lettersmith.docs
+  )
+end
+
 local page_actualizations = {}
 
 -- we need to get the modified date from Git :/
@@ -511,8 +531,9 @@ if commands[argument] == nil then
   www_dir, 
   builder(paths), 
   html_builder()(paths),
-  nove_knihy_builder()(nove_knihy),
+  -- nove_knihy_builder()(nove_knihy),
   html_builder("eng")(en_path),
+  markdown_builder(nil, "aktuality")(aktuality),
   opening_builder("opening.html","eng")(en_path),
   opening_builder("provozni_doba.htm")(paths),
   css_builder(paths),
