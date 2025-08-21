@@ -534,6 +534,7 @@ if commands[argument] == nil then
   -- nove_knihy_builder()(nove_knihy),
   html_builder("eng")(en_path),
   markdown_builder(nil, "aktuality")(aktuality),
+  markdown_builder("eng", "news")(en_aktuality),
   opening_builder("opening.html","eng")(en_path),
   opening_builder("provozni_doba.htm")(paths),
   css_builder(paths),
