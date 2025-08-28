@@ -28,18 +28,32 @@ function Menu()
     local item = MenuItem(title, href)
     table.insert(self.items, item)
     self.last = item
-    return item
+    return self
   end
 
   -- přidání podmenu k poslední přidané položce
   function self:addchild(title, href)
-    if not self.last then
-      error("Není kam přidat child – žádná hlavní položka zatím neexistuje")
+    if self.last then
+      -- return ("Není kam přidat child – žádná hlavní položka zatím neexistuje")
+      self.last:addchild(title, href)
     end
-    return self.last:addchild(title, href)
+    return self
   end
 
-  return self
+   return setmetatable(self, {
+    __index = self.items,   -- umožní přístup přes menu[1], menu[2] ...
+    __len = function(t) return #t.items end,
+    __ipairs = function(t)  -- pro Lua 5.2
+      return ipairs(t.items)
+    end,
+    __pairs = function(t)   -- pro pairs()
+      return pairs(t.items)
+    end,
+    __iter = function(t)    -- pro Lua 5.4: for x in menu:iter() do ...
+      return ipairs(t.items)
+    end,
+  })
+  -- return self
 end
 
 -- ------------------------
@@ -60,9 +74,11 @@ end
 -- menu:add("Contact", "/contact"):addchild("Email", "/contact/email")
 
 -- -- výpis
--- for _, item in ipairs(menu.items) do
+-- for _, item in ipairs(menu) do
 --   print(item.title .. " -> " .. item.href)
 --   for _, child in ipairs(item.children) do
 --     print("   " .. child.title .. " -> " .. child.href)
 --   end
 -- end
+
+return Menu
