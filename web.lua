@@ -9,6 +9,8 @@ local translator = require "lib.translator"
 local lfs = require "lfs"
 local attributes = lfs.attributes
 
+local menulib = require "lib.menulib"
+
 -- local render_mustache = require("lettersmith.mustache").choose_mustache
 local html_dir = os.getenv("HTML_DIR") or "html"
 local www_dir = os.getenv("WWW_DIR") or "www"
@@ -74,6 +76,16 @@ local mainmenu = {
   menuitem("O knihovně", "informace.htm"),
 }
 
+mainmenu = menulib()
+mainmenu:add("Služby","sluzby.htm")
+:add("Rezervace knih", "rezervacni_boxy.html")
+:add("Publikační činnost", "biblio.html")
+:add("Časopisy", "periodika.htm")
+:add("Elektronické zdroje", "eiz.htm")
+:add("Závěrečné práce", "kvalifikacni_prace.htm")
+:add("Nákup publikací","objednavani_liter.htm")
+:add("O knihovně", "informace.htm")
+
 
 
 -- english version
@@ -135,7 +147,7 @@ local add_defaults = make_transformer(function(doc)
   -- don't use old styles in the documents
   doc.styles = doc.styles or {}
   doc.siteurl = siteurl
-  doc.obalky_dir = data_dir .. "/obalky/"
+  -- doc.obalky_dir = data_dir .. "/obalky/"
   if doc.file_path then
     -- this doesn't work in Github actions
     doc.modified = attributes(doc.file_path, "modification")
@@ -459,7 +471,7 @@ local newindex = function(filepath,menu, languagestrings, lang)
     print("mainmenu", menu)
     -- get updated pages
     local newest = page_actualizations[lang or ""]
-    local obalky = get_new_books(data_dir .. "/obalky", 9)
+    -- local obalky = get_new_books(data_dir .. "/obalky", 9)
     -- local languagestrings = languagestrings or {}
     return wrap_in_iter { title=title, menuitems =menu, date = date, items =
     items, relative_filepath = filepath, prov_doba = prov_doba, obalky =
