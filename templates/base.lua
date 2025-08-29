@@ -9,9 +9,9 @@ local h = h5tk.init(true)
 
 local a, p, div, header, section = h.a, h.p, h.div, h.header, h.section
 
-local menuitem = function(title, href)
+local menuitem = function(title, href, children)
   -- return h.menuitem{class="button", h.a{src=href, title}}
-  return h.a{href="/" .. href, class="button", title}
+  return h.li{role="menuitem", h.a{href="/" .. href, class="button", title}, children}
 end
 
 
@@ -33,9 +33,23 @@ local function mainmenu(menuitems)
   local t = {}
   local menuitems = menuitems or {}
   for _, item in ipairs(menuitems) do
-    table.insert(t, menuitem(item.title,  item.href))
+    if item.children and #item.children > 0 then
+      local children = h.ul{class="submenu", role="menu",
+      (function()
+        local ct = {}
+        for _, child in ipairs(item.children) do
+          table.insert(ct, menuitem(child.title, child.href))
+        end
+        return ct
+      end)()
+      }
+      table.insert(t, menuitem(item.title,  item.href, children))
+    else
+      table.insert(t, menuitem(item.title,  item.href))
+    end
+    -- table.insert(t, menuitem(item.title,  item.href, children))
   end
-  return t
+  return h.ul{class="menu", role="menubar", t}
 end
 
 
@@ -151,35 +165,27 @@ local function template(data)
     h.body{
       class="container",
       -- row {h.p {}},
-      h.header {class="logo-container", row{-- nepoužívat row class="row",
-      medium(9, 
-      -- medium(12, 
-      {
+      h.header {
         -- h.a{href="http://pedf.cuni.cz", h.img{src="img/logo_pedf_small.jpg"}},
-        h.a{ href= T "/index.html", h.img{role="banner",style="height:90%;",alt=T "Logo knihovny", src=T "/img/logo.svg"}},
-        -- h.a{
-        --   class="logo",
-        --   href="/",
-        --   h.div{"Ústřední"},
-        --   h.div{"KNIHOVNA"},
-        --   h.div{"PedF UK"}
-        -- }
-      }),
-      -- medium(3,
-            -- card{ 
-  -- )
-  }},
-      div{role="navigation",h.header {
-        -- h.a{class="logo",h.div{"Ústřední knihovna PedF UK"}},
-        -- h.menu{
-        -- h.nav{class="nav-collapse",
-        -- h.ul{
-        -- class="row",
-        h.span {class="logo", "&nbsp;"},
-        mainmenu(data.menuitems),
-        h.span{ a{href=(data.altlang or T "/index-en.html"),h.img{src=T "/img/gb.svg", alt=T "Switch to English version", style="width:1em;"}}} -- odkaz na anglickou verzi stránek
+        h.nav{["aria-label"]= T "doplňková navigace", class="topmenu", 
+          h.div{class="nav-container", 
+            h.span{ a{href=(data.altlang or T "/index-en.html"),h.img{src=T "/img/gb.svg", alt=T "Switch to English version"}}} -- odkaz na anglickou verzi stránek
+          },
+        },
+        h.nav{["aria-label"]= T "hlavní menu", class="mainmenu",
+          h.div{class="nav-container",
+            h.a{ href= T "/index.html", h.img{role="banner", class="logo", alt=T "Zpět na hlavní stránku knihovny", src=T "/img/logo.svg"}},
+            -- h.a{class="logo",h.div{"Ústřední knihovna PedF UK"}},
+            -- h.menu{
+            -- h.nav{class="nav-collapse",
+            -- h.ul{
+            -- class="row",
+            h.span {class="logo", "&nbsp;"},
+            mainmenu(data.menuitems),
+          },
         -- }},
-      }},
+      },
+  },
       -- row{
         obsolete(data), -- upozornění na zastaralé stránky
         data.contents,

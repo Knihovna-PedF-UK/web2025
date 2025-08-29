@@ -1,3 +1,6 @@
+:root{
+  --max-width: 1200px;
+}
 
 @font-face {
   font-family: "Moderat";
@@ -29,7 +32,7 @@
 
 body {
   font-family: "Moderat", Moderat, Arial, Helvetica, sans-serif;
-  max-width: 120ch; 
+  max-width: var(--max-width);
   margin: 0 auto; 
   border: 1px solid black;
   line-height: 1.6;
@@ -130,3 +133,53 @@ em {
   font-style: italic;
 }
 
+
+/* oba pruhy jdou přes celou šířku */
+nav {
+  width: 100%;
+  background: #f8f8f8; /* jen pro ukázku */
+}
+
+/* vnitřní kontejner drží max. šířku */
+.nav-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0.5rem 1rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+img.logo {
+  max-height: 5rem;
+}
+
+/* menu */
+.menu {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  position: relative;
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.menu li:hover .submenu, .menu li:focus-within .submenu  {
+  display: block;
+}

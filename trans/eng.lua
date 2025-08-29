@@ -124,4 +124,5 @@ return {
  ,["Od 1. 7."] = "From 1 Jul"
  ,["hlavní menu"] = "main menu"
  ,["doplňková navigace"] = "additional navigation"
+ ,["Zpět na hlavní stránku knihovny"] = "Back to library homepage"
  }

@@ -78,7 +78,8 @@ local mainmenu = {
 
 mainmenu = menulib()
 mainmenu:add("Služby","sluzby.htm")
-:add("Rezervace knih", "rezervacni_boxy.html")
+:addchild("Rezervace knih", "rezervacni_boxy.html")
+:addchild("Studovna", "studovna.html")
 :add("Publikační činnost", "biblio.html")
 :add("Časopisy", "periodika.htm")
 :add("Elektronické zdroje", "eiz.htm")
