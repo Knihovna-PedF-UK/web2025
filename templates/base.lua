@@ -11,7 +11,12 @@ local a, p, div, header, section = h.a, h.p, h.div, h.header, h.section
 
 local menuitem = function(title, href, children)
   -- return h.menuitem{class="button", h.a{src=href, title}}
-  return h.li{role="menuitem", h.a{href="/" .. href, class="button", title}, children}
+  local button = {}
+  if children then
+    button = h.button{class="dropdown", h.img{src="/img/sipkadolu.svg"}}
+
+  end
+  return h.li{role="menuitem", h.a{href="/" .. href, class="button", title}, button, children}
 end
 
 

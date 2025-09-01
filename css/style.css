@@ -4,34 +4,35 @@
   --body-bg: #fff;
   --topmenu-bg: black;
   --topmenu-color: white;
+  --navmenu-divider-color: #ccc;
 }
 
 @font-face {
   font-family: "Moderat";
   font-weight: 400;
   font-display: swap;
-  src: url(https://ktv.pedf.cuni.cz/wp-content/uploads/sites/6/2023/02/Moderat-Regular-1.woff2) format("woff2");
+  src: url(/fonts/Moderat-Regular-1.woff2) format("woff2");
 }
 
 @font-face {
   font-family: "Moderat";
   font-weight: 500;
   font-display: swap;
-  src: url(https://ktv.pedf.cuni.cz/wp-content/uploads/sites/6/2023/02/Moderat-Medium-1.woff2) format("woff2");
+  src: url(/fonts/Moderat-Medium-1.woff2) format("woff2");
 }
 
 @font-face {
   font-family: "Moderat";
   font-weight: 700;
   font-display: swap;
-  src: url(https://ktv.pedf.cuni.cz/wp-content/uploads/sites/6/2023/02/Moderat-Bold-1.woff2) format("woff2");
+  src: url(/fonts/Moderat-Bold-1.woff2) format("woff2");
 }
 
 @font-face {
   font-family: "Moderat";
   font-weight: 900;
   font-display: swap;
-  src: url(https://ktv.pedf.cuni.cz/wp-content/uploads/sites/6/2023/02/Moderat-Black-1.woff2) format("woff2");
+  src: url(/fonts/Moderat-Black-1.woff2) format("woff2");
 }
 
 body {
@@ -83,9 +84,6 @@ main.main-content {
   }
 }
 
-.langswitcher img{
-  max-height: 1rem;
-}
 
 img.logo {
   max-height: 5rem;
@@ -99,8 +97,23 @@ img.logo {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+.mainmenu {
   .nav-container {
-    border-bottom: 1px solid var(--body-color);
+    border-bottom: 1px solid var(--navmenu-divider-color);
+    font-size: 1.5rem;
+  }
+  button{
+    all: unset;
+    cursor: pointer;
+    img {
+      height: 1em;
+      display: inline-flex;
+      align-items: flex-end;
+      padding:0;
+      border: none;
+    }
   }
 }
 
@@ -110,14 +123,14 @@ img.logo {
   padding: 0.2em 0;
   text-align: right;
   padding-left: auto;
+  vertical-align: middle;
   span{
-    display: inline-block;
+    /* display: inline-block; */
     border-right: 1px solid var(--topmenu-color);
     margin: 0 0.5em;
     padding-right: 0.5em;
-    padding-top: 0.2em;
-    padding-bottom: 0.2em;
-    height: 1em;
+    height: 1.5em;
+    width: auto;
   }
   span:last-child{
     border-right: none;
@@ -126,6 +139,10 @@ img.logo {
   }
   .nav-container {
     justify-content: right;
+  }
+  .langswitcher * {
+    display: inline;
+    width: auto;
   }
 }
 
