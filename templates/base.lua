@@ -136,7 +136,6 @@ local function template(data)
       -- h.link{rel="stylesheet", type="text/css", href="https://gitcdn.link/repo/Chalarangelo/mini.css/master/dist/mini-default.min.css"},
       -- '<link rel="stylesheet" href="https://code.cdn.mozilla.net/fonts/fira.css">',
      h.link {rel="alternate",  type="application/rss+xml", href= T "feed.rss"},
-      h.link{rel="stylesheet", type="text/css", href="/mini-knihovna.css"},
       h.link{rel="stylesheet", type="text/css", href="/css/style.css"},
       h.link{rel="stylesheet", type="text/css", href="/media.css"},
       custom_styles(data),
@@ -169,7 +168,11 @@ local function template(data)
         -- h.a{href="http://pedf.cuni.cz", h.img{src="img/logo_pedf_small.jpg"}},
         h.nav{["aria-label"]= T "doplňková navigace", class="topmenu", 
           h.div{class="nav-container", 
-            h.span{ a{href=(data.altlang or T "/index-en.html"),h.img{src=T "/img/gb.svg", alt=T "Switch to English version"}}} -- odkaz na anglickou verzi stránek
+            h.span{a{href= T "https://pedf.cuni.cz/PEDF-871.html", T "Všechny katedry"}},
+            h.span{ a{href=T "https://pedf.cuni.cz/", T "Pedagogická fakulta"}},
+            -- h.span{class="langswitcher", h.img{src="/img/world.svg"}, a{href=(data.altlang or T "/index-en.html"),h.img{src=T "/img/gb.svg",  alt=T "Switch to English version"}}} -- odkaz na anglickou verzi stránek
+            h.span{class="langswitcher", h.img{src="/img/world.svg",}, a{href=(data.altlang or T "/index-en.html"),  title=T "Switch to English version", T "EN"}}, -- odkaz na anglickou verzi stránek
+            h.span{h.img{src="/img/search.svg"}}, -- ToDo: dodělat vyhledávání
           },
         },
         h.nav{["aria-label"]= T "hlavní menu", class="mainmenu",
@@ -187,8 +190,10 @@ local function template(data)
       },
   },
       -- row{
+        h.main {class="main-content",
         obsolete(data), -- upozornění na zastaralé stránky
         data.contents,
+      },
     -- },
 
 

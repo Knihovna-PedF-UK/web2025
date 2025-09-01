@@ -1,5 +1,9 @@
 :root{
   --max-width: 1200px;
+  --body-color: #222;
+  --body-bg: #fff;
+  --topmenu-bg: black;
+  --topmenu-color: white;
 }
 
 @font-face {
@@ -32,17 +36,13 @@
 
 body {
   font-family: "Moderat", Moderat, Arial, Helvetica, sans-serif;
-  max-width: var(--max-width);
   margin: 0 auto; 
-  border: 1px solid black;
   line-height: 1.6;
   font-size: 1rem; /* 16px */
-  color: #222;
-  background-color: #fff;
-  padding: 1rem;
-  margin: 0 auto;
+  color: var(--body-color);
+  background-color: var(--body-bg);
 }
-header, main, footer {border: 1px solid black;}
+/* header, main, footer {border: 1px solid black;} */
 
 
 /* === CSS Reset === */
@@ -54,6 +54,123 @@ header, main, footer {border: 1px solid black;}
   margin: 0;
   padding: 0;
 }
+
+
+/* oba pruhy jdou přes celou šířku */
+nav {
+  width: 100%;
+  background: #f8f8f8; /* jen pro ukázku */
+}
+
+main.main-content {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* vnitřní kontejner drží max. šířku */
+.nav-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0.5rem 1rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  a {
+    color: inherit;
+    font-weight: 600;
+  }
+}
+
+.langswitcher img{
+  max-height: 1rem;
+}
+
+img.logo {
+  max-height: 5rem;
+  height: auto;
+}
+
+/* menu */
+.menu {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  .nav-container {
+    border-bottom: 1px solid var(--body-color);
+  }
+}
+
+.topmenu {
+  background-color: var(--topmenu-bg);
+  color: var(--topmenu-color);
+  padding: 0.2em 0;
+  text-align: right;
+  padding-left: auto;
+  span{
+    display: inline-block;
+    border-right: 1px solid var(--topmenu-color);
+    margin: 0 0.5em;
+    padding-right: 0.5em;
+    padding-top: 0.2em;
+    padding-bottom: 0.2em;
+    height: 1em;
+  }
+  span:last-child{
+    border-right: none;
+    margin-right: 0;
+    padding-right: 0;
+  }
+  .nav-container {
+    justify-content: right;
+  }
+}
+
+.menu li {
+  position: relative;
+}
+
+.submenu {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  list-style: none;
+  margin: 0;
+  padding: 0.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+.menu li:hover .submenu, .menu li:focus-within .submenu  {
+  width: 200px;
+  display: block;
+}
+
+/* *************** */
+/*      Triky      */
+/* *************** */
+
+/* Přidat ikonku u odkazů vedoucích mimo web knihovny */
+a[href^="http"]:not([href*="knihovna.pedf.cuni.cz"])::after {
+  content: "";
+  display: inline-block;
+  width: 0.9em;
+  height: 0.9em;
+  margin-left: 0.25em;
+  background: currentColor;
+  -webkig-mask: url("/img/external-link.svg") no-repeat center / contain;;
+  mask: url("/img/external-link.svg") no-repeat center / contain;;
+}
+
+
+
+/* ************************* */
+/*       Obecné styly        */
+/* ************************* */
 
 /* Odstranění defaultních stylů seznamů */
 ul,
@@ -71,7 +188,7 @@ a {
 /* Obrázky a média max. na šířku rodiče */
 img,
 video {
-  max-width: 100%;
+  /* max-width: 100%; */
   height: auto;
   display: block;
 }
@@ -133,53 +250,3 @@ em {
   font-style: italic;
 }
 
-
-/* oba pruhy jdou přes celou šířku */
-nav {
-  width: 100%;
-  background: #f8f8f8; /* jen pro ukázku */
-}
-
-/* vnitřní kontejner drží max. šířku */
-.nav-container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0.5rem 1rem;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-img.logo {
-  max-height: 5rem;
-}
-
-/* menu */
-.menu {
-  display: flex;
-  gap: 1rem;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-.menu li {
-  position: relative;
-}
-
-.submenu {
-  display: none;
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: white;
-  list-style: none;
-  margin: 0;
-  padding: 0.5rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-}
-
-.menu li:hover .submenu, .menu li:focus-within .submenu  {
-  display: block;
-}

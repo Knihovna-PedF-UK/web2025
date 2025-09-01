@@ -125,4 +125,9 @@ return {
  ,["hlavní menu"] = "main menu"
  ,["doplňková navigace"] = "additional navigation"
  ,["Zpět na hlavní stránku knihovny"] = "Back to library homepage"
+ ,["EN"] = "CS"
+ ,["Všechny katedry"] = "All departments"
+ ,["Pedagogická fakulta"] = "Faculty of Education"
+ ,["https://pedf.cuni.cz/"] = "https://pedf.cuni.cz/PEDFEN-1.html"
+ ,["https://pedf.cuni.cz/PEDF-871.html"] = "https://pedf.cuni.cz/PEDFEN-145.html"
  }
