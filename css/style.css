@@ -80,7 +80,7 @@ main.main-content {
   align-items: center;
   a {
     color: inherit;
-    font-weight: 600;
+    font-weight: 500;
   }
 }
 
@@ -102,7 +102,6 @@ img.logo {
 .mainmenu {
   .nav-container {
     border-bottom: 1px solid var(--navmenu-divider-color);
-    font-size: 1.5rem;
   }
   button{
     all: unset;
@@ -114,6 +113,37 @@ img.logo {
       padding:0;
       border: none;
     }
+  }
+  .menu {
+    font-size: 1.2rem;
+    font-weight: 700;
+    li {
+      position: relative;
+    }
+  }
+  .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem;
+    font-size: 1rem;
+    font-weight: normal;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    li + li {
+      margin-top: 0.5em;
+    }
+    li:before {
+      content: url("/img/threedots.svg");
+    }
+  }
+
+  li:hover .submenu, li:focus-within .submenu  {
+    width: 200px;
+    display: block;
   }
 }
 
@@ -146,26 +176,48 @@ img.logo {
   }
 }
 
-.menu li {
-  position: relative;
+
+/* *********************** */
+/*     Sticky header       */
+/* *********************** */
+
+:root {
+  --topmenu-h: 3rem; /* fallback, skutečná výška se doplní z JS */
 }
 
-.submenu {
-  display: none;
-  position: absolute;
-  top: 100%;
+/* top menu – fixní nahoře, na začátku viditelné */
+.topmenu {
+  position: fixed;
+  top: 0;
   left: 0;
-  background: white;
-  list-style: none;
-  margin: 0;
-  padding: 0.5rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  right: 0;
+
+  height: var(--topmenu-h);
+
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+
+  z-index: 1000; /* nad mainmenu a obsahem */
 }
 
-.menu li:hover .submenu, .menu li:focus-within .submenu  {
-  width: 200px;
-  display: block;
+/* při scrollu dolů schovej */
+.topmenu.hidden {
+  transform: translateY(calc(-1 * var(--topmenu-h)));
 }
+
+/* hlavní menu – sticky pod top barem */
+header {
+  position: sticky;
+  top: var(--topmenu-h, 0);
+  z-index: 999; /* pod topmenu */
+}
+
+header.top{
+  top: 0;
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+}
+
 
 /* *************** */
 /*      Triky      */
@@ -179,10 +231,9 @@ a[href^="http"]:not([href*="knihovna.pedf.cuni.cz"])::after {
   height: 0.9em;
   margin-left: 0.25em;
   background: currentColor;
-  -webkig-mask: url("/img/external-link.svg") no-repeat center / contain;;
+  -webkit-mask: url("/img/external-link.svg") no-repeat center / contain;
   mask: url("/img/external-link.svg") no-repeat center / contain;;
 }
-
 
 
 /* ************************* */
