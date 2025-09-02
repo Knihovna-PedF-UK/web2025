@@ -194,6 +194,15 @@ local function template(data)
           },
         -- }},
       },
+      h.nav{["aria-label"] = T "drobénková navigace", class="breadcrumb",
+        h.div{class="nav-container",
+          h.ul {
+           h.li {a {href= T "/index.html", h.img{src="/img/home.svg", alt=T "Domů"}}},
+           h.li{a {href= T "/sluzby.htm", T "Služby"}},
+           h.li{a {href= T "/informace.htm", T "Informace o knihovně"}},
+          },
+        }
+      },
   },
       -- row{
         h.main {class="main-content",

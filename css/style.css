@@ -176,6 +176,29 @@ img.logo {
   }
 }
 
+.breadcrumb {
+  ul {
+    list-style: none;           /* odstraní tečky */
+    display: flex;              /* položky vedle sebe */
+    flex-wrap: wrap;            /* pro menší obrazovky */
+    gap: 0.5em;                 /* mezera mezi položkami */
+    padding: 0;
+    margin: 0;
+    font-size: 0.9em;
+  }
+  li::after {
+    content: "›";               /* oddělovač mezi položkami */
+    margin-left: 0.5em;
+    color: #555;
+  }
+  li:last-child::after {
+    content: "";                /* poslední položka nemá oddělovač */
+  }
+  img {display: inline; height: 1em; vertical-align: middle;}
+}
+
+
+
 
 /* *********************** */
 /*     Sticky header       */

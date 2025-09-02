@@ -130,4 +130,6 @@ return {
  ,["Pedagogická fakulta"] = "Faculty of Education"
  ,["https://pedf.cuni.cz/"] = "https://pedf.cuni.cz/PEDFEN-1.html"
  ,["https://pedf.cuni.cz/PEDF-871.html"] = "https://pedf.cuni.cz/PEDFEN-145.html"
+ ,["drobénková navigace"] = "breadcrumb navigation"
+ ,["Domů"] = "Home"
  }
