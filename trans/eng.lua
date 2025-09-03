@@ -132,4 +132,5 @@ return {
  ,["https://pedf.cuni.cz/PEDF-871.html"] = "https://pedf.cuni.cz/PEDFEN-145.html"
  ,["drobénková navigace"] = "breadcrumb navigation"
  ,["Domů"] = "Home"
+ ,["rozbalit submenu"] = "expand submenu"
  }
