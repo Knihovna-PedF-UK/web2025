@@ -9,11 +9,14 @@ local h = h5tk.init(true)
 
 local a, p, div, header, section = h.a, h.p, h.div, h.header, h.section
 
+-- dummy translator
+local T = function(s) return s end
+
 local menuitem = function(title, href, children)
   -- return h.menuitem{class="button", h.a{src=href, title}}
   local button = {}
   if children then
-    button = h.button{class="dropdown", h.img{src="/img/sipkadolu.svg"}}
+    button = h.button{class="dropdown", ["aria-expanded"]="false", ["aria-controls"]="submenu-id", h.img{alt = "rozbalit submenu", src="/img/sipkadolu.svg"}}
 
   end
   return h.li{role="menuitem", h.a{href="/" .. href, class="button", title}, button, children}
@@ -54,7 +57,7 @@ local function mainmenu(menuitems)
     end
     -- table.insert(t, menuitem(item.title,  item.href, children))
   end
-  return h.ul{class="menu", role="menubar", t}
+  return h.ul{class="menu", id="mainmenu-list", role="menubar", t}
 end
 
 
@@ -120,7 +123,7 @@ end
 -- function column
 local function template(data)
   local strings = data.strings
-  local T = translator.get_translator(strings)
+  T = translator.get_translator(strings)
   
   return "<!DOCTYPE html>\n" .. (h.emit(
   h.html{lang=T "cs", prefix="og: http://ogp.me/ns#",
@@ -142,7 +145,7 @@ local function template(data)
       -- '<link rel="stylesheet" href="https://code.cdn.mozilla.net/fonts/fira.css">',
      h.link {rel="alternate",  type="application/rss+xml", href= T "feed.rss"},
       h.link{rel="stylesheet", type="text/css", href="/css/style.css"},
-      h.link{rel="stylesheet", type="text/css", href="/media.css"},
+      -- h.link{rel="stylesheet", type="text/css", href="/media.css"},
       custom_styles(data),
       [[
       <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
@@ -151,6 +154,7 @@ local function template(data)
       <link rel="manifest" href="/manifest.json">
       <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
       <script src="/js/header.js" defer></script>
+      <script src="/js/hamburger.js" defer></script>
       <meta name="theme-color" content="#ffffff">
       ]]
       -- <link rel="stylesheet" type="text/css" href="/css/fa-svg-with-js.css" />
@@ -191,6 +195,7 @@ local function template(data)
             -- class="row",
             h.span {class="logo", "&nbsp;"},
             mainmenu(data.menuitems),
+            h.button{class="hamburger", ["aria-label"]="Otevřít menu", ["aria-expanded"]="false", ["aria-controls"]="mainmenu-list", "☰"},
           },
         -- }},
       },

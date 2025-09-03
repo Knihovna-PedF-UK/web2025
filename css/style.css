@@ -1,5 +1,6 @@
 :root{
   --max-width: 1200px;
+  --header-bg: white;
   --body-color: #222;
   --body-bg: #fff;
   --topmenu-bg: black;
@@ -56,11 +57,17 @@ body {
   padding: 0;
 }
 
+header {
+  background-color: var(--header-bg);
+  box-shadow: 0 4px 12px -2px rgba(0,0,0,0.15);
+}
 
-/* oba pruhy jdou přes celou šířku */
+/* navigace jde přes celou šířku stránky*/
 nav {
   width: 100%;
   background: #f8f8f8; /* jen pro ukázku */
+  margin: 0;
+  padding: 0;
 }
 
 main.main-content {
@@ -78,9 +85,8 @@ main.main-content {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  a {
+  a, a:visited {
     color: inherit;
-    font-weight: 500;
   }
 }
 
@@ -105,13 +111,14 @@ img.logo {
   }
   button{
     all: unset;
-    cursor: pointer;
+    display: inline-block; cursor: pointer;
     img {
       height: 1em;
       display: inline-flex;
       align-items: flex-end;
       padding:0;
       border: none;
+      vertical-align: middle;
     }
   }
   .menu {
@@ -141,9 +148,11 @@ img.logo {
     }
   }
 
-  li:hover .submenu, li:focus-within .submenu  {
-    width: 200px;
-    display: block;
+  @media (min-width: 901px) {
+    li:hover .submenu, li:focus-within .submenu  {
+      width: 200px;
+      display: block;
+    }
   }
 }
 
@@ -177,6 +186,7 @@ img.logo {
 }
 
 .breadcrumb {
+  font-size: 1.1rem;
   ul {
     list-style: none;           /* odstraní tečky */
     display: flex;              /* položky vedle sebe */
@@ -196,6 +206,77 @@ img.logo {
   }
   img {display: inline; height: 1em; vertical-align: middle;}
 }
+
+/* ukotvi nav, aby absolute prvky měly referenci */
+.nav-container { position: relative; }
+
+/* jistota: každý root li je pozicovaný pro absolutní submenu */
+.mainmenu .menu > li { position: relative; }
+
+/* submenu má být nad ostatními vrstvami */
+.mainmenu .submenu { z-index: 1001; }
+
+/* umožni otevřít submenu i pomocí .open (na desktopu i mobilu) */
+.mainmenu .menu > li.open > .submenu { display: block; }
+
+
+
+/* ******************************************** */
+/*    Hamburger menu (pro mobilní zobrazení)    */
+/* ******************************************** */
+
+/* výchozí stav – desktop */
+.mainmenu button.hamburger {
+  all: unset;
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* mobilní stav */
+@media (max-width: 900px) {
+  img.logo {
+    max-height: 3rem;
+    height: auto;
+  }
+
+
+  .mainmenu button.hamburger {
+    display: inline-block; /* jen na mobilech */
+  }
+
+  li.open > .submenu {
+    display: block;     /* ukáže se při třídě .open */
+  }
+  .menu { /* skryté, otevře se .open */
+    display: none;
+    flex-direction: column;
+    position: absolute; 
+    top: 100%; 
+    left: 0; 
+    right: 0;
+    /* position: relative; */
+    z-index: 2000;
+    background: white; box-shadow: 0 4px 12px -2px rgba(0,0,0,0.15);
+  }
+  .menu.open { display: flex; }
+
+  /* mobilní submenu je statické (stackuje se svisle) */
+  .mainmenu .submenu {
+    display: none;
+    /* position: static; */
+    position: static;
+    z-index: 2100; /* ještě nad menu */
+    box-shadow: none;
+    padding-left: 1rem;
+  }
+  .mainmenu .menu > li.open > .submenu { display: block; }
+
+
+}
+
 
 
 
