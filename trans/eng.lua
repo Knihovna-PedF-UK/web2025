@@ -133,4 +133,6 @@ return {
  ,["drobénková navigace"] = "breadcrumb navigation"
  ,["Domů"] = "Home"
  ,["rozbalit submenu"] = "expand submenu"
+ ,["https://cuni.cz/UK-9056.html"] = "https://cuni.cz/UKEN-903.html"
+ ,["telefon"] = "phone"
  }
