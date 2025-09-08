@@ -220,6 +220,26 @@ img.logo {
 .mainmenu .menu > li.open > .submenu { display: block; }
 
 
+footer {
+  border-top: 5px solid #23b5b5;
+  /* padding: 1rem 0; */
+  img {display: inline; height: 1em; vertical-align: middle;}
+  div {vertical-align: bottom;}
+  div.column div{margin-top: 0.5rem;}
+  .copyright {
+    font-size: 1rem;
+    color: white;
+    padding: 1rem;
+    background-color: black;
+    text-align: center;
+  }
+  @media (max-width: 600px) {
+    .nav-container {
+      display: block;
+    }
+  }
+}
+
 
 /* ******************************************** */
 /*    Hamburger menu (pro mobilní zobrazení)    */

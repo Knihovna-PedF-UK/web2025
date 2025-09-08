@@ -222,24 +222,23 @@ local function template(data)
     -- (body)
     -- }},
     h.footer{role="contentinfo",
-      row{
-        medium(4, div{
-          p{"Knihovna PedF UK, Magdaleny Rettigové 4, 116&#8239;39&nbsp;Praha&nbsp;1"},
-          p{"Aktualizováno: " .. os.date("%Y-%m-%d")},
-          p{"© Univerzita Karlova",},
-
-        }),
-        medium(4, div {
+      h.div{class="nav-container", 
+        div{class="column",
+          h["h3"]{T "Kontakt"},
+          div{"Knihovna PedF UK, Magdaleny Rettigové 4, 116&#8239;39&nbsp;Praha&nbsp;1"},
+          div{ h.img{src="/img/mail.svg", alt="e-mail"}, a {href="mailto:knihovna@pedf.cuni.cz", "knihovna@pedf.cuni.cz"}},
+          div{ h.img{src="/img/phone.svg", alt= T "telefon"}, a {href="mailto:knihovna@pedf.cuni.cz", "knihovna@pedf.cuni.cz"}},
+          
           div{a {href="https://www.facebook.com/knihovnapedfpraha", "Facebook"}}
           ,div{a {href="https://www.instagram.com/KnihovnaPedFPraha/", "Instagram"}}
           ,div{a {href=T "/feed.rss", "RSS"}}
-
-        }),
-        medium(4, div {
-          p{"Jsme členy knihovnických organizací <a href='https://www.skipcr.cz/'>SKIP</a> a <a href='https://sdruk.cz/'>SDRUK z. s.</a>"},
-          p{"Webmaster: <a href='mailto:michal.hoftich@pedf.cuni.cz'>michal.hoftich@pedf.cuni.cz</a>"}
-          ,p{a {href="prohlaseni.html", "Prohlášení o přístupnosti stránek"}}
-        })
+        },
+        div { class="column",
+          div{"Jsme členy knihovnických organizací <a href='https://www.skipcr.cz/'>SKIP</a> a <a href='https://sdruk.cz/'>SDRUK z. s.</a>"},
+          -- div{"Webmaster: <a href='mailto:michal.hoftich@pedf.cuni.cz'>michal.hoftich@pedf.cuni.cz</a>"},
+          div{a {href="prohlaseni.html", "Prohlášení o přístupnosti stránek"}},
+          div{a {href= T "https://cuni.cz/UK-9056.html", "GDPR"}},
+        }
         -- boxik("EIZ pro PedF", "eiz.htm"),
         -- boxik('Časopisy', "periodika.htm"),
         -- boxik("Studenti se speciálními potřebami", "handi.htm"),
@@ -250,7 +249,9 @@ local function template(data)
         -- boxik("Pracoviště a zaměstnanci", "adresar.htm"),
         -- boxik("Formuláře", "e-formulare.htm")
 
-    }
+      },
+      h.div{class="copyright", "©", os.date("%Y"),  T "Knihovna Pedagogické fakulty Univerzity Karlovy ", }
+    --}
     },
     -- h.script{type="text/javascript", 'var nav = responsiveNav(".nav-collapse");'}
     -- h.script{src="https://support.ebsco.com/eit/scripts/ebscohostsearch.js", type="text/javascript", defer=true}
