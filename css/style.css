@@ -226,6 +226,7 @@ footer {
   img {display: inline; height: 1em; vertical-align: middle;}
   div {vertical-align: bottom;}
   div.column div{margin-top: 0.5rem;}
+  address{font-style: normal;}
   .copyright {
     font-size: 1rem;
     color: white;
