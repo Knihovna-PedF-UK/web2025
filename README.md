@@ -10,3 +10,7 @@ ToDo:
   - výběr z obrázků dostupných na serveru (takže musím nějak vytvářet automaticky jejich seznam)
   - měly by být k dispozici metadata zaměstnanců, aby šly snadno vkládat kontaktní údaje na jednotlivé stránky (CSV, JSON?)
     - automaticky generovat seznam zaměstnanců 
+
+Co využít:
+
+- ikonky: https://phosphoricons.com/
