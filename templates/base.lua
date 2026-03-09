@@ -235,7 +235,7 @@ local function template(data)
         div { class="column",
           div{"Jsme členy knihovnických organizací <a href='https://www.skipcr.cz/'>SKIP</a> a <a href='https://sdruk.cz/'>SDRUK z. s.</a>"},
           -- div{"Webmaster: <a href='mailto:michal.hoftich@pedf.cuni.cz'>michal.hoftich@pedf.cuni.cz</a>"},
-          div{a {href="prohlaseni.html", "Prohlášení o přístupnosti stránek"}},
+          div{a {href="/prohlaseni.html", "Prohlášení o přístupnosti stránek"}},
           div{a {href= T "https://cuni.cz/UK-9056.html", "GDPR"}},
         }
         -- boxik("EIZ pro PedF", "eiz.htm"),
