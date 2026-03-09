@@ -60,7 +60,7 @@ jobs:
         echo $WWW_DIR
         ./build.sh
     - name: Test if it works
-      run: cat www/js/calendar.js
+      run: cat www/js/count.js
     - name: Upload Pages artifact
       uses: actions/upload-pages-artifact@v3
       with:
