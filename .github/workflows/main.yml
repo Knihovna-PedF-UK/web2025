@@ -1,0 +1,81 @@
+name: Build web
+on: [push]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+      with:
+          fetch-depth: '0'
+    - name: Cache lua installation
+      uses: actions/cache@v4
+      with:
+        path: .lua
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+    - name: Debug git log
+      run:
+        git -C src log -1 --format='%ai' HEAD sluzby.htm
+    - uses: leafo/gh-actions-lua@v11
+      with:
+        luaVersion: "5.3"
+    - uses: leafo/gh-actions-luarocks@v4
+    - name: Cache luarocks modules
+      uses: actions/cache@v4
+      with:
+        path: .luarocks
+        key: ${{ runner.os }}-build-${{ env.cache-name }}-
+        restore-keys: |
+          ${{ runner.os }}-build-${{ env.cache-name }}-
+          ${{ runner.os }}-build-
+          ${{ runner.os }}-
+    - name: Install Lua dependencies
+      run: |
+        luarocks install h5tk 
+        luarocks install date 
+    - name: Download lettersmith
+      uses: actions/checkout@v2
+      with:
+        repository:  michal-h21/lettersmith 
+        path: lettersmith
+    - name: Install lettersmith
+      working-directory: lettersmith
+      run: luarocks make
+    - name: Download blog code
+      uses: actions/checkout@v2
+      with:
+        repository:  michal-h21/pedf-web
+        path: src
+    - name: Build web
+      run: | 
+        export HTML_DIR=$GITHUB_WORKSPACE/src
+        export DATA_DIR=$GITHUB_WORKSPACE/data
+        export WWW_DIR=$GITHUB_WORKSPACE/www
+        echo $WWW_DIR
+        ./build.sh
+    - name: Test if it works
+      run: cat www/js/calendar.js
+    - name: Upload Pages artifact
+      uses: actions/upload-pages-artifact@v3
+      with:
+        path: www
+
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+    - name: Deploy to GitHub Pages
+      id: deployment
+      uses: actions/deploy-pages@v4
