@@ -140,4 +140,5 @@ return {
  ,["Kontakt"] = "Contact"
  ,["Prohlášení o přístupnosti stránek"] = "Accessibility statement"
  ,["Více"] = "More"
+ ,["Archiv aktualit"] = "News archive"
  }

@@ -629,7 +629,9 @@ end
 
 
 local archiv_items = make_transformer(function(doc)
-  doc.contents = print_actual(doc.items)
+  local strings = doc.strings
+  local T = translator.get_translator(strings)
+  doc.contents = h.article{h.h1{T "Archiv aktualit"}, print_actual(doc.items)}
   return doc
 end)
 
