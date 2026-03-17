@@ -55,15 +55,60 @@ function building_blocks.print_actual(items)
       src = "/img/default.jpg"
       alt = "Foto: Kimberly Farmer/Unsplash"
     end
+    -- chci zobrazit jen první odstavec, zbytek schovat do details
+    local contents = item.contents:gsub("%s$","") -- odstranit nadbytečné mezery, aby fungovala detekce prázdného obsahu po prvním odstavci
     local img = h.img {src = src, class="aktual-img",alt = alt,  title = alt}
-   table.insert(t, building_blocks.row {
-    building_blocks.medium(2, img),
-    building_blocks.medium(10, h.div{h.h3{item.date  .. " – " ..akt_title},item.contents}
-    )
-  })
+    local more_button = h.span{class="read-more-btn", "Více"}
+    if not rest or rest == "" then more_button = "" end
+    table.insert(t, 
+      h.section {class="news-item", 
+        -- building_blocks.medium(2, img),
+        h.h3{akt_title},
+        h.div{class="date", item.date },
+        h.div{class="content", 
+        contents
+      }
+    }
+  )
    -- table.insert(t, h.p{h.small {item.date}})
    -- table.insert(t, item.contents)
-   if i < #items then table.insert(t, h.hr{}) end
+   -- if i < #items then table.insert(t, h.hr{}) end
+  end
+  return t
+end
+function building_blocks.print_actual_index(items, T)
+  local t = {}
+  for i, item in ipairs(items) do
+    local akt_title = item.akt_title or ""
+    local alt = item.alt
+    local src = item.img
+    if not src then
+      src = "/img/default.jpg"
+      alt = "Foto: Kimberly Farmer/Unsplash"
+    end
+    -- chci zobrazit jen první odstavec, zbytek schovat do details
+    local contents = item.contents:gsub("%s$","") -- odstranit nadbytečné mezery, aby fungovala detekce prázdného obsahu po prvním odstavci
+    local first_paragraph, rest = contents:match("^(.-</p>)(.*)$")
+    local img = h.img {src = src, class="aktual-img",alt = alt,  title = alt}
+    local more_button = h.span{class="read-more-btn", T "Více"}
+    if not rest or rest == "" then more_button = "" end
+    table.insert(t, 
+      h.details {class="news-item", 
+        -- building_blocks.medium(2, img),
+        h.summary{
+          h.h3{akt_title},
+          h.div{class="date", item.date },
+          first_paragraph,
+          more_button,
+        },
+        h.div{class="content", 
+        rest
+      }
+    }
+  )
+   -- table.insert(t, h.p{h.small {item.date}})
+   -- table.insert(t, item.contents)
+   -- if i < #items then table.insert(t, h.hr{}) end
   end
   return t
 end
