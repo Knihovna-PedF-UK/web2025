@@ -4,6 +4,11 @@ Nový design webu
 
 ToDo:
 
+- vyhledávání 
+- TOC na stránkách
+- bredcrumbs na stránkách, na který se neodkazujeme z menu  f
+- mobilní zobrazení hlavní stránky
+
 - formulář na tvorbu aktualit
 - formulář na editaci stránek
   - oba by měly mít nějaký rozraní na editaci YAML metadat
