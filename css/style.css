@@ -110,6 +110,36 @@ img.logo {
   padding: 0;
 }
 
+.quick-links{
+  box-shadow: 0 4px 12px -2px rgba(0,0,0,0.15);
+  width: fit-content;
+  margin: 1rem auto;
+  padding: 0.5rem;
+  img {max-height: 1.5rem;}
+  .quicklink{
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background-color: white;
+    border-radius: 4px;
+    margin: 0.5rem;
+    font-weight: 500;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.2s ease;
+    img {
+      vertical-align: middle;
+      margin: 0 auto;
+      text-align: center;
+    }
+    a, a:visited {color: inherit;}
+  }
+  .quicklink + .quicklink {
+    border-left: 1px solid var(--navmenu-divider-color);
+    border-radius: 0;
+    transition: none;
+  }
+
+}
 .mainmenu {
   .has-breadcrumbs {
     border-bottom: 1px solid var(--navmenu-divider-color);

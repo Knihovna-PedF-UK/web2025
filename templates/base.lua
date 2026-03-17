@@ -259,8 +259,8 @@ local function template(data)
           div{h.address{itemprop="address",itemtype="http://schema.org/PostalAddress", h.span{ "Knihovna PedF UK"}, ", " , h.span {itemprop="streetAddress", "Magdaleny Rettigové 4, 116&#8239;39&nbsp;Praha&nbsp;1"}}},
           div{ h.img{src="/img/mail.svg", itemprop="email", alt="e-mail"}, a {href="mailto:knihovna@pedf.cuni.cz", "knihovna@pedf.cuni.cz"}},
           div{ h.img{src="/img/phone.svg", alt= T "telefon"}, a {href="tel:+420221900178",["aria-label"]="2 2 1 9 0 0 1 7 8",  h.span {itemprop="telephone", "+420 221 900 178"}}},
-          div{a {href="https://www.facebook.com/knihovnapedfpraha", "Facebook"}}
-          ,div{a {href="https://www.instagram.com/KnihovnaPedFPraha/", "Instagram"}}
+          div{ h.img {src= "/img/facebook.svg", alt= "facebook"}, a {href="https://www.facebook.com/knihovnapedfpraha", "Facebook"}}
+          ,div{ h.img {src= "/img/instagram.svg", alt = "instagram"}, a {href="https://www.instagram.com/KnihovnaPedFPraha/", "Instagram"}}
           ,div{a {href=T "/feed.rss", "RSS"}}
         },
         div { class="column",

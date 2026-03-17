@@ -104,6 +104,20 @@ local function search_box(h, T)
 }}
   end
 
+local function quick_links(doc, T)
+  local t = {}
+  for _, link in ipairs(doc.quicklinks or {}) do
+    t[#t+1] = h.div {
+      class = "quicklink", 
+        h.a{href=T(link.href), 
+        h.img{src = link.img, alt = T(link.title)},
+        T(link.title)
+      }
+    }
+  end
+  return t
+end
+
 -- function column
 local function template(doc )
   local title = doc.title
@@ -120,17 +134,18 @@ local function template(doc )
   end
   local contents = {
     h.main {
-      search_box(h, T),
+
+      h.section {class="rollup", h.img {src = "img/aslop.jpg"}},
+      h.aside {class="quick-links", quick_links(doc, T)},
+
+      -- hledání musíme pořešit
+      -- search_box(h, T),
     row{
-      medium(9,{
-        medium(12, card(row{
           -- card {
             h.h2{class="news", T "Aktuality" },
-            print_actual(doc.items), div {class="archiv-link", T ' (<a href="archiv.html">Další aktuality zde</a>)' }
+            print_actual(doc.items), div {class="archiv-link", T ' (<a href="archiv.html">Další aktuality zde</a>)' },
             -- actuality("Provozní doba v průběhu letních prázdnin", "26. 6. 2017", p {"Aktualizovanou provozní dobu knihovny v průběhu letních prázdnin a v září naleznete zde"}),
             -- actuality("Uzavření SAJL v Celetné", "23.06.2017", "Upozorňujeme <b>všechny</b> uživatele služeb ve Studovně anglického jazyka a literatury PedF v Celetné 13, aby si veškerou literaturu, kterou budou potřebovat ke zkouškám v září, vypůjčili do konce června. V srpnu bude studovna z důvodu stěhování knihovního fondu uzavřena.")
-          }
-          )),--},
           -- row {
             -- medium(9, {card {p{"Vyhledávací boxy"}}}),
             -- medium(9, card{ div{class="tabs", 
@@ -148,10 +163,6 @@ local function template(doc )
   --   boxik("Galerie knihovny"),
   --   boxik("Formuláře")
   -- },
-})
-,
-medium(3,
-{ 
             -- card{ 
             --   div{class="tabs searchbox", 
         -- tab("ukaz-sbox", T "UKAŽ", 
@@ -221,18 +232,18 @@ medium(3,
   
   close_element,
   div{ a {href=T "provozni_doba.htm", T "Plánované uzavření knihovny"}}},
-  {card {row { 
-    div{ '<img src="img/phone.svg" style="width:0.9em" alt="" /> <a href="tel:+420221900148" aria-label="telephone 4 2 0 2 2 1 9 0 0 1 4 8">+420 221 900 148</a>'},
-    div {'<img src="img/envelope.svg" style="width:0.9em" alt="e-mail" /> ', a{href="mailto:knihovna@pedf.cuni.cz","knihovna@pedf.cuni.cz"}},
-    -- },
-    -- row{
-    div {
-      '<a href="https://www.facebook.com/knihovnapedfpraha"><img src="img/facebook.svg" style="width:0.9em" alt="facebook" /></a>',
-      '<a href="https://www.instagram.com/KnihovnaPedFPraha/"><img src="img/instagram.svg" style="width:0.9em" alt="instagram" /></a>',
-      a{href="https://www.facebook.com/knihovnapedfpraha", ["aria-label"]="facebook knihovnapedfpraha",'knihovnapedfpraha'}},
+  -- {card {row { 
+    -- div{ '<img src="img/phone.svg" style="width:0.9em" alt="" /> <a href="tel:+420221900148" aria-label="telephone 4 2 0 2 2 1 9 0 0 1 4 8">+420 221 900 148</a>'},
+    -- div {'<img src="img/envelope.svg" style="width:0.9em" alt="e-mail" /> ', a{href="mailto:knihovna@pedf.cuni.cz","knihovna@pedf.cuni.cz"}},
+    -- -- },
+    -- -- row{
+    -- div {
+    --   '<a href="https://www.facebook.com/knihovnapedfpraha"><img src="img/facebook.svg" style="width:0.9em" alt="facebook" /></a>',
+    --   '<a href="https://www.instagram.com/KnihovnaPedFPraha/"><img src="img/instagram.svg" style="width:0.9em" alt="instagram" /></a>',
+    --   a{href="https://www.facebook.com/knihovnapedfpraha", ["aria-label"]="facebook knihovnapedfpraha",'knihovnapedfpraha'}},
     -- div {'<a href="https://www.instagram.com/KnihovnaPedFPraha/"><i class="fab fa-instagram" aria-hidden="true"></i></a>',a{href="https://www.instagram.com/KnihovnaPedFPraha/",'knihovnapedfpraha'}}
-  }} 
-},
+  -- }} 
+-- },
 -- {card {h.h2{ a{href="/nove_knihy/index.html", T "Nové knihy"}},
 -- -- row( div{ class="my-slider",  print_obalky(doc.obalky)}
 -- -- -- obalky "978-80-7422-500-0",
@@ -250,7 +261,6 @@ medium(3,
     --     h.li {"třetí možnost",progress(300)}
     --   }
     -- }
-  })
 },
 {
     medium(12, card(

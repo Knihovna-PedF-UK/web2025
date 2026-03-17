@@ -180,6 +180,11 @@ engmenu:add("Services", "services.html")
       -- :add("For teachers", "biblio.html")
       :add("About library", "about.html")
 
+local quicklinks = {
+  {title = "Vyhledávač UKAŽ", href = "https://ukaz.cuni.cz/", img = "/img/binoculars.svg"},
+  {title = "Registrace do knihovny", href = "https://knihovna.cuni.cz/e-prihlaska/", img = "/img/pencil.svg"},
+}
+
 local engstrings = require "trans.eng"
 
 local function make_breadcrumbs(doc)
@@ -297,13 +302,14 @@ end
 
 -- aplikovat h5tk templates
 local apply_template = make_transformer(function(doc)
-  local doc_card =card {h.article{role="main",doc.contents}}
+  local doc_card =h.article{role="main",doc.contents}
   -- přidat obrázek pokud ho stránka má nastavený
   if doc.img then
-    doc.contents = card{ row {
-      medium(7, h.article{role="main", doc.contents}),
-      medium(5, h.div{ class="page-img", h.img{src = doc.img, alt=doc.alt, title=doc.alt}})
-    }}
+    -- současná verze šablony nepoužívá obrázky na jednotlivých stránkách
+    -- doc.contents = card{ row {
+    --   medium(7, h.article{role="main", doc.contents}),
+    --   medium(5, h.div{ class="page-img", h.img{src = doc.img, alt=doc.alt, title=doc.alt}})
+    -- }}
   else
     doc.contents = doc_card
   end
@@ -584,7 +590,7 @@ local newindex = function(filepath,menu, languagestrings, lang)
     return wrap_in_iter { title=title, menuitems =menu, date = date, items =
     items, relative_filepath = filepath, prov_doba = prov_doba, obalky =
     obalky, strings = languagestrings or {}, closing = zaviraci_dny, calendar = kalendar,
-    siteurl = siteurl, updates = newest
+    siteurl = siteurl, updates = newest, quicklinks = quicklinks
   }
   end
 end
