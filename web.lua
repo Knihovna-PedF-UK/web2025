@@ -183,6 +183,7 @@ engmenu:add("Services", "services.html")
 local quicklinks = {
   {title = "Vyhledávač UKAŽ", href = "https://ukaz.cuni.cz/", img = "/img/binoculars.svg"},
   {title = "Registrace do knihovny", href = "https://knihovna.cuni.cz/e-prihlaska/", img = "/img/pencil.svg"},
+  {title = "Ezdroje UK", href = "https://ezdroje.cuni.cz/", img = "/img/road-horizon.svg"}
 }
 
 local engstrings = require "trans.eng"
