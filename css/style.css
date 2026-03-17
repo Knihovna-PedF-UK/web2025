@@ -328,12 +328,44 @@ img.logo {
     text-align: center;
     margin-top: 1rem;
     font-size: 1.3rem;
-    a{
-      color: var(--body-color);
-      text-decoration: underline; 
-      text-decoration-thickness: 3px;
-      text-decoration-color: var(--footer-divider-color);
+  }
+}
+
+.opening{
+  h2 {text-align: center;margin-bottom: 2rem;}
+  table{
+    text-align: left;
+    vertical-align: top;
+    display: inline-block;
+    width: 20%;
+    caption{
+      width: fit-content;
     }
+    td:first-child {
+      padding-right: 1rem;
+    }
+
+  }
+  table + table {
+    margin-left: 2rem;
+  }
+  text-align: center;
+  margin-bottom: 3rem;
+
+}
+
+.planned_closing, .archive-link{
+  font-size: 1.2rem;
+  a{
+    color: var(--body-color);
+    text-decoration: underline; 
+    text-decoration-thickness: 3px;
+    text-decoration-color: var(--footer-divider-color);
+  }
+  a:hover{
+    text-decoration: underline; 
+    text-decoration-thickness: 3px;
+    text-decoration-color: var(--body-color);
   }
 }
 

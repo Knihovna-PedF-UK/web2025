@@ -149,12 +149,10 @@ local function template(doc )
         h.h2{T "Provozní doba"},
         provozni_doba( doc.prov_doba, T),
         close_element,
-        div{ a {href=T "provozni_doba.htm", T "Plánované uzavření knihovny"}}
+        div{class="planned_closing",  a {href=T "provozni_doba.htm", T "Plánované uzavření knihovny"}}
+      },
+      h.section{ h.b {T "Nejnovější aktualizace"}, print_updates(T,doc.updates), "/",  h.a{href= T "aktualizace.html",  T "Starší"}},
     },
-{
-    medium(12, card(
-          h.div{ h.b {T "Nejnovější aktualizace"}, print_updates(T,doc.updates), "/",  h.a{href= T "aktualizace.html",  T "Starší"}}))
-}},
 
 -- h.div{class="row", h.div {class="col-sm-12 col-md-10 col-md-offset-1",
 -- h.div{class="card", h.section {class="section ",
