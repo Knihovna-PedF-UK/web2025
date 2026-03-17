@@ -19,7 +19,12 @@ local menuitem = function(title, href, children)
     button = h.button{class="dropdown", ["aria-expanded"]="false", ["aria-controls"]="submenu-id", h.img{alt = "rozbalit submenu", src="/img/sipkadolu.svg"}}
 
   end
-  return h.li{role="menuitem", h.a{href="/" .. href, class="button", title}, button, children}
+  local link = href:match("^https?%:%/%/") and href or "/" .. href
+  return h.li{role="menuitem", class="menuitem", h.a{href= link, class="button", title}, button, children}
+end
+
+local section_title = function(title)
+  return h.li{role="presentation", class="section-title", title}
 end
 
 
@@ -46,7 +51,12 @@ local function mainmenu(menuitems)
       (function()
         local ct = {}
         for _, child in ipairs(item.children) do
-          table.insert(ct, menuitem(child.title, child.href))
+          -- there can be child items or section titles
+          if child.href then
+            table.insert(ct, menuitem(child.title, child.href))
+          else
+            table.insert(ct, section_title(child.title))
+          end
         end
         return ct
       end)()
@@ -194,7 +204,7 @@ local function template(data)
             -- h.ul{
             -- class="row",
             h.span {class="logo", "&nbsp;"},
-            mainmenu(data.menuitems),
+            mainmenu(data.menuitems.items),
             h.button{class="hamburger", ["aria-label"]="Otevřít menu", ["aria-expanded"]="false", ["aria-controls"]="mainmenu-list", "☰"},
           },
         -- }},
@@ -233,7 +243,7 @@ local function template(data)
           ,div{a {href=T "/feed.rss", "RSS"}}
         },
         div { class="column",
-          div{"Jsme členy knihovnických organizací <a href='https://www.skipcr.cz/'>SKIP</a> a <a href='https://sdruk.cz/'>SDRUK z. s.</a>"},
+          div{T "Jsme členy knihovnických organizací", "<a href='https://www.skipcr.cz/'>SKIP</a>", T" a ", "<a href='https://sdruk.cz/'>SDRUK z. s.</a>"},
           -- div{"Webmaster: <a href='mailto:michal.hoftich@pedf.cuni.cz'>michal.hoftich@pedf.cuni.cz</a>"},
           div{a {href="/prohlaseni.html", "Prohlášení o přístupnosti stránek"}},
           div{a {href= T "https://cuni.cz/UK-9056.html", "GDPR"}},

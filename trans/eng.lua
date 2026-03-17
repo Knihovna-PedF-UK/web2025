@@ -135,4 +135,8 @@ return {
  ,["rozbalit submenu"] = "expand submenu"
  ,["https://cuni.cz/UK-9056.html"] = "https://cuni.cz/UKEN-903.html"
  ,["telefon"] = "phone"
+ ,[" a "] = " and "
+ ,["Jsme členy knihovnických organizací"] = "We are members of library organizations"
+ ,["Kontakt"] = "Contact"
+ ,["Prohlášení o přístupnosti stránek"] = "Accessibility statement"
  }

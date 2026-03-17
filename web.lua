@@ -63,40 +63,122 @@ local print_actual = building_blocks.print_actual
 
 local menuitem = function(title, href) return {title = title, href= href} end
 
-local mainmenu = {
-  -- menuitem("Domů","index.html"),
-  menuitem("Služby","sluzby.htm"),
-  menuitem("Rezervace knih", "rezervacni_boxy.html"),
-  menuitem("Publikační činnost", "biblio.html"),
-  menuitem("Časopisy", "periodika.htm"),
-  menuitem("Elektronické zdroje", "eiz.htm"),
-  menuitem("Závěrečné práce", "kvalifikacni_prace.htm"),
-  -- menuitem("Průvodce", "pruvodce.html"),
-  menuitem("Nákup publikací","objednavani_liter.htm"),
-  menuitem("O knihovně", "informace.htm"),
-}
+-- tohle je starý menu
+-- local mainmenu = {
+--   -- menuitem("Domů","index.html"),
+--   menuitem("Služby","sluzby.htm"),
+--   menuitem("Rezervace knih", "rezervacni_boxy.html"),
+--   menuitem("Publikační činnost", "biblio.html"),
+--   menuitem("Časopisy", "periodika.htm"),
+--   menuitem("Elektronické zdroje", "eiz.htm"),
+--   menuitem("Závěrečné práce", "kvalifikacni_prace.htm"),
+--   -- menuitem("Průvodce", "pruvodce.html"),
+--   menuitem("Nákup publikací","objednavani_liter.htm"),
+--   menuitem("O knihovně", "informace.htm"),
+-- }
 
-mainmenu = menulib()
-mainmenu:add("Služby","sluzby.htm")
-:addchild("Rezervace knih", "rezervacni_boxy.html")
-:addchild("Studovna", "studovna.html")
-:add("Publikační činnost", "biblio.html")
-:add("Zdroje", "zdroje.htm")
-:addchild("Časopisy", "periodika.htm")
-:addchild("Elektronické zdroje", "eiz.htm")
-:addchild("Závěrečné práce", "kvalifikacni_prace.htm")
-:addchild("Nákup publikací","objednavani_liter.htm")
-:add("O knihovně", "informace.htm")
+local mainmenu = menulib()
+  mainmenu:add("Služby","sluzby.htm")
+    :addchild("Výpůjční služby")
+    :addchild("Půjčovna – půjčování dokumentů","vypujcni_protokol.html")
+    :addchild("Registrace pro výpůjčky", "https://knihovna.cuni.cz/e-prihlaska/")
+    :addchild("Rezervační boxy", "rezervacni_boxy.html")
+    :addchild("Vracení knih do biblioboxu", "bibliobox.html")
+    :addchild("Jak platit zpozdné", "zpozdne.html")
+    :addchild("Meziknihovní výpůjční služba", "meziknih.htm")
+    :addchild("Nabídka vyřazené literatury", "odpisy.htm")
+    :addchild("Rezervace knih", "rezervacni_boxy.html")
+    :addchild("Studijní služby")
+    :addchild("Kopírování a tisk", "tisk.html")
+    :addchild("Informace k tvorbě závěrečných prací", "kvalifikacni_prace.htm")
+    :addchild("Pomoc s tvorbou citací", "inform_vzdelavani.htm")
+    :addchild("Studenti se specifickými potřebami")
+    :addchild("Služby pro studenty se speciálními potřebami", "handi.htm")
+    :addchild("Seznam digitalizovaných dokumentů", "handiscn.htm")
+    :addchild("Návody")
+    :addchild("Návody pro vyhledávač UKAŽ", "https://wiki.alma.cuni.cz/index.php?title=N%C3%A1vody_pro_u%C5%BEivatele")
+  :add("Naše prostory", "prostory.html")
+    :addchild("Půjčovna")
+      :addchild("Půjčovna – půjčování dokumentů","vypujcni_protokol.html")
+    :addchild("Studovny")
+      :addchild("Studovna v Rettigové",  "studovna.html")
+      :addchild("Studovna v Celetné", "celetna.html")
+      :addchild("Týmová studovna", "tymovka.html")
+  :add("Sbírky a zdroje", "sbirky.html")
+    :addchild("Katalogy a databáze")
+      :addchild("Vyhledávání knih a elekronických zdrojů - discovery systém UKAŽ", "https://ukaz.cuni.cz/")
+      :addchild("Elektronické informační zdroje", "eiz.htm")
+      :addchild("Časopisy", "periodika.htm")
+      :addchild("Informace k tvorbě závěrečných prací", "kvalifikacni_prace.htm")
+    :addchild("Změny ve fondu")
+      :addchild("Návrhněte nám knihy k zakoupení do fondu knihovny", "objednavani_liter.htm")
+      :addchild("Nové knihy", 
+        "https://cuni.primo.exlibrisgroup.com/discovery/search?query=any,contains,9*&amp;tab=LibraryCatalog&amp;search_scope=MyInstitution&amp;vid=420CKIS_INST:UKAZ&amp;mfacet=tlevel,include,available_p,1&amp;mfacet=library,include,6986%E2%80%93112118530006986,1&amp;mfacet=newrecords,include,30%20days%20back,2&amp;lang=cs&amp;offset=0")
+      :addchild("Nabídka vyřazené literatury", "odpisy.htm")
+  :add("Pro vyučující", "biblio.html")
+  -- :add("Zdroje", "zdroje.htm")
+  --   :addchild("Časopisy", "periodika.htm")
+  --   :addchild("Elektronické zdroje", "eiz.htm")
+  --   :addchild("Závěrečné práce", "kvalifikacni_prace.htm")
+  --   :addchild("Nákup publikací","objednavani_liter.htm")
+  :add("O knihovně", "informace.htm")
+    :addchild("Kontakty")
+    :addchild("Kontaktní adresa a zaměstnanci",  "kontaktni_adresa.htm")
+      :addchild("Provozní doba", "provozni_doba.htm")
+      :addchild("Jak to u nás vypadá", "fotogalerie.html")
+    :addchild("Knihovní řád a jiné dokumenty")
+    : addchild("Provozní řád", "https://wwwmod.pedf.cuni.cz/udeska/files/opatreni_dekana/opad_20_2022_provozni_rad_knihovny_2022.pdf")
+    : addchild("Ceník", "https://wwwmod.pedf.cuni.cz/udeska/files/opatreni_dekana/opatreni_dekana_c.92023_stanoveni_vyse_uhrad_od_studentu_pedagogicke_fakulty_univerzity_karlovy_zverejneni.pdf")
+    : addchild("Jak platit zpozdné", "zpozdne.html")
+    : addchild("Knihovní řád UK", "https://cuni.cz/UK-14398.html")
+
 
 
 
 -- english version
-local engmenu = {
-  menuitem("Home", "index-en.html"),
-  menuitem("Services", "services.html"),
-  menuitem("Catalogues and databases", "catalogues.html"),
-  menuitem("About library", "about.html")
-}
+-- local engmenu = {
+--   menuitem("Home", "index-en.html"),
+--   menuitem("Services", "services.html"),
+--   menuitem("Catalogues and databases", "catalogues.html"),
+--   menuitem("About library", "about.html")
+-- }
+local engmenu = menulib()
+engmenu:add("Services", "services.html")
+  :addchild("Lending services")
+    :addchild("Reference Desk – Borrowing documents","reference-desk.html")
+    :addchild("Registration for Borrowing", "https://library.cuni.cz/e-application/")
+    :addchild("Smart Lockers", "lockers.html")
+    :addchild("Returning Books to Biblioboxes", "bibliobox-en.html")
+    :addchild("How to Pay Fines", "fees.html")
+  :addchild("Other services")
+    :addchild("Copying and Printing", "print.html")
+    :addchild("Services for Students with Special Needs", "special-needs.html")
+    -- :addchild("Interlibrary loan service", "meziknih.htm")
+    -- :addchild("Offer of withdrawn literature", "odpisy.htm")
+  :add("Our Facilities", "spaces.html")
+    :addchild("Reference Desk")
+      :addchild("Reference Desk – Borrowing documents", "reference-desk.html")
+    :addchild("Study Rooms")
+      :addchild("Study Room Rettigová",  "study-room.html")
+      :addchild("Study Room Celetná ", "celetna-en.html")
+      -- :addchild("Team study room", "tymovka.html")
+  :add("Collections and resources", "catalogues.html")
+    :addchild("Catalogues and databases")
+      :addchild("Discovery System – Search for Books and Articles ", "https://ukaz.cuni.cz/")
+      :addchild("eResources Portal of Charles University", "https://ezdroje.cuni.cz/index.php?lang=en")
+      :addchild("Ulrichsweb", "https://cuni.primo.exlibrisgroup.com/permalink/420CKIS_INST/gf08nd/alma9925591385506986")
+    :addchild("Guides")
+      :addchild("Electronic Resources: A Practical Guide to the ER at CU", "https://publications.cuni.cz/handle/20.500.14178/2503")
+
+      -- :addchild("Electronic information resources", "eiz.htm")
+      -- :addchild("Perio", "periodika.htm")
+      -- :addchild("Information on the creation of theses", "kvalifikacni_prace.htm")
+    -- :addchild("Changes in the collection")
+      -- :addchild("Suggest books for purchase to the library collection", "objednavani_liter.htm")
+      -- :addchild("New books", 
+        -- "https://cuni.primo.exlibrisgroup.com/discovery/search?query=any,contains,9*&amp;tab=LibraryCatalog&amp;search_scope=MyInstitution&amp;vid=420CKIS_INST:UKAZ&amp;mfacet=tlevel,include,available_p,1&amp;mfacet=library,include,6986%E2%80%93112118530006986,1&amp;mfacet=newrecords,include,30%20days%20back")
+      -- :add("For teachers", "biblio.html")
+      :add("About library", "about.html")
 
 local engstrings = require "trans.eng"
 
