@@ -139,4 +139,5 @@ return {
  ,["Jsme členy knihovnických organizací"] = "We are members of library organizations"
  ,["Kontakt"] = "Contact"
  ,["Prohlášení o přístupnosti stránek"] = "Accessibility statement"
+ ,["Více"] = "More"
  }
