@@ -261,7 +261,7 @@ local function template(data)
           div{ h.img{src="/img/phone.svg", alt= T "telefon"}, a {href="tel:+420221900178",["aria-label"]="2 2 1 9 0 0 1 7 8",  h.span {itemprop="telephone", "+420 221 900 178"}}},
           div{ h.img {src= "/img/facebook.svg", alt= "facebook"}, a {href="https://www.facebook.com/knihovnapedfpraha", "Facebook"}}
           ,div{ h.img {src= "/img/instagram.svg", alt = "instagram"}, a {href="https://www.instagram.com/KnihovnaPedFPraha/", "Instagram"}}
-          ,div{a {href=T "/feed.rss", "RSS"}}
+          ,div{ h.img {src= "/img/rss.svg", alt = "rss"}, a {href=T "/feed.rss", "RSS"}}
         },
         div { class="column",
           div{T "Jsme členy knihovnických organizací", "<a href='https://www.skipcr.cz/'>SKIP</a>", T" a ", "<a href='https://sdruk.cz/'>SDRUK z. s.</a>"},
