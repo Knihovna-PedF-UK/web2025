@@ -7,6 +7,7 @@
   --topmenu-color: white;
   --navmenu-divider-color: #ccc;
   --menu-title-bg: #F5722C;
+  --footer-divider-color: #23b5b5;
 }
 
 @font-face {
@@ -115,7 +116,6 @@ img.logo {
   width: fit-content;
   margin: 1rem auto;
   padding: 0.5rem;
-  img {max-height: 1.5rem;}
   .quicklink{
     display: inline-block;
     padding: 0.5rem 1rem;
@@ -130,8 +130,9 @@ img.logo {
       vertical-align: middle;
       margin: 0 auto;
       text-align: center;
+      height: 2.5rem;
     }
-    a, a:visited {color: inherit;}
+    a, a:visited {color: inherit; font-weight: bold;}
   }
   .quicklink + .quicklink {
     border-left: 1px solid var(--navmenu-divider-color);
@@ -267,8 +268,77 @@ img.logo {
   }
 }
 
+.news {
+  .news-item {
+    vertical-align: top;
+    display: inline-block;
+    max-width: 33%;
+    margin-bottom: auto;
+    padding: 0.5rem;
+    padding-left: 0;
+    overflow: hidden; /* Důležité pro oříznutí obsahu */
+    transition: all 0.3s ease;
+    h3 {
+      margin-top: 0;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+    .date {font-size: 0.9rem;}
+    summary::-webkit-details-marker { display: none; }
+    summary { 
+     list-style: none; 
+     cursor: pointer;
+     outline: none;
+    }
+    /* Styl pro "tlačítko" */
+  .read-more-btn {
+    text-decoration: underline;
+    font-size: 0.8rem;
+  }
+
+  /* Omezení výšky v zavřeném stavu */
+  &:not([open]) {
+    /* Oříznutí obsahu a zobrazení efektu vytrácení */
+    max-height: 23rem;
+    /* Efekt vytrácení textu do ztracena */
+    /* background: linear-gradient(to bottom, black 80%, transparent 100%); */
+    /* -webkit-background-clip: text; */
+    /* -webkit-text-fill-color: transparent; */
+  }
+
+  /* V otevřeném stavu */
+  &[open] {
+    max-height: 90rem; /* Dostatečně velká výška */
+    background: none;
+    -webkit-text-fill-color: currentcolor;
+
+    .read-more-btn {
+      display: none; /* Schová tlačítko po rozbalení */
+    }
+  }
+  }
+  h2 {text-align: center;}
+
+  .news-item + .news-item {
+    border-left: 1px solid var(--navmenu-divider-color);
+    padding-left: 0.5rem;
+  }
+  .archive-link {
+    display: block;
+    text-align: center;
+    margin-top: 1rem;
+    font-size: 1.3rem;
+    a{
+      color: var(--body-color);
+      text-decoration: underline; 
+      text-decoration-thickness: 3px;
+      text-decoration-color: var(--footer-divider-color);
+    }
+  }
+}
+
 footer {
-  border-top: 5px solid #23b5b5;
+  border-top: 5px solid var(--footer-divider-color);
   /* padding: 1rem 0; */
   img {display: inline; height: 1em; vertical-align: middle;}
   div {vertical-align: bottom;}
@@ -341,6 +411,14 @@ footer {
     padding-left: 1rem;
   }
   .mainmenu .menu > li.open > .submenu { display: block; }
+  .quick-links{ 
+    img {height: 1.5rem;}
+    overflow-x: auto;
+    white-space: nowrap;    /* Volitelné: zabrání textu, aby se zalamoval pod sebe */
+    scrollbar-width: thin;
+    scrollbar-color: var(--body-color)  var(--body-bg);
+    -webkit-overflow-scrolling: touch;
+  }
 
 
 }

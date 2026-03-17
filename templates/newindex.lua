@@ -22,7 +22,7 @@ local tab = building_blocks.tab
 local boxik = building_blocks.boxik
 local translator = require "lib.translator"
 
-local print_actual = building_blocks.print_actual
+local print_actual_index = building_blocks.print_actual_index
 local provozni_doba = building_blocks.provozni_doba
 
 
@@ -143,7 +143,7 @@ local function template(doc )
       h.section{
         class="news",
         h.h2{class="news-head", T "Aktuality" },
-        print_actual(doc.items), div {class="archiv-link", T ' (<a href="archiv.html">Další aktuality zde</a>)' },
+        print_actual_index(doc.items, T), div {class="archive-link", T ' (<a href="archiv.html">Další aktuality zde</a>)' },
       },
       h.section{class="opening",
         h.h2{T "Provozní doba"},
