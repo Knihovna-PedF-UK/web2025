@@ -6,6 +6,7 @@
   --topmenu-bg: black;
   --topmenu-color: white;
   --navmenu-divider-color: #ccc;
+  --menu-title-bg: #F5722C;
 }
 
 @font-face {
@@ -143,14 +144,18 @@ img.logo {
     li + li {
       margin-top: 0.5em;
     }
-    li:before {
+    li.menuitem:before {
       content: url("/img/threedots.svg");
+    }
+    li.section-title {
+      background-color: var(--menu-title-bg);
+      text-align: center;
     }
   }
 
   @media (min-width: 901px) {
     li:hover .submenu, li:focus-within .submenu  {
-      width: 200px;
+      min-width: 300px;
       display: block;
     }
   }
@@ -366,11 +371,12 @@ a[href^="http"]:not([href*="knihovna.pedf.cuni.cz"])::after {
 /* ************************* */
 
 /* Odstranění defaultních stylů seznamů */
-ul,
-ol {
-  list-style: none;
-  padding-left: 1.5rem;
-}
+/* Proč jsem to tu měl? */
+/* ul, */
+/* ol { */
+/*   list-style: none; */
+/*   padding-left: 1.5rem; */
+/* } */
 
 /* Odstranění podtržení odkazů v resetu (vrátíme později) */
 a {
