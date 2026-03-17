@@ -107,6 +107,35 @@ local function custom_styles(data)
   return t
 end
 
+local function breadcrumbs(data) 
+  if data.breadcrumbs then
+    local t = {}
+    for _, crumb in ipairs(data.breadcrumbs) do
+      table.insert(t, h.li{a {href= crumb.href, crumb.title}})
+    end
+    return h.nav{
+      ["aria-label"] = T "drobénková navigace", class="breadcrumb",
+      h.div{class="nav-container",
+      h.ul {
+        h.li {a {href= T "/index.html", h.img{src="/img/home.svg", alt=T "Domů"}}},
+        t
+        -- h.li{a {href= T "/sluzby.htm", T "Služby"}},
+        -- h.li{a {href= T "/informace.htm", T "Informace o knihovně"}},
+      },
+    }
+  }
+  end
+end
+
+local function has_breadcrumbs(data, class)
+  if data.breadcrumbs then
+    return class .. " has-breadcrumbs"
+  else
+    return class
+  end
+end
+
+
 local function obsolete(data)
   -- 
   if data.obsolete then
@@ -196,7 +225,7 @@ local function template(data)
           },
         },
         h.nav{["aria-label"]= T "hlavní menu", class="mainmenu",
-          h.div{class="nav-container",
+          h.div{class=has_breadcrumbs(data, "nav-container"),
             h.a{ href= T "/index.html", h.img{role="banner", class="logo", alt=T "Zpět na hlavní stránku knihovny", src=T "/img/logo.svg"}},
             -- h.a{class="logo",h.div{"Ústřední knihovna PedF UK"}},
             -- h.menu{
@@ -209,15 +238,7 @@ local function template(data)
           },
         -- }},
       },
-      h.nav{["aria-label"] = T "drobénková navigace", class="breadcrumb",
-        h.div{class="nav-container",
-          h.ul {
-           h.li {a {href= T "/index.html", h.img{src="/img/home.svg", alt=T "Domů"}}},
-           h.li{a {href= T "/sluzby.htm", T "Služby"}},
-           h.li{a {href= T "/informace.htm", T "Informace o knihovně"}},
-          },
-        }
-      },
+      breadcrumbs(data)
   },
       -- row{
         h.main {class="main-content",
@@ -245,7 +266,7 @@ local function template(data)
         div { class="column",
           div{T "Jsme členy knihovnických organizací", "<a href='https://www.skipcr.cz/'>SKIP</a>", T" a ", "<a href='https://sdruk.cz/'>SDRUK z. s.</a>"},
           -- div{"Webmaster: <a href='mailto:michal.hoftich@pedf.cuni.cz'>michal.hoftich@pedf.cuni.cz</a>"},
-          div{a {href="/prohlaseni.html", "Prohlášení o přístupnosti stránek"}},
+          div{a {href="/prohlaseni.html", T "Prohlášení o přístupnosti stránek"}},
           div{a {href= T "https://cuni.cz/UK-9056.html", "GDPR"}},
         }
         -- boxik("EIZ pro PedF", "eiz.htm"),

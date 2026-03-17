@@ -58,6 +58,10 @@ body {
   padding: 0;
 }
 
+
+
+/* === Základní design === */
+/* Odstranění výchozích marginů/paddingů a sjednocení box modelu */
 header {
   background-color: var(--header-bg);
   box-shadow: 0 4px 12px -2px rgba(0,0,0,0.15);
@@ -107,7 +111,7 @@ img.logo {
 }
 
 .mainmenu {
-  .nav-container {
+  .has-breadcrumbs {
     border-bottom: 1px solid var(--navmenu-divider-color);
   }
   button{
@@ -209,7 +213,7 @@ img.logo {
   li:last-child::after {
     content: "";                /* poslední položka nemá oddělovač */
   }
-  img {display: inline; height: 1em; vertical-align: middle;}
+  img {display: inline; height: 1em; vertical-align: -0.2ch;}
 }
 
 /* ukotvi nav, aby absolute prvky měly referenci */
@@ -224,6 +228,14 @@ img.logo {
 /* umožni otevřít submenu i pomocí .open (na desktopu i mobilu) */
 .mainmenu .menu > li.open > .submenu { display: block; }
 
+
+.rollup{
+  padding-bottom: 1ch;
+  margin-top: 3rem;
+  img {
+    max-width: 100%;
+  }
+}
 
 footer {
   border-top: 5px solid #23b5b5;

@@ -182,6 +182,27 @@ engmenu:add("Services", "services.html")
 
 local engstrings = require "trans.eng"
 
+local function make_breadcrumbs(doc)
+  -- tady bych chtěl zkusit, jestli najdu aktuální soubor v menu. pokud ano, tak pro něj vytvořím drobénkovou navigaci
+  local path = (doc.relative_filepath or ""):gsub("^/", "")
+  -- můžeme mít jen dvě úrovně navigace, takže můžeme použít jen dva cykly
+  local breadcrumbs = {}
+  for _, menu in ipairs(doc.menuitems) do
+    if menu.href == path then
+      table.insert(breadcrumbs, {title = menu.title, href = menu.href})
+      return breadcrumbs
+    end
+    if menu.children then
+      for _, submmenu in ipairs(menu.children) do
+        if submmenu.href == path then
+          table.insert(breadcrumbs, {title = menu.title, href = menu.href})
+          table.insert(breadcrumbs, {title = submmenu.title, href = submmenu.href})
+          return breadcrumbs
+        end
+      end
+    end
+  end
+end
 
 
 
@@ -252,6 +273,9 @@ local add_defaults = make_transformer(function(doc)
     doc.strings = engstrings
   else
     doc.menuitems = mainmenu
+  end
+  if not doc.breadcrumbs then
+    doc.breadcrumbs = make_breadcrumbs(doc)
   end
   -- doc.sitemap = sitemap
   doc.prov_doba = prov_doba
