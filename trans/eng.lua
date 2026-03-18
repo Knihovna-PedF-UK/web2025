@@ -140,5 +140,11 @@ return {
  ,["Kontakt"] = "Contact"
  ,["Prohlášení o přístupnosti stránek"] = "Accessibility statement"
  ,["Více"] = "More"
- ,["Archiv aktualit"] = "News archive"
+ ,["Archiv aktualit"] = "News Archive"
+,["Elektronické zdroje"] = "Electronic Resources"
+,["eiz.htm"] = "catalogues.html"
+,["Poprvé v knihovně"] = "First Time in the Library"
+,["poprve.html"] = "first-time.html"
+,["Návrh knih k nákupu"] = "Suggest a book for purchase"
+,["objednavani_liter.htm"] = "purchase-books.html"
  }
