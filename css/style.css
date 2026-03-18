@@ -3,10 +3,11 @@
   --header-bg: white;
   --body-color: #222;
   --body-bg: #fff;
+  --highlight-color: #dd5f5e;
   --topmenu-bg: black;
   --topmenu-color: white;
   --navmenu-divider-color: #ccc;
-  --menu-title-bg: #F5722C;
+  --menu-title-bg: var(--highlight-color);
   --footer-divider-color: #23b5b5;
 }
 
@@ -184,7 +185,9 @@ img.logo {
     }
     li.section-title {
       background-color: var(--menu-title-bg);
+      font-weight: bold;
       text-align: center;
+      color: white;
     }
   }
 
@@ -340,9 +343,6 @@ img.logo {
     width: 20%;
     caption{
       width: fit-content;
-    }
-    td:first-child {
-      padding-right: 1rem;
     }
 
   }
@@ -548,6 +548,13 @@ video {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+}
+td:not(first-child) {
+  padding-right: 1rem;
+}
+
+th{
+  text-align: left;
 }
 
 /* === Typografie === */
