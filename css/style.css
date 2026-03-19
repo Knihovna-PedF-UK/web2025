@@ -509,7 +509,9 @@ img.logo {
 }
 
 .closed{
-  border: 1px solid var(--color-highlight);
+  &:has(b) {
+    border: 1px solid var(--color-highlight);
+  }
   width: fit-content;
   b{display: block; width: 100%; background-color:  var(--color-highlight); color: white; padding: 0 3rem; font-size: 1.2rem;}
  }
