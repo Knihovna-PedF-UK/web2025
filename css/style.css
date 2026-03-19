@@ -1,37 +1,65 @@
-:root{
+/* ============================================ */
+/*   CSS custom properties                       */
+/* ============================================ */
+:root {
   --max-width: 1200px;
-  --header-bg: white;
-  --body-color: #222;
-  --body-bg: #fff;
-  --highlight-color: #dd5f5e;
-  --topmenu-bg: black;
-  --topmenu-color: white;
-  --navmenu-divider-color: #ccc;
-  --menu-title-bg: var(--highlight-color);
-  --footer-divider-color: #23b5b5;
+
+  /* Barvy */
+  --color-header-bg: white;
+  --color-body: #222;
+  --color-body-bg: #fff;
+  --color-highlight: #dd5f5e;
+  --color-topmenu-bg: black;
+  --color-topmenu: white;
+  --color-divider: #ccc;
+  --color-menu-title-bg: var(--color-highlight);
+  --color-footer-divider: #23b5b5;
+
+  /* Stíny */
+  --shadow-card: 0 4px 12px -2px rgba(0, 0, 0, 0.15);
+
+  /* Typografie */
+  --font-base: "Moderat", Arial, Helvetica, sans-serif;
+  --font-size-base: 1rem;
+  --line-height-base: 1.6;
+
+  /* Mezery */
+  --space-xs: 0.25rem;
+  --space-s:  0.5rem;
+  --space-m:  1rem;
+  --space-l:  1.5rem;
+  --space-xl: 3rem;
+
+  /* Poloměry */
+  --radius-s: 4px;
+  --radius-m: 8px;
+
+  /* Výška top menu (JS doplní skutečnou hodnotu) */
+  --topmenu-h: 3rem;
 }
 
+
+/* ============================================ */
+/*   Fonty                                       */
+/* ============================================ */
 @font-face {
   font-family: "Moderat";
   font-weight: 400;
   font-display: swap;
   src: url(/fonts/Moderat-Regular-1.woff2) format("woff2");
 }
-
 @font-face {
   font-family: "Moderat";
   font-weight: 500;
   font-display: swap;
   src: url(/fonts/Moderat-Medium-1.woff2) format("woff2");
 }
-
 @font-face {
   font-family: "Moderat";
   font-weight: 700;
   font-display: swap;
   src: url(/fonts/Moderat-Bold-1.woff2) format("woff2");
 }
-
 @font-face {
   font-family: "Moderat";
   font-weight: 900;
@@ -39,19 +67,10 @@
   src: url(/fonts/Moderat-Black-1.woff2) format("woff2");
 }
 
-body {
-  font-family: "Moderat", Moderat, Arial, Helvetica, sans-serif;
-  margin: 0 auto; 
-  line-height: 1.6;
-  font-size: 1rem; /* 16px */
-  color: var(--body-color);
-  background-color: var(--body-bg);
-}
-/* header, main, footer {border: 1px solid black;} */
 
-
-/* === CSS Reset === */
-/* Odstranění výchozích marginů/paddingů a sjednocení box modelu */
+/* ============================================ */
+/*   CSS reset                                   */
+/* ============================================ */
 *,
 *::before,
 *::after {
@@ -61,110 +80,164 @@ body {
 }
 
 
-
-/* === Základní design === */
-/* Odstranění výchozích marginů/paddingů a sjednocení box modelu */
-header {
-  background-color: var(--header-bg);
-  box-shadow: 0 4px 12px -2px rgba(0,0,0,0.15);
+/* ============================================ */
+/*   Základní elementy                           */
+/* ============================================ */
+html {
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
 }
 
-/* navigace jde přes celou šířku stránky*/
+body {
+  font-family: var(--font-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--color-body);
+  background-color: var(--color-body-bg);
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+  color: #0055cc;
+}
+a:hover,
+a:focus {
+  text-decoration: underline;
+}
+
+img,
+video {
+  height: auto;
+  display: block;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+td:not(:first-child) {
+  padding-right: var(--space-m);
+}
+th {
+  text-align: left;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.25;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+h1 { font-size: 2rem; }
+h2 { font-size: 1.5rem; }
+h3 { font-size: 1.25rem; }
+h4 { font-size: 1.125rem; }
+h5 { font-size: 1rem; }
+h6 { font-size: 0.875rem; }
+
+p, ul, ol, blockquote {
+  margin-bottom: var(--space-m);
+}
+
+strong { font-weight: 600; }
+em     { font-style: italic; }
+
+input, button, textarea, select {
+  font: inherit;
+  line-height: inherit;
+  color: inherit;
+}
+
+
+/* ============================================ */
+/*   Layout                                      */
+/* ============================================ */
+header {
+  background-color: var(--color-header-bg);
+  box-shadow: var(--shadow-card);
+  position: sticky;
+  top: var(--topmenu-h, 0);
+  z-index: 999;
+}
+
+header.top {
+  top: 0;
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+}
+
 nav {
   width: 100%;
-  background: #f8f8f8; /* jen pro ukázku */
   margin: 0;
   padding: 0;
+}
+
+.nav-container {
+  position: relative;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-s) var(--space-m);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  a,
+  a:visited {
+    color: inherit;
+  }
 }
 
 main.main-content {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 1rem;
+  padding: var(--space-m);
 }
-
-/* vnitřní kontejner drží max. šířku */
-.nav-container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0.5rem 1rem;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  a, a:visited {
-    color: inherit;
-  }
-}
-
 
 img.logo {
   max-height: 5rem;
   height: auto;
 }
 
-/* menu */
+
+/* ============================================ */
+/*   Navigační menu                              */
+/* ============================================ */
 .menu {
   display: flex;
-  gap: 1rem;
+  gap: var(--space-m);
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.quick-links{
-  box-shadow: 0 4px 12px -2px rgba(0,0,0,0.15);
-  width: fit-content;
-  margin: 1rem auto;
-  padding: 0.5rem;
-  .quicklink{
-    display: inline-block;
-    padding: 0.5rem 1rem;
-    background-color: white;
-    border-radius: 4px;
-    margin: 0.5rem;
-    font-weight: 500;
-    text-decoration: none;
-    color: inherit;
-    transition: background-color 0.2s ease;
-    img {
-      vertical-align: middle;
-      margin: 0 auto;
-      text-align: center;
-      height: 2.5rem;
-    }
-    a, a:visited {color: inherit; font-weight: bold;}
-  }
-  .quicklink + .quicklink {
-    border-left: 1px solid var(--navmenu-divider-color);
-    border-radius: 0;
-    transition: none;
-  }
-
-}
 .mainmenu {
   .has-breadcrumbs {
-    border-bottom: 1px solid var(--navmenu-divider-color);
+    border-bottom: 1px solid var(--color-divider);
   }
-  button{
+
+  button {
     all: unset;
-    display: inline-block; cursor: pointer;
+    display: inline-block;
+    cursor: pointer;
+
     img {
       height: 1em;
       display: inline-flex;
       align-items: flex-end;
-      padding:0;
-      border: none;
       vertical-align: middle;
     }
   }
+
   .menu {
     font-size: 1.2rem;
     font-weight: 700;
+
     li {
       position: relative;
     }
   }
+
   .submenu {
     display: none;
     position: absolute;
@@ -173,216 +246,363 @@ img.logo {
     background: white;
     list-style: none;
     margin: 0;
-    padding: 0.5rem;
+    padding: var(--space-s);
     font-size: 1rem;
     font-weight: normal;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    z-index: 1001;
+
     li + li {
       margin-top: 0.5em;
     }
-    li.menuitem:before {
+
+    li.menuitem::before {
       content: url("/img/threedots.svg");
     }
+
     li.section-title {
-      background-color: var(--menu-title-bg);
+      background-color: var(--color-menu-title-bg);
       font-weight: bold;
       text-align: center;
       color: white;
     }
   }
 
+  /* Otevření submenu na desktopu hoveru / focusu */
   @media (min-width: 901px) {
-    li:hover .submenu, li:focus-within .submenu  {
+    li:hover .submenu,
+    li:focus-within .submenu {
       min-width: 300px;
       display: block;
     }
   }
+
+  /* Otevření submenu třídou .open (desktop i mobil) */
+  .menu > li.open > .submenu {
+    display: block;
+  }
 }
 
+/* Hamburger – skrytý na desktopu */
+.mainmenu button.hamburger {
+  all: unset;
+  display: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+
+/* ============================================ */
+/*   Top menu                                    */
+/* ============================================ */
 .topmenu {
-  background-color: var(--topmenu-bg);
-  color: var(--topmenu-color);
+  background-color: var(--color-topmenu-bg);
+  color: var(--color-topmenu);
   padding: 0.2em 0;
-  text-align: right;
-  padding-left: auto;
-  vertical-align: middle;
-  span{
-    /* display: inline-block; */
-    border-right: 1px solid var(--topmenu-color);
-    margin: 0 0.5em;
-    padding-right: 0.5em;
-    height: 1.5em;
-    width: auto;
-  }
-  span:last-child{
-    border-right: none;
-    margin-right: 0;
-    padding-right: 0;
-  }
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--topmenu-h);
+  transform: translateY(0);
+  transition: transform 0.3s ease;
+  z-index: 1000;
+
   .nav-container {
-    justify-content: right;
+    justify-content: flex-end;
   }
+
+  span {
+    border-right: 1px solid var(--color-topmenu);
+    margin: 0 var(--space-s);
+    padding-right: var(--space-s);
+    height: 1.5em;
+
+    &:last-child {
+      border-right: none;
+      margin-right: 0;
+      padding-right: 0;
+    }
+  }
+
   .langswitcher * {
     display: inline;
     width: auto;
   }
 }
 
+.topmenu.hidden {
+  transform: translateY(calc(-1 * var(--topmenu-h)));
+}
+
+
+/* ============================================ */
+/*   Drobečková navigace                         */
+/* ============================================ */
 .breadcrumb {
   font-size: 1.1rem;
+
   ul {
-    list-style: none;           /* odstraní tečky */
-    display: flex;              /* položky vedle sebe */
-    flex-wrap: wrap;            /* pro menší obrazovky */
-    gap: 0.5em;                 /* mezera mezi položkami */
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-s);
     padding: 0;
     margin: 0;
     font-size: 0.9em;
   }
+
   li::after {
-    content: "›";               /* oddělovač mezi položkami */
-    margin-left: 0.5em;
+    content: "›";
+    margin-left: var(--space-s);
     color: #555;
   }
+
   li:last-child::after {
-    content: "";                /* poslední položka nemá oddělovač */
+    content: "";
   }
-  img {display: inline; height: 1em; vertical-align: -0.2ch;}
+
+  img {
+    display: inline;
+    height: 1em;
+    vertical-align: -0.2ch;
+  }
 }
 
-/* ukotvi nav, aby absolute prvky měly referenci */
-.nav-container { position: relative; }
 
-/* jistota: každý root li je pozicovaný pro absolutní submenu */
-.mainmenu .menu > li { position: relative; }
+/* ============================================ */
+/*   Quick links                                 */
+/* ============================================ */
+.quick-links {
+  box-shadow: var(--shadow-card);
+  /* Na desktopu se přizpůsobí obsahu, na mobilu zabere celou šířku */
+  width: 100%;
+  max-width: fit-content;
+  margin: var(--space-m) auto;
+  padding: var(--space-s);
+  /* Horizontální scroll je omezen na tento element, ne na celou stránku */
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-body) var(--color-body-bg);
+  /* Zabrání přesahu obsahu mimo tento box */
+  white-space: nowrap;
 
-/* submenu má být nad ostatními vrstvami */
-.mainmenu .submenu { z-index: 1001; }
+  .quicklink {
+    display: inline-block;
+    padding: var(--space-s) var(--space-m);
+    background-color: white;
+    border-radius: var(--radius-s);
+    margin: var(--space-s);
+    font-weight: 500;
+    text-decoration: none;
+    color: inherit;
+    transition: background-color 0.2s ease;
+    vertical-align: middle;
 
-/* umožni otevřít submenu i pomocí .open (na desktopu i mobilu) */
-.mainmenu .menu > li.open > .submenu { display: block; }
+    img {
+      vertical-align: middle;
+      margin: 0 auto;
+      text-align: center;
+      height: 2.5rem;
+    }
+
+    a,
+    a:visited {
+      color: inherit;
+      font-weight: bold;
+    }
+  }
+
+  .quicklink + .quicklink {
+    border-left: 1px solid var(--color-divider);
+    border-radius: 0;
+    transition: none;
+  }
+}
 
 
-.rollup{
+/* ============================================ */
+/*   Rollup sekce                                */
+/* ============================================ */
+.rollup {
   padding-bottom: 1ch;
-  margin-top: 3rem;
+  margin-top: var(--space-xl);
+
   img {
     max-width: 100%;
   }
 }
 
+
+/* ============================================ */
+/*   Aktuality (.news)                           */
+/* ============================================ */
 .news {
+  /* Flexbox místo inline-block: zalamuje se přirozeně na menších obrazovkách */
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-m);
+
+  /* h2 a archive-link zabírají celý řádek, ostatní flex-itemy se řadí vedle sebe */
+  h2,
+  .closed,
+  .archive-link {
+    width: 100%;
+    text-align: center;
+  }
+
   .news-item {
+    /* Minimální šířka zajišťuje, že se sloupce nezmenší pod čitelnou hodnotu */
+    flex: 1 1 260px;
+    min-width: 0;           /* bez tohoto by flex-item mohl přetékat */
     vertical-align: top;
-    display: inline-block;
-    max-width: 33%;
-    margin-bottom: auto;
-    padding: 0.5rem;
-    padding-left: 0;
-    overflow: hidden; /* Důležité pro oříznutí obsahu */
+    overflow: hidden;
     transition: all 0.3s ease;
+
     h3 {
       margin-top: 0;
-      margin-bottom: 0.5rem;
+      margin-bottom: var(--space-s);
       font-size: 1rem;
     }
-    .date {font-size: 0.9rem;}
-    summary::-webkit-details-marker { display: none; }
-    summary { 
-     list-style: none; 
-     cursor: pointer;
-     outline: none;
+
+    .date {
+      font-size: 0.9rem;
     }
-    /* Styl pro "tlačítko" */
-  .read-more-btn {
-    text-decoration: underline;
-    font-size: 0.8rem;
-  }
 
-  /* Omezení výšky v zavřeném stavu */
-  &:not([open]) {
-    /* Oříznutí obsahu a zobrazení efektu vytrácení */
-    max-height: 23rem;
-    /* Efekt vytrácení textu do ztracena */
-    /* background: linear-gradient(to bottom, black 80%, transparent 100%); */
-    /* -webkit-background-clip: text; */
-    /* -webkit-text-fill-color: transparent; */
-  }
+    summary::-webkit-details-marker {
+      display: none;
+    }
 
-  /* V otevřeném stavu */
-  &[open] {
-    max-height: 90rem; /* Dostatečně velká výška */
-    background: none;
-    -webkit-text-fill-color: currentcolor;
+    summary {
+      list-style: none;
+      cursor: pointer;
+      outline: none;
+    }
 
     .read-more-btn {
-      display: none; /* Schová tlačítko po rozbalení */
+      text-decoration: underline;
+      font-size: 0.8rem;
+    }
+
+    &:not([open]) {
+      max-height: 23rem;
+    }
+
+    &[open] {
+      max-height: 90rem;
+
+      .read-more-btn {
+        display: none;
+      }
     }
   }
-  }
-  h2 {text-align: center;}
 
-  .news-item + .news-item {
-    border-left: 1px solid var(--navmenu-divider-color);
-    padding-left: 0.5rem;
+  /* Oddělovač – jen mezi sousedními položkami a jen na desktopu */
+  @media (min-width: 601px) {
+    .news-item + .news-item {
+      border-left: 1px solid var(--color-divider);
+      padding-left: var(--space-s);
+    }
   }
-  .archive-link {
-    display: block;
-    text-align: center;
-    margin-top: 1rem;
-    font-size: 1.3rem;
-  }
+
 }
 
-.opening{
-  h2 {text-align: center;margin-bottom: 2rem;}
-  table{
+.closed{
+  border: 1px solid var(--color-highlight);
+  width: fit-content;
+  b{display: block; width: 100%; background-color:  var(--color-highlight); color: white; padding: 0 3rem; font-size: 1.2rem;}
+ }
+
+/* ============================================ */
+/*   Otevírací doby (.opening)                   */
+/* ============================================ */
+.opening {
+  /* Flexbox místo inline-block: tabulky se zalamují na menších obrazovkách */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--space-l);
+  margin-bottom: var(--space-xl);
+
+  /* Tyto prvky zabírají celý řádek samostatně, centrovaně */
+  h2,
+  .closed,
+  .planned_closing {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 0;
+  }
+
+  h2 {
+    margin-bottom: 2rem;
+  }
+
+  table {
     text-align: left;
     vertical-align: top;
-    display: inline-block;
-    width: 20%;
-    caption{
+    /* Pevná min-width zabrání zbytečnému zmáčknutí */
+    min-width: 160px;
+
+    caption {
       width: fit-content;
     }
-
   }
-  table + table {
-    margin-left: 2rem;
-  }
-  text-align: center;
-  margin-bottom: 3rem;
-
 }
 
-.planned_closing, .archive-link{
+
+/* ============================================ */
+/*   Sdílené styly odkazů (archiv, uzavírky)     */
+/* ============================================ */
+.planned_closing,
+.archive-link {
   font-size: 1.2rem;
-  a{
-    color: var(--body-color);
-    text-decoration: underline; 
+
+  a {
+    color: var(--color-body);
+    text-decoration: underline;
     text-decoration-thickness: 3px;
-    text-decoration-color: var(--footer-divider-color);
+    text-decoration-color: var(--color-footer-divider);
   }
-  a:hover{
-    text-decoration: underline; 
-    text-decoration-thickness: 3px;
-    text-decoration-color: var(--body-color);
+
+  a:hover {
+    text-decoration-color: var(--color-body);
   }
 }
 
+
+/* ============================================ */
+/*   Zápatí                                      */
+/* ============================================ */
 footer {
-  border-top: 5px solid var(--footer-divider-color);
-  /* padding: 1rem 0; */
-  img {display: inline; height: 1em; vertical-align: middle;}
-  div {vertical-align: bottom;}
-  div.column div{margin-top: 0.5rem;}
-  address{font-style: normal;}
+  border-top: 5px solid var(--color-footer-divider);
+
+  img {
+    display: inline;
+    height: 1em;
+    vertical-align: middle;
+  }
+
+  div {
+    vertical-align: bottom;
+  }
+
+  div.column div {
+    margin-top: var(--space-s);
+  }
+
+  address {
+    font-style: normal;
+  }
+
   .copyright {
     font-size: 1rem;
     color: white;
-    padding: 1rem;
+    padding: var(--space-m);
     background-color: black;
     text-align: center;
   }
+
   @media (max-width: 600px) {
     .nav-container {
       display: block;
@@ -391,121 +611,65 @@ footer {
 }
 
 
-/* ******************************************** */
-/*    Hamburger menu (pro mobilní zobrazení)    */
-/* ******************************************** */
-
-/* výchozí stav – desktop */
-.mainmenu button.hamburger {
-  all: unset;
-  display: none;
-  font-size: 2rem;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-
-/* mobilní stav */
+/* ============================================ */
+/*   Mobilní navigace (max 900px)                */
+/* ============================================ */
 @media (max-width: 900px) {
   img.logo {
     max-height: 3rem;
     height: auto;
   }
 
-
   .mainmenu button.hamburger {
-    display: inline-block; /* jen na mobilech */
+    display: inline-block;
   }
 
-  li.open > .submenu {
-    display: block;     /* ukáže se při třídě .open */
-  }
-  .menu { /* skryté, otevře se .open */
+  /* Hlavní menu je schované, otevírá se třídou .open */
+  .menu {
     display: none;
     flex-direction: column;
-    position: absolute; 
-    top: 100%; 
-    left: 0; 
+    position: absolute;
+    top: 100%;
+    left: 0;
     right: 0;
-    /* position: relative; */
     z-index: 2000;
-    background: white; box-shadow: 0 4px 12px -2px rgba(0,0,0,0.15);
+    background: white;
+    box-shadow: var(--shadow-card);
   }
-  .menu.open { display: flex; }
 
-  /* mobilní submenu je statické (stackuje se svisle) */
+  .menu.open {
+    display: flex;
+  }
+
+  /* Mobilní submenu se stackuje svisle */
   .mainmenu .submenu {
     display: none;
-    /* position: static; */
     position: static;
-    z-index: 2100; /* ještě nad menu */
+    z-index: 2100;
     box-shadow: none;
-    padding-left: 1rem;
-  }
-  .mainmenu .menu > li.open > .submenu { display: block; }
-  .quick-links{ 
-    img {height: 1.5rem;}
-    overflow-x: auto;
-    white-space: nowrap;    /* Volitelné: zabrání textu, aby se zalamoval pod sebe */
-    scrollbar-width: thin;
-    scrollbar-color: var(--body-color)  var(--body-bg);
-    -webkit-overflow-scrolling: touch;
+    padding-left: var(--space-m);
   }
 
+  .mainmenu .menu > li.open > .submenu {
+    display: block;
+  }
 
+  /* Quick links: na mobilu zabere celou šířku a lze scrollovat jen tento box */
+  .quick-links {
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+
+    img {
+      height: 1.5rem;
+    }
+  }
 }
 
 
-
-
-
-/* *********************** */
-/*     Sticky header       */
-/* *********************** */
-
-:root {
-  --topmenu-h: 3rem; /* fallback, skutečná výška se doplní z JS */
-}
-
-/* top menu – fixní nahoře, na začátku viditelné */
-.topmenu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-
-  height: var(--topmenu-h);
-
-  transform: translateY(0);
-  transition: transform 0.3s ease;
-
-  z-index: 1000; /* nad mainmenu a obsahem */
-}
-
-/* při scrollu dolů schovej */
-.topmenu.hidden {
-  transform: translateY(calc(-1 * var(--topmenu-h)));
-}
-
-/* hlavní menu – sticky pod top barem */
-header {
-  position: sticky;
-  top: var(--topmenu-h, 0);
-  z-index: 999; /* pod topmenu */
-}
-
-header.top{
-  top: 0;
-  transform: translateY(0);
-  transition: transform 0.3s ease;
-}
-
-
-/* *************** */
-/*      Triky      */
-/* *************** */
-
-/* Přidat ikonku u odkazů vedoucích mimo web knihovny */
+/* ============================================ */
+/*   Trik: ikona externího odkazu                */
+/* ============================================ */
 a[href^="http"]:not([href*="knihovna.pedf.cuni.cz"])::after {
   content: "";
   display: inline-block;
@@ -514,97 +678,5 @@ a[href^="http"]:not([href*="knihovna.pedf.cuni.cz"])::after {
   margin-left: 0.25em;
   background: currentColor;
   -webkit-mask: url("/img/external-link.svg") no-repeat center / contain;
-  mask: url("/img/external-link.svg") no-repeat center / contain;;
+  mask: url("/img/external-link.svg") no-repeat center / contain;
 }
-
-
-/* ************************* */
-/*       Obecné styly        */
-/* ************************* */
-
-/* Odstranění defaultních stylů seznamů */
-/* Proč jsem to tu měl? */
-/* ul, */
-/* ol { */
-/*   list-style: none; */
-/*   padding-left: 1.5rem; */
-/* } */
-
-/* Odstranění podtržení odkazů v resetu (vrátíme později) */
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-/* Obrázky a média max. na šířku rodiče */
-img,
-video {
-  /* max-width: 100%; */
-  height: auto;
-  display: block;
-}
-
-/* Tabulky bez mezírek */
-table {
-  border-collapse: collapse;
-  border-spacing: 0;
-}
-td:not(first-child) {
-  padding-right: 1rem;
-}
-
-th{
-  text-align: left;
-}
-
-/* === Typografie === */
-html {
-  font-size: 100%; /* 16px jako základ (1rem = 16px) */
-  -webkit-text-size-adjust: 100%; /* lepší zoom na mobilech */
-}
-
-
-/* Nadpisy */
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;
-  line-height: 1.25;
-  margin-top: 1.5em;
-  margin-bottom: 0.5em;
-}
-
-h1 { font-size: 2rem; }   /* 32px */
-h2 { font-size: 1.5rem; } /* 24px */
-h3 { font-size: 1.25rem; }/* 20px */
-h4 { font-size: 1.125rem; }
-h5 { font-size: 1rem; }
-h6 { font-size: 0.875rem; }
-
-/* Odstavce a seznamy */
-p, ul, ol, blockquote {
-  margin-bottom: 1rem;
-}
-
-/* Odkazy */
-a {
-  color: #0055cc;
-}
-a:hover,
-a:focus {
-  text-decoration: underline;
-}
-
-/* Formuláře */
-input, button, textarea, select {
-  font: inherit;
-  line-height: inherit;
-  color: inherit;
-}
-
-/* Zvýraznění */
-strong {
-  font-weight: 600;
-}
-em {
-  font-style: italic;
-}
-
