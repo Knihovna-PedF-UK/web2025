@@ -127,7 +127,7 @@ function building_blocks.provozni_doba(data, T)
         table.insert(tble, curr_row)
       end
       -- return {h.table{class="prov_doba",h.thead{tbl}, h.tbody{tble}}}
-      return {h.table{class="prov_doba small",tbl, tble}}
+      return {h.section{class="prov_doba_container", h.table{class="prov_doba small",tbl, tble}}}
   end
   local function jednotky(idata)
     for _, jednotka in ipairs(idata.children) do
