@@ -130,6 +130,7 @@ local function template(doc )
   local close_element = div {class="closed", id="closed"}
   if close_comment then
     close_element = div{class="closed", id="closed", div{h.b {T "Dnes má knihovna zavřeno: "}}, div{T(close_comment)}}
+  else
     -- close_element = div{class="closed", h.strong {T "Dnes má knihovna zavřeno: "}, T(close_comment)}
   end
   local contents = {
@@ -143,12 +144,14 @@ local function template(doc )
       h.section{
         class="news",
         h.h2{class="news-head", T "Aktuality" },
-        print_actual_index(doc.items, T), div {class="archive-link", T ' (<a href="archiv.html">Další aktuality zde</a>)' },
+        close_element,
+        print_actual_index(doc.items, T), 
+        div {class="archive-link", T ' (<a href="archiv.html">Další aktuality zde</a>)' 
+      },
       },
       h.section{class="opening",
         h.h2{T "Provozní doba"},
         provozni_doba( doc.prov_doba, T),
-        close_element,
         div{class="planned_closing",  a {href=T "provozni_doba.htm", T "Plánované uzavření knihovny"}}
       },
       h.section{ h.b {T "Nejnovější aktualizace"}, print_updates(T,doc.updates), "/",  h.a{href= T "aktualizace.html",  T "Starší"}},
