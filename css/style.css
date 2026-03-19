@@ -540,16 +540,35 @@ img.logo {
     margin-bottom: 2rem;
   }
 
-  table {
-    text-align: left;
-    vertical-align: top;
-    /* Pevná min-width zabrání zbytečnému zmáčknutí */
-    min-width: 160px;
+  .prov_doba_container {
+    table{ 
+      text-align: left;
+      vertical-align: top;
+      /* Pevná min-width zabrání zbytečnému zmáčknutí */
+      min-width: 160px;
 
-    caption {
-      width: fit-content;
+      caption {
+        width: fit-content;
+      }
     }
   }
+  /* @media (min-width: 601px) { */
+  /*   table + table, caption + caption { */
+  /*     border-left: 1px solid var(--color-divider); */
+  /*     padding-left: var(--space-s); */
+  /*   } */
+  /* } */
+  @media (min-width: 601px) {
+  .prov_doba_container  + .prov_doba_container {
+    border-left: 1px solid var(--color-divider);
+    padding-left: var(--space-s);
+
+  }
+}
+}
+
+.opening h2, .news h2 {
+  font-size: 2rem;
 }
 
 
