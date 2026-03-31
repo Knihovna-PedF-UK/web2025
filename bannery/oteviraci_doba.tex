@@ -1,0 +1,54 @@
+\documentclass{article}
+\usepackage[paperwidth=800pt,paperheight=300pt,margin=0mm]{geometry}
+\usepackage{uklogo}
+\usepackage[boxwidth=400pt]{responsive}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\pagecolor[HTML]{F6B2B6}
+\parindent=0pt
+
+\setmainfont{Moderat-Medium.ttf}
+\begin{document}
+
+Nazdar světe, jsme otevřeni každý den od 9:00 do 18:00. Těšíme se na vás!
+
+\makeatletter
+% \logosovacolor[40pt]
+\makeatother
+
+
+%\ExplSyntaxOn
+
+\newcommand\testik[2]{
+\setbox1=\vbox{
+  {\Large\textcolor[HTML]{#2}{Otevírací doba}}\par
+  \bigskip
+  \begin{tabular}{@{}ll@{}}
+    Po-Čt: & 9:00 - 18:00 \\
+    \textcolor{white}{Pá:} & \textcolor{white}{9:00 - 17:00}\\
+  \end{tabular}
+  \textcolor[HTML]{F6B2B6}{more lines}\par
+  \textcolor[HTML]{EC662C}{more lines}\par
+  \textcolor[HTML]{47BCCA}{more lines}\par
+  \textcolor[HTML]{A1662C}{more lines}\par
+  \textcolor[HTML]{A7D5C2}{more lines}\par
+}
+\pagecolor[HTML]{#1}%
+\AddToHook{ shipout/background } {
+\put(600pt, -40pt){\uklogo[40pt]}
+\put(200pt, -280pt){\box1}
+}
+  \null\newpage\null%
+}
+
+%\ExplSyntaxOff
+
+\testik{F6B2B6}{A1662C}
+\testik{EC662C}{A7D5C2}
+\testik{47BCCA}{A7D5C2}
+\testik{A1662C}{A7D5C2}
+\testik{A7D5C2}{A1662C}
+
+
+
+\end{document}
