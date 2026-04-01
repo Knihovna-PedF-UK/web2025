@@ -4,10 +4,13 @@
 \usepackage[boxwidth=400pt]{responsive}
 \usepackage{fontspec}
 \usepackage{xcolor}
+\usepackage{pict2e}
+\usepackage{graphicx}
+\usepackage{l3draw}
 \pagecolor[HTML]{F6B2B6}
 \parindent=0pt
 
-\setmainfont{Moderat-Medium.ttf}
+\setmainfont{Moderat Medium}
 \begin{document}
 
 Nazdar světe, jsme otevřeni každý den od 9:00 do 18:00. Těšíme se na vás!
@@ -19,14 +22,36 @@ Nazdar světe, jsme otevřeni každý den od 9:00 do 18:00. Těšíme se na vás
 
 %\ExplSyntaxOn
 
+\ExplSyntaxOn
+
+\newcommand\circleobrazek[2][8cm]{%
+  % našteme obrázek do boxu, aby se dal používat v l3draw příkazech a abysme mohli počítat jeho rozměry
+  \hbox_set:Nn \l_tmpa_box {
+  \includegraphics[height=#1]{#2}
+}
+\draw_begin:
+  % nastavení ořezové cesty – kruh
+  % průměr je dán výškou obrázku, takže se vejde celý
+  \draw_path_circle:nn { 0 , 0 } { -0.5\box_ht:N \l_tmpa_box}
+  % oříznutí podle cesty
+  \draw_path_use_clear:n { clip }
+  % musíme posunout box s obrázkem tak, aby jeho střed byl v místě středu kruhu, tedy v počátku souřadnic
+  \draw_transform_shift:n {  -0.5\box_wd:N \l_tmpa_box , -0.5\box_ht:N \l_tmpa_box}
+  % vykreslíme obrázek
+  \draw_box_use:N \l_tmpa_box
+\draw_end:
+}
+
+\ExplSyntaxOff
+
 \newcommand\testik[2]{
 \setbox1=\vbox{
-  {\Large\textcolor[HTML]{#2}{Otevírací doba}}\par
+  {\Huge\textcolor[HTML]{#2}{Otevírací doba}}\par
   \bigskip
   \begin{tabular}{@{}ll@{}}
     Po-Čt: & 9:00 - 18:00 \\
     \textcolor{white}{Pá:} & \textcolor{white}{9:00 - 17:00}\\
-  \end{tabular}
+  \end{tabular}\par
   \textcolor[HTML]{F6B2B6}{more lines}\par
   \textcolor[HTML]{EC662C}{more lines}\par
   \textcolor[HTML]{47BCCA}{more lines}\par
@@ -36,7 +61,11 @@ Nazdar světe, jsme otevřeni každý den od 9:00 do 18:00. Těšíme se na vás
 \pagecolor[HTML]{#1}%
 \AddToHook{ shipout/background } {
 \put(600pt, -40pt){\uklogo[40pt]}
+% \put(60pt,-280pt){{\color{white}\circle*{240}}}
+% \put(10pt, -290pt){\includegraphics[width=120pt]{clock.pdf}}
+\put(-50pt,-350pt){\circleobrazek[10cm]{example-image}}
 \put(200pt, -280pt){\box1}
+% \put(0pt,-1OOpt){\hbox{\includegraphics[]{clock.pdf}}}
 }
   \null\newpage\null%
 }
