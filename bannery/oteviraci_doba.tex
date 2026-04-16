@@ -1,7 +1,7 @@
 \documentclass{article}
-\usepackage[paperwidth=800pt,paperheight=300pt,margin=0mm]{geometry}
+\usepackage[paperwidth=1200pt,paperheight=450pt,margin=0mm]{geometry}
 \usepackage{uklogo}
-\usepackage[boxwidth=400pt]{responsive}
+\usepackage[boxwidth=0.5\paperwidth]{responsive}
 \usepackage{fontspec}
 \usepackage{xcolor}
 \usepackage{pict2e}
@@ -13,7 +13,7 @@
 \setmainfont{Moderat Medium}
 \begin{document}
 
-Nazdar světe, jsme otevřeni každý den od 9:00 do 18:00. Těšíme se na vás!
+% Nazdar světe, jsme otevřeni každý den od 9:00 do 18:00. Těšíme se na vás!
 
 \makeatletter
 % \logosovacolor[40pt]
@@ -23,6 +23,35 @@ Nazdar světe, jsme otevřeni každý den od 9:00 do 18:00. Těšíme se na vás
 %\ExplSyntaxOn
 
 \ExplSyntaxOn
+
+% these dimensions hold size of the particular grid dimenensions
+\dim_new:N \l_pedf_grid_x
+\dim_new:N \l_pedf_grid_y
+\int_new:N \l_pedf_grid_cols
+\int_new:N \l_pedf_grid_rows
+% calculate dimensions of the grid
+\NewDocumentCommand\calculategriddims{mm}{
+  \int_set:Nn \l_pedf_grid_cols { #1 }
+  \int_set:Nn \l_pedf_grid_rows { #2 }
+  \dim_set:Nn \l_pedf_grid_x { \paperwidth / #1 }
+  \dim_set:Nn \l_pedf_grid_y { \paperheight / #2 }
+}
+
+% default grid dimensions
+\calculategriddims{20}{10}
+
+
+\box_new:N \l_pedf_grid_box
+
+% put something on the grid using the \put command
+\NewDocumentCommand\putongrid{mm+m}{
+% \newcommand\putongrid[3]{
+  \vbox_set:Nn \l_pedf_grid_box {#3}
+  \dim_set:Nn \l_tmpa_dim {\l_pedf_grid_x * #1}
+  \dim_set:Nn \l_tmpb_dim { (-\l_pedf_grid_y * #2) - \box_ht:N \l_pedf_grid_box  }
+  \put(\dim_use:N \l_tmpa_dim, \dim_use:N \l_tmpb_dim){\box_use:N \l_pedf_grid_box}
+} 
+
 
 \newcommand\circleobrazek[2][8cm]{%
   % našteme obrázek do boxu, aby se dal používat v l3draw příkazech a abysme mohli počítat jeho rozměry
@@ -44,29 +73,57 @@ Nazdar světe, jsme otevřeni každý den od 9:00 do 18:00. Těšíme se na vás
 
 \ExplSyntaxOff
 
+\ExplSyntaxOn
+\newcommand\setboxy[1]{
+\dim_set:Nn \l_tmpa_dim { -#1 - \ht1 }
+\dimen1=\l_tmpa_dim
+}
+\ExplSyntaxOff
+
 \newcommand\testik[2]{
-\setbox1=\vbox{
-  {\Huge\textcolor[HTML]{#2}{Otevírací doba}}\par
-  \bigskip
-  \begin{tabular}{@{}ll@{}}
-    Po-Čt: & 9:00 - 18:00 \\
-    \textcolor{white}{Pá:} & \textcolor{white}{9:00 - 17:00}\\
-  \end{tabular}\par
-  \textcolor[HTML]{F6B2B6}{more lines}\par
-  \textcolor[HTML]{EC662C}{more lines}\par
-  \textcolor[HTML]{47BCCA}{more lines}\par
-  \textcolor[HTML]{A1662C}{more lines}\par
-  \textcolor[HTML]{A7D5C2}{more lines}\par
-}
-\pagecolor[HTML]{#1}%
-\AddToHook{ shipout/background } {
-\put(600pt, -40pt){\uklogo[40pt]}
-% \put(60pt,-280pt){{\color{white}\circle*{240}}}
-% \put(10pt, -290pt){\includegraphics[width=120pt]{clock.pdf}}
-\put(-50pt,-350pt){\circleobrazek[10cm]{example-image}}
-\put(200pt, -280pt){\box1}
-% \put(0pt,-1OOpt){\hbox{\includegraphics[]{clock.pdf}}}
-}
+  \pagecolor[HTML]{#1}%
+  \AddToHook{ shipout/background } {
+    % logo pravém horním rohu
+    \putongrid{15}{1}{
+      \uklogo[0.15\textheight]
+    }
+
+    % obrázek v kroužku
+    \putongrid{-1}{5}{\circleobrazek[0.3\textwidth]{celek}}
+
+    % otevírací doba
+    \putongrid{5}{2}{
+      {\Huge\textcolor[HTML]{#2}{Otevírací doba}}
+    }
+      % \bigskip
+
+    \putongrid{5}{4}{
+      Studovny v Rettigové\par\bigskip
+      \begin{tabular}{@{}ll@{}}
+        Po-Čt: & 8:00 - 18:00 \\
+        Pá: & {8:00 - 17:00}\\
+      \end{tabular}\par
+      % zkouším různé barvy, aby bylo vidět, že se mění
+    }
+
+    \putongrid{9}{4}{{
+      \color{white}
+      Studovny v Rettigové\par\bigskip
+      \begin{tabular}{@{}ll@{}}
+        Po-Čt: & 9:00 - 18:00 \\
+        Pá: & 9:00 - 13:00\\
+      \end{tabular}\par
+    }}
+
+    \putongrid{15}{5}{
+      test barev:\par
+      \textcolor[HTML]{F6B2B6}{more lines}\par
+      \textcolor[HTML]{EC662C}{more lines}\par
+      \textcolor[HTML]{47BCCA}{more lines}\par
+      \textcolor[HTML]{A1662C}{more lines}\par
+      \textcolor[HTML]{A7D5C2}{more lines}\par
+    }
+  }
   \null\newpage\null%
 }
 
