@@ -1,12 +1,16 @@
 \documentclass{article}
 \usepackage[paperwidth=1200pt,paperheight=450pt,margin=0mm]{geometry}
 \usepackage{uklogo}
-\usepackage[boxwidth=0.5\paperwidth]{responsive}
+\usepackage[boxwidth=0.6\paperwidth]{responsive}
 \usepackage{fontspec}
 \usepackage{xcolor}
 \usepackage{pict2e}
 \usepackage{graphicx}
 \usepackage{l3draw}
+\usepackage{lipsum}
+\usepackage{linebreaker}
+\usepackage{microtype}
+\usepackage[latin,czech]{babel}
 \pagecolor[HTML]{F6B2B6}
 \parindent=0pt
 
@@ -27,6 +31,8 @@
 % these dimensions hold size of the particular grid dimenensions
 \dim_new:N \l_pedf_grid_x
 \dim_new:N \l_pedf_grid_y
+\dim_new:N \l_pedf_origin_x
+\dim_new:N \l_pedf_origin_y
 \int_new:N \l_pedf_grid_cols
 \int_new:N \l_pedf_grid_rows
 % calculate dimensions of the grid
@@ -37,8 +43,26 @@
   \dim_set:Nn \l_pedf_grid_y { \paperheight / #2 }
 }
 
+\NewDocumentCommand\setgridorigin{mm}{
+  \dim_set:Nn \l_pedf_origin_x { \l_pedf_grid_x * #1 }
+  \dim_set:Nn \l_pedf_origin_y { -\l_pedf_grid_y * #2 }
+}
+
+% get dimensions for the grid unit
+
+% #1 number of columns
+\NewDocumentCommand\getgridunitx{m}{
+  \dim_eval:n {\l_pedf_grid_x * #1}
+}
+
+% #1 number of rows
+\NewDocumentCommand\getgridunity{m}{
+  \dim_eval:n {\l_pedf_grid_y * #1}
+}
+
 % default grid dimensions
 \calculategriddims{20}{10}
+\setgridorigin{0}{0}
 
 
 \box_new:N \l_pedf_grid_box
@@ -47,94 +71,104 @@
 \NewDocumentCommand\putongrid{mm+m}{
 % \newcommand\putongrid[3]{
   \vbox_set:Nn \l_pedf_grid_box {#3}
-  \dim_set:Nn \l_tmpa_dim {\l_pedf_grid_x * #1}
-  \dim_set:Nn \l_tmpb_dim { (-\l_pedf_grid_y * #2) - \box_ht:N \l_pedf_grid_box  }
+  \dim_set:Nn \l_tmpa_dim {\l_pedf_origin_x +\l_pedf_grid_x * #1}
+  \dim_set:Nn \l_tmpb_dim { \l_pedf_origin_y + (-\l_pedf_grid_y * #2) - \box_ht:N \l_pedf_grid_box  }
   \put(\dim_use:N \l_tmpa_dim, \dim_use:N \l_tmpb_dim){\box_use:N \l_pedf_grid_box}
 } 
 
 
-\newcommand\circleobrazek[2][8cm]{%
+\NewDocumentCommand\circleobrazek{O{8cm}m}{%
   % našteme obrázek do boxu, aby se dal používat v l3draw příkazech a abysme mohli počítat jeho rozměry
   \hbox_set:Nn \l_tmpa_box {
-  \includegraphics[height=#1]{#2}
-}
-\draw_begin:
-  % nastavení ořezové cesty – kruh
-  % průměr je dán výškou obrázku, takže se vejde celý
-  \draw_path_circle:nn { 0 , 0 } { -0.5\box_ht:N \l_tmpa_box}
-  % oříznutí podle cesty
-  \draw_path_use_clear:n { clip }
-  % musíme posunout box s obrázkem tak, aby jeho střed byl v místě středu kruhu, tedy v počátku souřadnic
-  \draw_transform_shift:n {  -0.5\box_wd:N \l_tmpa_box , -0.5\box_ht:N \l_tmpa_box}
-  % vykreslíme obrázek
-  \draw_box_use:N \l_tmpa_box
-\draw_end:
+    \includegraphics[height=#1]{#2}
+  }
+  \draw_begin:
+    % nastavení ořezové cesty – kruh
+    % průměr je dán výškou obrázku, takže se vejde celý
+    \draw_path_circle:nn { 0 , 0 } { -0.5\box_ht:N \l_tmpa_box}
+    % oříznutí podle cesty
+    \draw_path_use_clear:n { clip }
+    % musíme posunout box s obrázkem tak, aby jeho střed byl v místě středu kruhu, tedy v počátku souřadnic
+    \draw_transform_shift:n {  -0.5\box_wd:N \l_tmpa_box , -0.5\box_ht:N \l_tmpa_box}
+    % vykreslíme obrázek
+    \draw_box_use:N \l_tmpa_box
+  \draw_end:
 }
 
 \ExplSyntaxOff
 
-\ExplSyntaxOn
-\newcommand\setboxy[1]{
-\dim_set:Nn \l_tmpa_dim { -#1 - \ht1 }
-\dimen1=\l_tmpa_dim
-}
-\ExplSyntaxOff
 
-\newcommand\testik[2]{
-  \pagecolor[HTML]{#1}%
-  \AddToHook{ shipout/background } {
+% testovací příkaz, který nám umožní rychle zkoušet různé barvy a umístění
+\newcommand\testik[3][000000]{
+  \pagecolor[HTML]{#2}%
+  \AddToHookNext{ shipout/background } {
+    \setgridorigin{0}{0}
     % logo pravém horním rohu
     \putongrid{15}{1}{
-      \uklogo[0.15\textheight]
+      \uklogo[0.12\textheight]
     }
 
-    % obrázek v kroužku
-    \putongrid{-1}{5}{\circleobrazek[0.3\textwidth]{celek}}
+    % obrázek v kroužku, s průmměrem 8 dílků gridu
+    \putongrid{-2}{2}{\circleobrazek[\getgridunitx{8}]{celek}}
 
+    % nastavení původu pro grid, aby se nám lépe počítalo umístění
+    \setgridorigin{7}{2}
     % otevírací doba
-    \putongrid{5}{2}{
-      {\Huge\textcolor[HTML]{#2}{Otevírací doba}}
+    \putongrid{0}{0}{
+      {\Huge\textcolor[HTML]{#3}{Otevírací doba}}
     }
       % \bigskip
 
-    \putongrid{5}{4}{
-      Studovny v Rettigové\par\bigskip
+    \bgroup
+    \color[HTML]{#1}
+    \putongrid{0}{2}{
+      \strut Studovny v Rettigové\par\bigskip
       \begin{tabular}{@{}ll@{}}
         Po-Čt: & 8:00 - 18:00 \\
         Pá: & {8:00 - 17:00}\\
       \end{tabular}\par
-      % zkouším různé barvy, aby bylo vidět, že se mění
     }
 
-    \putongrid{9}{4}{{
-      \color{white}
-      Studovny v Rettigové\par\bigskip
+    \putongrid{5}{2}{{
+      % \color{white}
+      \strut Studovna v Celetné\par\bigskip
       \begin{tabular}{@{}ll@{}}
         Po-Čt: & 9:00 - 18:00 \\
         Pá: & 9:00 - 13:00\\
       \end{tabular}\par
     }}
+    \egroup
 
-    \putongrid{15}{5}{
-      test barev:\par
-      \textcolor[HTML]{F6B2B6}{more lines}\par
-      \textcolor[HTML]{EC662C}{more lines}\par
-      \textcolor[HTML]{47BCCA}{more lines}\par
-      \textcolor[HTML]{A1662C}{more lines}\par
-      \textcolor[HTML]{A7D5C2}{more lines}\par
+    % zobrazit aktuální barvy
+    \putongrid{-6}{5}{
+      \textcolor[HTML]{000000}{{\tiny Nadpis: #3, pozadí: #2}}
     }
+
+    % \putongrid{9}{2}{\parbox{\getgridunitx{3}}{\selectlanguage{latin}\tiny\lipsum[1]}}
+
   }
-  \null\newpage\null%
+  \null\newpage%
 }
 
 %\ExplSyntaxOff
 
-\testik{F6B2B6}{A1662C}
-\testik{EC662C}{A7D5C2}
-\testik{47BCCA}{A7D5C2}
-\testik{A1662C}{A7D5C2}
-\testik{A7D5C2}{A1662C}
 
+\ExplSyntaxOn
+
+% testovací barvy, abychom viděli, jak vypadají a jak vypadají na různých pozadích
+\clist_set:Nn \l_tmpa_tl {F6B2B6,A1662C,A7D5C2,EC662C,A1662C,47BCCA}
+
+
+\clist_map_inline:Nn \l_tmpa_tl {
+  \clist_map_inline:Nn \l_tmpa_tl {
+    \str_if_eq:nnTF {##1} {#1} {}{
+      \testik{#1}{##1}
+      \testik[ffffff]{#1}{##1}
+    }
+  }
+}
+\ExplSyntaxOff
+a co je tady?
 
 
 \end{document}
