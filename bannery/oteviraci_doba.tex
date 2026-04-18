@@ -1,6 +1,7 @@
 \documentclass{article}
 \usepackage[paperwidth=1200pt,paperheight=450pt,margin=0mm]{geometry}
 \usepackage{uklogo}
+\usepackage{pedfstyles}
 \usepackage[boxwidth=0.6\paperwidth]{responsive}
 \usepackage{fontspec}
 \usepackage{xcolor}
@@ -24,78 +25,6 @@
 \makeatother
 
 
-%\ExplSyntaxOn
-
-\ExplSyntaxOn
-
-% these dimensions hold size of the particular grid dimenensions
-\dim_new:N \l_pedf_grid_x
-\dim_new:N \l_pedf_grid_y
-\dim_new:N \l_pedf_origin_x
-\dim_new:N \l_pedf_origin_y
-\int_new:N \l_pedf_grid_cols
-\int_new:N \l_pedf_grid_rows
-% calculate dimensions of the grid
-\NewDocumentCommand\calculategriddims{mm}{
-  \int_set:Nn \l_pedf_grid_cols { #1 }
-  \int_set:Nn \l_pedf_grid_rows { #2 }
-  \dim_set:Nn \l_pedf_grid_x { \paperwidth / #1 }
-  \dim_set:Nn \l_pedf_grid_y { \paperheight / #2 }
-}
-
-\NewDocumentCommand\setgridorigin{mm}{
-  \dim_set:Nn \l_pedf_origin_x { \l_pedf_grid_x * #1 }
-  \dim_set:Nn \l_pedf_origin_y { -\l_pedf_grid_y * #2 }
-}
-
-% get dimensions for the grid unit
-
-% #1 number of columns
-\NewDocumentCommand\getgridunitx{m}{
-  \dim_eval:n {\l_pedf_grid_x * #1}
-}
-
-% #1 number of rows
-\NewDocumentCommand\getgridunity{m}{
-  \dim_eval:n {\l_pedf_grid_y * #1}
-}
-
-% default grid dimensions
-\calculategriddims{20}{10}
-\setgridorigin{0}{0}
-
-
-\box_new:N \l_pedf_grid_box
-
-% put something on the grid using the \put command
-\NewDocumentCommand\putongrid{mm+m}{
-% \newcommand\putongrid[3]{
-  \vbox_set:Nn \l_pedf_grid_box {#3}
-  \dim_set:Nn \l_tmpa_dim {\l_pedf_origin_x +\l_pedf_grid_x * #1}
-  \dim_set:Nn \l_tmpb_dim { \l_pedf_origin_y + (-\l_pedf_grid_y * #2) - \box_ht:N \l_pedf_grid_box  }
-  \put(\dim_use:N \l_tmpa_dim, \dim_use:N \l_tmpb_dim){\box_use:N \l_pedf_grid_box}
-} 
-
-
-\NewDocumentCommand\circleobrazek{O{8cm}m}{%
-  % našteme obrázek do boxu, aby se dal používat v l3draw příkazech a abysme mohli počítat jeho rozměry
-  \hbox_set:Nn \l_tmpa_box {
-    \includegraphics[height=#1]{#2}
-  }
-  \draw_begin:
-    % nastavení ořezové cesty – kruh
-    % průměr je dán výškou obrázku, takže se vejde celý
-    \draw_path_circle:nn { 0 , 0 } { 0.5\box_ht:N \l_tmpa_box}
-    % oříznutí podle cesty
-    \draw_path_use_clear:n { clip }
-    % musíme posunout box s obrázkem tak, aby jeho střed byl v místě středu kruhu, tedy v počátku souřadnic
-    \draw_transform_shift:n {  -0.5\box_wd:N \l_tmpa_box , -0.5\box_ht:N \l_tmpa_box}
-    % vykreslíme obrázek
-    \draw_box_use:N \l_tmpa_box
-  \draw_end:
-}
-
-\ExplSyntaxOff
 
 
 % testovací příkaz, který nám umožní rychle zkoušet různé barvy a umístění
@@ -109,7 +38,7 @@
     }
 
     % obrázek v kroužku, s průmměrem 8 dílků gridu
-    \putongrid{-2}{2}{\circleobrazek[\getgridunitx{8}]{celek}}
+    \putongrid{-2}{2}{\circleimage[\getgridunitx{8}]{celek}}
 
     % nastavení původu pro grid, aby se nám lépe počítalo umístění
     \setgridorigin{7}{2}
