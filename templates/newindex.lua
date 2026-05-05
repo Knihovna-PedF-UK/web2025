@@ -136,7 +136,7 @@ local function template(doc )
   local contents = {
     h.main {
 
-      h.section {class="rollup", h.img {src = "img/aslop.jpg"}},
+      h.section {class="rollup", h.img {src = "img/oteviraci_doba-01.jpg"}},
       h.aside {class="quick-links", quick_links(doc, T)},
 
       -- hledání musíme pořešit
