@@ -585,12 +585,14 @@ mark.secondary{
   /*   } */
   /* } */
   @media (min-width: 601px) {
-  .prov_doba_container  + .prov_doba_container {
-    border-left: 1px solid var(--color-divider);
-    padding-left: var(--space-s);
-
+    .prov_doba_container  + .prov_doba_container {
+      border-left: 1px solid var(--color-divider);
+      padding-left: var(--space-s);
+    }
   }
-}
+  @media (max-width: 600px) {
+    justify-content: flex-start;
+  }
 }
 
 .opening h2, .news h2 {
