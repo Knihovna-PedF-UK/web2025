@@ -2,7 +2,7 @@
 \usepackage[paperwidth=1200pt,paperheight=450pt,margin=0mm]{geometry}
 \usepackage{uklogo}
 \usepackage{pedfstyles}
-\usepackage[boxwidth=0.6\paperwidth]{responsive}
+\usepackage[boxwidth=0.6\paperwidth, characters=50]{responsive}
 \usepackage{fontspec}
 \usepackage{xcolor}
 \usepackage{pict2e}
@@ -41,7 +41,7 @@
     \putongrid{-2}{2}{\circleimage[\getgridunitx{8}]{celek}}
 
     % nastavení původu pro grid, aby se nám lépe počítalo umístění
-    \setgridorigin{7}{2}
+    \setgridorigin{7}{3}
     % otevírací doba
     \putongrid{0}{0}{
       {\Huge\textcolor[HTML]{#3}{Otevírací doba}}
@@ -58,7 +58,7 @@
       \end{tabular}\par
     }
 
-    \putongrid{5}{2}{{
+    \putongrid{6}{2}{{
       % \color{white}
       \strut Studovna v Celetné\par\bigskip
       \begin{tabular}{@{}ll@{}}
