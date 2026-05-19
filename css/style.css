@@ -362,11 +362,13 @@ mark.secondary{
 /* ============================================ */
 .breadcrumb {
   font-size: 1.1rem;
+  overflow-x: auto;
 
   ul {
     list-style: none;
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    white-space: nowrap;
     gap: var(--space-s);
     padding: 0;
     margin: 0;
@@ -432,6 +434,9 @@ mark.secondary{
     a:visited {
       color: inherit;
       font-weight: bold;
+    }
+    @media (max-width: 900px) {
+      font-size: clamp(0.6rem, 2vw, 1rem); /* plynulé zmenšování podle šířky viewportu */
     }
   }
 
