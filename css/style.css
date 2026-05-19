@@ -95,6 +95,7 @@ body {
   color: var(--color-body);
   background-color: var(--color-body-bg);
   margin: 0 auto;
+  padding-top: var(--topmenu-h);
 }
 
 a {
@@ -116,7 +117,8 @@ table {
   border-collapse: collapse;
   border-spacing: 0;
 }
-td:not(:first-child) {
+
+td:not(:last-child) {
   padding-right: var(--space-m);
 }
 th {
@@ -129,6 +131,11 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 1.5em;
   margin-bottom: 0.5em;
 }
+
+h1:first-child {
+  margin-top: 0;
+}
+
 h1 { font-size: 2rem; }
 h2 { font-size: 1.5rem; }
 h3 { font-size: 1.25rem; }
@@ -192,11 +199,17 @@ main.main-content {
   max-width: var(--max-width);
   margin: 0 auto;
   padding: var(--space-m);
+  /* padding-top: calc(var(--space-m) + var(--topmenu-h)); /1* ← přidat *1/ */
 }
 
 img.logo {
   max-height: 5rem;
   height: auto;
+}
+
+.warning {
+  border: 1px solid var(--color-highlight);
+  padding: var(--space-m);
 }
 
 
@@ -427,7 +440,7 @@ img.logo {
 /* ============================================ */
 .rollup {
   padding-bottom: 1ch;
-  margin-top: var(--space-xl);
+  /* margin-top: var(--space-xl); */
 
   img {
     max-width: 100%;
