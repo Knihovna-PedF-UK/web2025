@@ -139,10 +139,11 @@ end
 local function obsolete(data)
   -- 
   if data.obsolete then
-    return [[<div class="row"><div class="card fluid warning"><mark class="secondary">Upozornění</mark>Tato stránka není aktuální.
-      Nachází se zde pouze proto, že mohou existovat stránky, které na ní odkazují.
-      Použijte prosím navigaci v hlavním menu stránky k nalezení aktuálních
-      informací.</div></div>]]
+    return [[<article class="warning"><p><mark class="secondary">Upozornění</mark></p>
+    <p>Tato stránka není aktuální.
+    Nachází se zde pouze proto, že mohou existovat stránky, které na ní odkazují.
+    Použijte prosím navigaci v hlavním menu stránky k nalezení aktuálních
+    informací.</p></article>]]
   end
 end
 
