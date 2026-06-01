@@ -243,7 +243,7 @@ local function template(data)
       breadcrumbs(data)
   },
       -- row{
-        h.main {class="main-content",
+        h.main {class="main-content", id="main-content",
         obsolete(data), -- upozornění na zastaralé stránky
         data.contents,
       },
