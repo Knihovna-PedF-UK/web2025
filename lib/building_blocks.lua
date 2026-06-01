@@ -122,7 +122,7 @@ function building_blocks.provozni_doba(data, T)
 
 
       for _, obdobi in ipairs(jednotka.data) do
-        local curr_row = h.tr { h.td { T(obdobi.day)}, h.td {T(obdobi.time)}}
+        local curr_row = h.tr { h.th { T(obdobi.day), scope="row"}, h.td {T(obdobi.time)}}
         -- h.tr { h.td { obdobi.day}, h.td {obdobi.time}}
         table.insert(tble, curr_row)
       end

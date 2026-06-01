@@ -584,6 +584,9 @@ mark.secondary{
       caption {
         width: fit-content;
       }
+      th {
+        font-weight: normal;
+      }
     }
   }
   /* @media (min-width: 601px) { */
