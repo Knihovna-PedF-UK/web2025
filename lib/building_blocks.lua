@@ -122,7 +122,13 @@ function building_blocks.provozni_doba(data, T)
 
 
       for _, obdobi in ipairs(jednotka.data) do
-        local curr_row = h.tr { h.th { T(obdobi.day), scope="row"}, h.td {T(obdobi.time)}}
+        local curr_row
+        if obdobi.time == "" then
+          -- obdobi bez času, třeba "zavřeno" nebo "otevřeno nonstop", není třeba použít element <th>
+          curr_row = h.tr { h.td { T(obdobi.day)}}
+        else
+          curr_row = h.tr { h.th { T(obdobi.day), scope="row"}, h.td {T(obdobi.time)}}
+        end
         -- h.tr { h.td { obdobi.day}, h.td {obdobi.time}}
         table.insert(tble, curr_row)
       end
