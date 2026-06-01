@@ -214,6 +214,7 @@ local function template(data)
     h.body{
       class="container",
       -- row {h.p {}},
+      h.a {href="#main-content", class="skip-link", T "Přejít k obsahu"},
       h.header {
         -- h.a{href="http://pedf.cuni.cz", h.img{src="img/logo_pedf_small.jpg"}},
         h.nav{["aria-label"]= T "doplňková navigace", class="topmenu", 
