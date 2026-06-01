@@ -106,7 +106,6 @@ local mainmenu = menulib()
       -- :addchild("Informace k tvorbě závěrečných prací", "kvalifikacni_prace.htm")
       :addchild("Změny ve fondu")
       :addchild("Meziknihovní výpůjční služba", "meziknih.htm")
-      :addchild("Nabídka vyřazené literatury", "odpisy.htm")
       :addchild("Návrh knih k nákupu", "objednavani_liter.htm")
       :addchild("Nové knihy", 
         "https://cuni.primo.exlibrisgroup.com/discovery/search?query=any,contains,9*&amp;tab=LibraryCatalog&amp;search_scope=MyInstitution&amp;vid=420CKIS_INST:UKAZ&amp;mfacet=tlevel,include,available_p,1&amp;mfacet=library,include,6986%E2%80%93112118530006986,1&amp;mfacet=newrecords,include,30%20days%20back,2&amp;lang=cs&amp;offset=0")
