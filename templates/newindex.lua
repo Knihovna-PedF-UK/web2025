@@ -141,6 +141,7 @@ local function template(doc )
 
       -- hledání musíme pořešit
       -- search_box(h, T),
+      h.h1 {class = "visually-hidden", T "Knihovna PedF UK"},
       h.section{
         class="news",
         h.h2{class="news-head", T "Aktuality" },
