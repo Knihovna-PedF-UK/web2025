@@ -134,7 +134,7 @@ local function template(doc )
     -- close_element = div{class="closed", h.strong {T "Dnes má knihovna zavřeno: "}, T(close_comment)}
   end
   local contents = {
-    h.article {
+    h.div {
 
       h.section {class="rollup", h.img {src = "img/oteviraci_doba-01.jpg", alt= T "Letáček s otevírací dobou knihovny, v textové formě ho najde dále na stránce"}},
       h.aside {class="quick-links", quick_links(doc, T)},

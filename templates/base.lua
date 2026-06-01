@@ -16,7 +16,7 @@ local menuitem = function(title, href, children)
   -- return h.menuitem{class="button", h.a{src=href, title}}
   local button = {}
   if children then
-    button = h.button{class="dropdown", ["aria-expanded"]="false", ["aria-controls"]="submenu-id", h.img{alt = "rozbalit submenu", src="/img/sipkadolu.svg"}}
+    button = h.button{class="dropdown", ["aria-expanded"]="false", h.img{alt = "rozbalit submenu", src="/img/sipkadolu.svg"}}
 
   end
   local link = href:match("^https?%:%/%/") and href or "/" .. href
@@ -47,7 +47,7 @@ local function mainmenu(menuitems)
   local menuitems = menuitems or {}
   for _, item in ipairs(menuitems) do
     if item.children and #item.children > 0 then
-      local children = h.ul{class="submenu", role="menu",
+      local children = h.ul{class="submenu",
       (function()
         local ct = {}
         for _, child in ipairs(item.children) do
@@ -221,13 +221,13 @@ local function template(data)
             h.span{a{href= T "https://pedf.cuni.cz/PEDF-871.html", T "Všechny katedry"}},
             h.span{ a{href=T "https://pedf.cuni.cz/", T "Pedagogická fakulta"}},
             -- h.span{class="langswitcher", h.img{src="/img/world.svg"}, a{href=(data.altlang or T "/index-en.html"),h.img{src=T "/img/gb.svg",  alt=T "Switch to English version"}}} -- odkaz na anglickou verzi stránek
-            h.span{class="langswitcher", h.img{src="/img/world.svg", alt= T "jazyk"}, a{href=(data.altlang or T "/index-en.html"),  title=T "Switch to English version", T "EN"}}, -- odkaz na anglickou verzi stránek
+            h.span{class="langswitcher", h.img{src="/img/world.svg", alt= T "jazyk"}, a{href=(data.altlang or T "/index-en.html"), lang = T "en", hreflang=T "en",  title=T "Switch to English version", T "EN"}}, -- odkaz na anglickou verzi stránek
             h.span{h.img{src="/img/search.svg", alt= T "hledat"}}, -- ToDo: dodělat vyhledávání
           },
         },
         h.nav{["aria-label"]= T "hlavní menu", class="mainmenu",
           h.div{class=has_breadcrumbs(data, "nav-container"),
-            h.a{ href= T "/index.html", h.img{class="logo", alt=T "Zpět na hlavní stránku knihovny", src=T "/img/logo.svg"}},
+            h.a{ href= T "/index.html", h.img{class="logo", alt=T "Knihovna PedF UK", src=T "/img/logo.svg"}},
             -- h.a{class="logo",h.div{"Ústřední knihovna PedF UK"}},
             -- h.menu{
             -- h.nav{class="nav-collapse",
@@ -260,9 +260,9 @@ local function template(data)
           div{h.address{itemprop="address",itemtype="https://schema.org/PostalAddress", h.span{ "Knihovna PedF UK"}, ", " , h.span {itemprop="streetAddress", "Magdaleny Rettigové 4, 116&#8239;39&nbsp;Praha&nbsp;1"}}},
           div{ h.img{src="/img/mail.svg", itemprop="email", alt="e-mail"}, a {href="mailto:knihovna@pedf.cuni.cz", "knihovna@pedf.cuni.cz"}},
           div{ h.img{src="/img/phone.svg", alt= T "telefon"}, a {href="tel:+420221900178",["aria-label"]="2 2 1 9 0 0 1 7 8",  h.span {itemprop="telephone", "+420 221 900 178"}}},
-          div{ h.img {src= "/img/facebook.svg", alt= "facebook"}, a {href="https://www.facebook.com/knihovnapedfpraha", "Facebook"}}
-          ,div{ h.img {src= "/img/instagram.svg", alt = "instagram"}, a {href="https://www.instagram.com/KnihovnaPedFPraha/", "Instagram"}}
-          ,div{ h.img {src= "/img/rss.svg", alt = "rss"}, a {href=T "/feed.rss", "RSS"}}
+          div{ h.img {src= "/img/facebook.svg", alt= "", ["aria-hidden"] = true}, a {href="https://www.facebook.com/knihovnapedfpraha", "Facebook"}}
+          ,div{ h.img {src= "/img/instagram.svg", alt= "", ["aria-hidden"] = true}, a {href="https://www.instagram.com/KnihovnaPedFPraha/", "Instagram"}}
+          ,div{ h.img {src= "/img/rss.svg", alt= "", ["aria-hidden"] = true}, a {href=T "/feed.rss", "RSS"}}
         },
         div { class="column",
           div{T "Jsme členy knihovnických organizací", "<a href='https://www.skipcr.cz/'>SKIP</a>", T" a ", "<a href='https://sdruk.cz/'>SDRUK z. s.</a>"},
