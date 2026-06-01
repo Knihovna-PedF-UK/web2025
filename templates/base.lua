@@ -20,7 +20,7 @@ local menuitem = function(title, href, children)
 
   end
   local link = href:match("^https?%:%/%/") and href or "/" .. href
-  return h.li{role="menuitem", class="menuitem", h.a{href= link, class="button", title}, button, children}
+  return h.li{ class="menuitem", h.a{href= link, class="button", title}, button, children}
 end
 
 local section_title = function(title)
@@ -67,7 +67,7 @@ local function mainmenu(menuitems)
     end
     -- table.insert(t, menuitem(item.title,  item.href, children))
   end
-  return h.ul{class="menu", id="mainmenu-list", role="menubar", t}
+  return h.ul{class="menu", id="mainmenu-list", t}
 end
 
 
@@ -221,13 +221,13 @@ local function template(data)
             h.span{a{href= T "https://pedf.cuni.cz/PEDF-871.html", T "Všechny katedry"}},
             h.span{ a{href=T "https://pedf.cuni.cz/", T "Pedagogická fakulta"}},
             -- h.span{class="langswitcher", h.img{src="/img/world.svg"}, a{href=(data.altlang or T "/index-en.html"),h.img{src=T "/img/gb.svg",  alt=T "Switch to English version"}}} -- odkaz na anglickou verzi stránek
-            h.span{class="langswitcher", h.img{src="/img/world.svg",}, a{href=(data.altlang or T "/index-en.html"),  title=T "Switch to English version", T "EN"}}, -- odkaz na anglickou verzi stránek
-            h.span{h.img{src="/img/search.svg"}}, -- ToDo: dodělat vyhledávání
+            h.span{class="langswitcher", h.img{src="/img/world.svg", alt= T "jazyk"}, a{href=(data.altlang or T "/index-en.html"),  title=T "Switch to English version", T "EN"}}, -- odkaz na anglickou verzi stránek
+            h.span{h.img{src="/img/search.svg", alt= T "hledat"}}, -- ToDo: dodělat vyhledávání
           },
         },
         h.nav{["aria-label"]= T "hlavní menu", class="mainmenu",
           h.div{class=has_breadcrumbs(data, "nav-container"),
-            h.a{ href= T "/index.html", h.img{role="banner", class="logo", alt=T "Zpět na hlavní stránku knihovny", src=T "/img/logo.svg"}},
+            h.a{ href= T "/index.html", h.img{class="logo", alt=T "Zpět na hlavní stránku knihovny", src=T "/img/logo.svg"}},
             -- h.a{class="logo",h.div{"Ústřední knihovna PedF UK"}},
             -- h.menu{
             -- h.nav{class="nav-collapse",

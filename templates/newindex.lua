@@ -110,7 +110,7 @@ local function quick_links(doc, T)
     t[#t+1] = h.div {
       class = "quicklink", 
         h.a{href=T(link.href), 
-        h.img{src = link.img, alt = T(link.title)},
+        h.img{src = link.img, alt = "", ["aria-hidden"]="true"},
         T(link.title)
       }
     }
@@ -136,7 +136,7 @@ local function template(doc )
   local contents = {
     h.article {
 
-      h.section {class="rollup", h.img {src = "img/oteviraci_doba-01.jpg"}},
+      h.section {class="rollup", h.img {src = "img/oteviraci_doba-01.jpg", alt= T "Letáček s otevírací dobou knihovny, v textové formě ho najde dále na stránce"}},
       h.aside {class="quick-links", quick_links(doc, T)},
 
       -- hledání musíme pořešit
