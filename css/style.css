@@ -350,6 +350,14 @@ mark.secondary{
     display: inline;
     width: auto;
   }
+
+  @media (max-width: 900px) {
+    font-size: clamp(0.8rem, 2vw, 1rem); /* plynulé zmenšování podle šířky viewportu */
+    height: auto;
+
+    span{overflow: hidden; white-space: nowrap;}
+  }
+
 }
 
 .topmenu.hidden {
@@ -366,7 +374,7 @@ mark.secondary{
 
   ul {
     list-style: none;
-    display: flex;
+   display: flex;
     flex-wrap: nowrap;
     white-space: nowrap;
     gap: var(--space-s);
