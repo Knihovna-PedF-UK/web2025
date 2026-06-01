@@ -151,4 +151,5 @@ return {
 ,["hledat"] = "search"
 ,[ "Letáček s otevírací dobou knihovny, v textové formě ho najde dále na stránce"] = "Opening hours of the library. You can find it in text form further on this page."
 ,["en"] = "cs"
+,[ "Přejít k obsahu"] = "Skip to content"
  }
