@@ -2,7 +2,7 @@
 \usepackage[paperwidth=1200pt,paperheight=450pt,margin=0mm]{geometry}
 \usepackage{uklogo}
 \usepackage{pedfstyles}
-\usepackage[boxwidth=0.6\paperwidth, characters=50]{responsive}
+\usepackage[boxwidth=0.6\paperwidth, characters=60]{responsive}
 \usepackage{fontspec}
 \usepackage{xcolor}
 \usepackage{pict2e}
@@ -22,6 +22,9 @@
 
 \makeatletter
 % \logosovacolor[40pt]
+\def\sova@faculty{FACULTY OF EDUCATION}
+\def\sova@university{Charles University}
+\def\sova@library{Library}
 \makeatother
 
 
@@ -44,26 +47,26 @@
     \setgridorigin{7}{3}
     % otevírací doba
     \putongrid{0}{0}{
-      {\Huge\textcolor[HTML]{#3}{Otevírací doba}}
+      {\Huge\textcolor[HTML]{#3}{Opening hours}}
     }
       % \bigskip
 
     \bgroup
     \color[HTML]{#1}
     \putongrid{0}{2}{
-      \strut Studovny v Rettigové\par\bigskip
+      \strut Study Rooms in Rettigová\par\bigskip
       \begin{tabular}{@{}ll@{}}
-        Po--čt: & 8:00 -- 18:00 \\
-        Pá: & {8:00 -- 17:00}\\
+        Mon-Thu: & 8:00 - 18:00 \\
+        Fri: & {8:00 - 17:00}\\
       \end{tabular}\par
     }
 
     \putongrid{6}{2}{{
       % \color{white}
-      \strut Studovna v Celetné\par\bigskip
+      \strut Study Room in Celetná\par\bigskip
       \begin{tabular}{@{}ll@{}}
-        Po--čt: & 9:00 -- 18:00 \\
-        Pá: & 9:00 -- 13:00\\
+        Mon-Thu: & 9:00 - 18:00 \\
+        Fri: & 9:00 - 13:00\\
       \end{tabular}\par
     }}
     \egroup
