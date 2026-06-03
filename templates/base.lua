@@ -223,7 +223,7 @@ local function template(data)
             h.span{ a{href=T "https://pedf.cuni.cz/", T "Pedagogická fakulta"}},
             -- h.span{class="langswitcher", h.img{src="/img/world.svg"}, a{href=(data.altlang or T "/index-en.html"),h.img{src=T "/img/gb.svg",  alt=T "Switch to English version"}}} -- odkaz na anglickou verzi stránek
             h.span{class="langswitcher", h.img{src="/img/world.svg", alt= T "jazyk"}, a{href=(data.altlang or T "/index-en.html"), lang = T "en", hreflang=T "en",  title=T "Switch to English version", T "EN"}}, -- odkaz na anglickou verzi stránek
-            h.span{h.img{src="/img/search.svg", alt= T "hledat"}}, -- ToDo: dodělat vyhledávání
+            h.span{h.a {href= T "hledat.html", h.img{src="/img/search.svg", alt= T "hledat"}}}, 
           },
         },
         h.nav{["aria-label"]= T "hlavní menu", class="mainmenu",

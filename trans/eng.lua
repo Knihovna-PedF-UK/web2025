@@ -78,6 +78,7 @@ return {
  ,["UKAŽ (UK)" ] = "EDS (CU)"
  ,["Vyhledávač UKAŽ" ] = "Discovery system"
  ,["Další možnosti vyhledávání:"] = "More search options:"
+ ,["Vyhledávání"] = "Search"
  ,["Zavřeno do odvolání"] = "Closed until further notice"
  ,["Červenec"] = "July"
  ,["Srpen"] = "August"
@@ -156,4 +157,5 @@ return {
 ,[ "img/oteviraci_doba-01.jpg"] = "img/opening_hours-01.jpg"
 ,[ "Po, St"] = "Mon, Wed"
 ,[ "Zavřeno – rekonstrukce"] = "Closed – reconstruction"
+,[ "hledat.html"] = "search.html"
  }

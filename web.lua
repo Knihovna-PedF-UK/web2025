@@ -20,12 +20,12 @@ print("Data dir" , data_dir)
 
 local siteurl =  "http://knihovna.pedf.cuni.cz/"
 local rss = require "atom"
--- local sitemap = require "sitemap"
 local discount = require "discount"
 local archiv = require "archivaktual".index
 local newindex_template = require "templates.newindex".template
 local opening_template = require "templates.opening".template
 local updates_template = require "templates.updates".template
+local search_template = require "templates.search".template
 local prov_doba_fn = require "prov_doba"
 local prov_doba = prov_doba_fn(data_dir .. "/opening.csv")
 local load_closing = require "closing"
@@ -257,7 +257,7 @@ local nk_defaults = make_transformer(function(doc)
  return doc
 end)
 
-local add_defaults = make_transformer(function(doc)
+local function apply_defaults(doc)
   print("Zpracovavam", doc.relative_filepath)
   doc.template = doc.template or "blog.tpl"
   -- don't use old styles in the documents
@@ -288,9 +288,12 @@ local add_defaults = make_transformer(function(doc)
   if not doc.breadcrumbs then
     doc.breadcrumbs = make_breadcrumbs(doc)
   end
-  -- doc.sitemap = sitemap
   doc.prov_doba = prov_doba
   return doc
+end
+
+local add_defaults = make_transformer(function(doc)
+  return apply_defaults(doc)
 end)
 
 local set_english = make_transformer(function(doc)
@@ -390,12 +393,6 @@ local apply_newindex = make_transformer(function(doc)
   -- save_calendar(T(calendar_name), doc.calendar, T)
   return merge(doc, {contents = rendered})
 end)
-
--- local add_sitemap = make_transformer(function(doc)
---   doc.sitemap=sitemap
---   doc.prov_doba = prov_doba
---   return doc
--- end)
 
 
 local builder = comp(
@@ -508,19 +505,6 @@ local function newest_pages_builder(path, lang)
   )
 end
 
-local function nove_knihy_builder(lang)
-  local lang_func = get_lang_func(lang)
-  return comp(
-    apply_template,
-    nk_defaults,
-    add_defaults,
-    lang_func,
-    html_filter,
-    only_root,
-    lettersmith.docs
-  )
-end
-
 
 local function opening_builder(name, lang)
   local lang_func = get_lang_func(lang)
@@ -548,25 +532,6 @@ local function rss_gen(page, title)
   rss.generate_rss(page,"http://knihovna.pedf.cuni.cz",title, ""),
   lettersmith.docs
   )
-end
-
-local function get_new_books(path, number)
-  local t = {}
-  for image in walk_file_paths(path) do
-    table.insert(t,image)
-  end
-  -- seřadit soubory od nejnovějších
-  table.sort(t, function(a,b) return a > b end)
-  -- stačí nanejvýš 10 obálek
-  local obalky = {}
-  for i=1,number do
-    local current = t[i]
-    if not current then break end
-    current = current:match("([^%/]+)$")
-    local isbn = current:match("%d+%-%d+%-%d+%-(.+)%.jpg")
-    table.insert(obalky, {file = current, isbn = isbn})
-  end
-  return obalky
 end
 
 
@@ -659,15 +624,23 @@ local archive_gen = function(page, lang)
   )
 end
 
-local search_gen = function(page, lang)
-  local lang_func = get_lang_func(lang)
+local search_builder = function(page, lang)
+  -- local lang_func = get_lang_func(lang)
+  local search = function(iter, ...)
+    local doc = {relative_filepath = page, lang = lang}
+    doc = apply_defaults(doc)
+    doc.altlang = "search.html"
+    if lang == "eng" then 
+      doc.altlang = "hledat.html"
+    end
+    doc.contents = search_template(doc)
+    return wrap_in_iter(doc)
+  end
   return comp(
-  apply_template,
-  archiv_items,
-  add_defaults,
-  lang_func,
-  -- add_sitemap,
-  archiv(page),
+  -- apply_template,
+  -- add_defaults,
+  -- lang_func,
+  search,
   lettersmith.docs
   )
 end
@@ -693,6 +666,8 @@ if commands[argument] == nil then
   css_builder(paths),
   calendar_builder("js/calendar.js")(paths),
   calendar_builder("js/calendar-en.js", "eng")(paths),
+  search_builder("hledat.html")(paths),
+  search_builder("search.html", "eng")(paths),
   newest_pages_builder("aktualizace.html")(paths),
   newest_pages_builder("updates.html", "eng")(en_path),
   index_gen("index-en.html", "eng")(en_aktuality),
