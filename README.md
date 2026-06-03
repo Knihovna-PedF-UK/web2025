@@ -6,8 +6,8 @@ ToDo:
 
 - vyhledávání 
 - TOC na stránkách
-- bredcrumbs na stránkách, na který se neodkazujeme z menu  f
-- mobilní zobrazení hlavní stránky
+- bredcrumbs na stránkách, na který se neodkazujeme z menu
++ mobilní zobrazení hlavní stránky
 
 - formulář na tvorbu aktualit
 - formulář na editaci stránek
