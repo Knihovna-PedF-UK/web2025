@@ -691,6 +691,75 @@ footer {
   }
 }
 
+/* ============================================ */
+/*   Vyhledávání                                */
+/* ============================================ */
+
+.tabs.searchbox {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 30rem;
+}
+
+/* schovat radio buttony */
+.tabs.searchbox > input[type="radio"] {
+    position: absolute;
+    left: -9999px;
+}
+
+/* vzhled záložek */
+.tabs.searchbox > label {
+    padding: .5em 1em;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    background: #eee;
+    margin-right: .2em;
+}
+
+/* aktivní záložka */
+.tabs.searchbox > input:checked + label {
+    background: white;
+    font-weight: bold;
+}
+
+/* obsah záložek */
+.tabs.searchbox > div {
+    display: none;
+    width: 100%;
+    padding: 1em;
+    border: 1px solid #ccc;
+    order: 99;
+}
+
+/* zobrazit obsah aktivní záložky */
+.tabs.searchbox > input:checked + label + div {
+    display: block;
+}
+
+.tabs.searchbox > input:checked + label {
+    position: relative;
+    z-index: 1;
+}
+
+.tabs.searchbox > input:checked + label::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -1px;
+    height: 1px;
+    background: white;
+}
+
+.searchbox input[type="image"] {
+  background-color: var(--color-body);
+  padding: 0.5em;
+  margin: 0;
+  margin-left: 0.5em;
+  vertical-align: bottom;
+}
+
 
 /* ============================================ */
 /*   Mobilní navigace (max 900px)                */

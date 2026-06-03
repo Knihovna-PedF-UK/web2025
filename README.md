@@ -4,10 +4,13 @@ Nový design webu
 
 ToDo:
 
-+ vyhledávání 
 - TOC na stránkách
 - bredcrumbs na stránkách, na který se neodkazujeme z menu
+- stránky s profilama zaměstnanců
+- kontakty na zaměstnance na stránkách
+- udělat rozcestníky z menu
 + mobilní zobrazení hlavní stránky
++ vyhledávání 
 
 - formulář na tvorbu aktualit
 - formulář na editaci stránek
