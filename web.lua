@@ -356,22 +356,28 @@ local function make_calendar(calendar, T)
   return "{\n" .. table.concat(buffer, ",") .. "\n}"
 end
 
+
 -- save calendar JS
 local function calendar_builder(path, lang) 
+  local count = 0
   local lang_func = get_lang_func(lang)
-  local calendar_render = make_transformer(function(doc)
-    doc.relative_filepath = path
-    local T = translator.get_translator(doc.strings)
+  -- local calendar_render = make_transformer(function(doc)
+  local calendar_render = function(iter, ...)
+    print("spouštíme kalendář")
+    local strings = {}
+    if lang == "eng" then
+      strings = engstrings
+    end
+    local T = translator.get_translator(strings)
     -- global variable
     local contents = make_calendar(kalendar, T)
-    return merge(doc, {contents = contents})
-  end)
+    -- return merge(doc, {contents = contents})
+    return wrap_in_iter {contents = contents, relative_filepath = path, lang = lang}
+  end
   return comp(
-  calendar_render,
   add_defaults,
-  lang_func,
-  html_filter,
-  only_root,
+  calendar_render,
+  -- filter_first,
   lettersmith.docs
   )
 end
@@ -653,6 +659,20 @@ local archive_gen = function(page, lang)
   lettersmith.docs
   )
 end
+
+local search_gen = function(page, lang)
+  local lang_func = get_lang_func(lang)
+  return comp(
+  apply_template,
+  archiv_items,
+  add_defaults,
+  lang_func,
+  -- add_sitemap,
+  archiv(page),
+  lettersmith.docs
+  )
+end
+
 
 
 local commands = {
