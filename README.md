@@ -4,7 +4,7 @@ Nový design webu
 
 ToDo:
 
-- vyhledávání 
++ vyhledávání 
 - TOC na stránkách
 - bredcrumbs na stránkách, na který se neodkazujeme z menu
 + mobilní zobrazení hlavní stránky
