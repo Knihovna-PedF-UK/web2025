@@ -363,7 +363,6 @@ local function calendar_builder(path, lang)
   local lang_func = get_lang_func(lang)
   -- local calendar_render = make_transformer(function(doc)
   local calendar_render = function(iter, ...)
-    print("spouštíme kalendář")
     local strings = {}
     if lang == "eng" then
       strings = engstrings
@@ -602,7 +601,7 @@ local newindex = function(filepath,menu, languagestrings, lang)
     return wrap_in_iter { title=title, menuitems =menu, date = date, items =
     items, relative_filepath = filepath, prov_doba = prov_doba, obalky =
     obalky, strings = languagestrings or {}, closing = zaviraci_dny, calendar = kalendar,
-    siteurl = siteurl, updates = newest, quicklinks = quicklinks
+    siteurl = siteurl, updates = newest, quicklinks = quicklinks, lang = lang
   }
   end
 end
@@ -630,8 +629,8 @@ local function index_gen(page, lang)
   end
   return comp(
   apply_newindex,
-  newindex(page,menu, strings,lang),
   add_defaults,
+  newindex(page,menu, strings,lang),
   lang_func,
   filter_aktual,
   lettersmith.docs
