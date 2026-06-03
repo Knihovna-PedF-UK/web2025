@@ -62,6 +62,7 @@ return {
  ,['Dnes má knihovna zavřeno: '] = "The library is closed today:"
  ,['Vánoční prázdniny'] = "Christmas"
  ,['vánoční prázdniny'] = "Christmas"
+ ,["Státní svátek"] = "Public holiday"
  ,['Letní prázdniny'] = "Summer holiday"
  ,['letní prázdniny'] = "Summer holiday"
  ,['Rektorský den'] = "Rector's day"
