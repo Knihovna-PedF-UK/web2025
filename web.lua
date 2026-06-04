@@ -181,7 +181,10 @@ engmenu:add("Services", "services.html")
       -- :addchild("New books", 
         -- "https://cuni.primo.exlibrisgroup.com/discovery/search?query=any,contains,9*&amp;tab=LibraryCatalog&amp;search_scope=MyInstitution&amp;vid=420CKIS_INST:UKAZ&amp;mfacet=tlevel,include,available_p,1&amp;mfacet=library,include,6986%E2%80%93112118530006986,1&amp;mfacet=newrecords,include,30%20days%20back")
       -- :add("For teachers", "biblio.html")
-      :add("About library", "about.html")
+      :add("About library", "library.html")
+        :addchild("Contacts")
+          :addchild("Contact address and staff",  "about.html")
+          :addchild("Opening hours", "opening.html")
 
 local quicklinks = {
   {title = "Poprvé v knihovně", href = "poprve.html", img = "/img/star.svg"},
