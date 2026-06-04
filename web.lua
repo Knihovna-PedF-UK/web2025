@@ -195,7 +195,7 @@ local engstrings = require "trans.eng"
 
 local function make_breadcrumbs(doc)
   -- tady bych chtěl zkusit, jestli najdu aktuální soubor v menu. pokud ano, tak pro něj vytvořím drobénkovou navigaci
-  local path = (doc.relative_filepath or ""):gsub("^/", "")
+  local path = (doc.parent or doc.relative_filepath or ""):gsub("^/", "")
   -- můžeme mít jen dvě úrovně navigace, takže můžeme použít jen dva cykly
   local breadcrumbs = {}
   for _, menu in ipairs(doc.menuitems) do
@@ -645,6 +645,52 @@ local search_builder = function(page, lang)
   )
 end
 
+local function print_submenu(submenu)
+  local elements = {}
+  local current_list = {}
+  local function create_list(tbl)
+    if #tbl > 0 then
+      table.insert(elements, h.ul(tbl))
+    end
+  end
+  for _, item in ipairs(submenu) do
+    if item.href then
+      table.insert(current_list, h.li{h.a {href=item.href, item.title}, "\n"})
+    else
+      create_list(current_list)
+      table.insert(elements, h.h2 {item.title})
+      current_list = {}
+    end
+  end
+  create_list(current_list)
+  return table.concat(elements, "\n")
+end
+
+
+local menu_portal_builder = function(menu, lang)
+  local render_menu_portal = function(iter, ...)
+    --- takže pomocí coroutiny můžeme vygenerovat extra soubory
+    return coroutine.wrap(function()
+      for _, submenu in ipairs(menu) do
+        local doc = {relative_filepath = submenu.href , lang = lang}
+        doc = apply_defaults(doc)
+        doc.contents = {
+          h.h1 {submenu.title},
+          print_submenu(submenu.children)
+        }
+        -- pages[#pages+1] = wrap_in_iter(doc)
+        coroutine.yield(doc)
+      end
+    end)
+  end
+
+  return comp(
+    apply_template,
+    add_defaults,
+    render_menu_portal,
+    lettersmith.docs
+  )
+end
 
 
 local commands = {
@@ -675,6 +721,8 @@ if commands[argument] == nil then
   archive_gen("archive-en.html","eng")(en_aktuality),
   index_gen("index.html")(aktuality),
   rss_gen("feed.rss",  "Knihovna PedF UK")(aktuality),
+  menu_portal_builder(mainmenu)(paths),
+  menu_portal_builder(engmenu, "eng")(en_path),
   archive_gen("archiv.html")(aktuality)
   -- index_gen(aktuality),
   -- katalog_portal("Katalogy a databáze"),
