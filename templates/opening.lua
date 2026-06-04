@@ -17,16 +17,15 @@ local M = {}
 function M.template(doc)
   local strings = doc.strings
   local T = translator.get_translator(strings)
-  doc.contents = card {row{
-    medium(4,{
+  doc.contents = {
     h.h1{ T "Provozní doba"},
+    h.section{class="opening", 
     provozni_doba(doc.prov_doba,T)
-  }),
-    medium(8, {
-      h.h1 { T "Plánované uzavření knihovny"},
+  }, h.h1 { T "Plánované uzavření knihovny"},
+  h.section{class="closing",
       uzavreni(doc.closing, T)
-    })
-  }}
+    }
+  }
   return base_template(doc)
 end
 return M
