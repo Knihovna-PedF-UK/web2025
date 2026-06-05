@@ -43,6 +43,14 @@ local comp = transducers.comp
 local transform = lazy.transform
 local transformer = lazy.transformer
 
+local table_map = function(fn, tbl)
+  local result = {}
+  for k,v in pairs(tbl) do
+    result[k] = fn(v, k)
+  end
+  return result
+end
+
 
 
 local file_utils = require "lettersmith.file_utils"
@@ -216,6 +224,7 @@ local en_path = lettersmith.paths(html_dir_en)
 local aktuality = lettersmith.paths(html_dir .. "/aktuality")
 local en_aktuality = lettersmith.paths(html_dir .. "/en/aktuality")
 local nove_knihy = lettersmith.paths(html_dir .. "/nove_knihy")
+local zamestnanci = lettersmith.paths("data/staff")
 -- local diplomka_path = lettersmith.paths("diplomky")
 
 local make_transformer = function(fn)
@@ -471,7 +480,8 @@ local function newest_pages_builder(path, lang)
   -- convert documents to table
   local get_newest_pages = function(doc) 
     local modified = get_git_modified(doc, repo_path)
-    return {modified = modified, relative_filepath = doc.relative_filepath, title = doc.title, obsolete = doc.obsolete, date = os.date("%Y-%m-%d", modified) } end
+    return {modified = modified, relative_filepath = doc.relative_filepath, title = doc.title, obsolete = doc.obsolete, date = os.date("%Y-%m-%d", modified) } 
+  end
   local take_news = comp(take(5000), map(get_newest_pages))
   local newest_pages = function(iter, ...)
     local items = into(take_news, iter, ...)
@@ -689,6 +699,39 @@ local menu_portal_builder = function(menu, lang)
   )
 end
 
+local staff_builder = function(page, lang)
+  local function render_staff(iter, ...)
+    local doc = {relative_filepath = "/" .. page, lang = lang}
+    local get_staff = function(person) return person end
+    local take_staff = comp(take(5000), map(get_staff))
+    local staff = into(take_staff, iter, ...)
+    -- ToDo: řadit správně podle český abecedy a příjmení
+    table.sort(staff, function(a,b) return a.name < b.name end)
+    for k,v in ipairs(staff) do
+      print(v.name)
+    end
+
+
+    -- doc = apply_defaults(doc)
+    -- local staff = {}
+    doc.contents = h.article{
+      h.h1 {"Zaměstnanci"},
+      h.table{
+        h.tr{h.th {"Jméno"}, h.th {"Pozice"}, h.th {"Email"}},
+        table_map(function(s) return h.tr{h.td{ s.name }, h.td{ s.description }, h.td{ h.a {href="mailto:" .. s.mail, s.mail} }} end, staff)
+      }
+    }
+    return wrap_in_iter(doc)
+  end
+  return comp(
+    apply_template,
+    add_defaults,
+    render_staff,
+    lettersmith.docs
+  )
+
+end
+
 
 local commands = {
 }
@@ -699,6 +742,7 @@ if commands[argument] == nil then
   lettersmith.build(
   www_dir, 
   builder(paths), 
+  staff_builder("zamestnanci.html")(zamestnanci),
   html_builder()(paths),
   -- nove_knihy_builder()(nove_knihy),
   html_builder("eng")(en_path),
