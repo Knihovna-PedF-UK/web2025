@@ -5,7 +5,8 @@ Nový design webu
 ToDo:
 
 - TOC na stránkách
-- bredcrumbs na stránkách, na který se neodkazujeme z menu
++ bredcrumbs na stránkách, na který se neodkazujeme z menu
+  + je třeba dát do YAML headeru položku `parent` odkazující na název některýho souboru obsaženýho v hlavním menu
 - stránky s profilama zaměstnanců
 - kontakty na zaměstnance na stránkách
 + udělat rozcestníky z menu
