@@ -8,7 +8,7 @@ ToDo:
 - bredcrumbs na stránkách, na který se neodkazujeme z menu
 - stránky s profilama zaměstnanců
 - kontakty na zaměstnance na stránkách
-- udělat rozcestníky z menu
++ udělat rozcestníky z menu
 + mobilní zobrazení hlavní stránky
 + vyhledávání 
 
