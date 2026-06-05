@@ -61,21 +61,7 @@ local medium = building_blocks.medium
 local row = building_blocks.row
 local print_actual = building_blocks.print_actual
 
-local menuitem = function(title, href) return {title = title, href= href} end
-
--- tohle je starý menu
--- local mainmenu = {
---   -- menuitem("Domů","index.html"),
---   menuitem("Služby","sluzby.htm"),
---   menuitem("Rezervace knih", "rezervacni_boxy.html"),
---   menuitem("Publikační činnost", "biblio.html"),
---   menuitem("Časopisy", "periodika.htm"),
---   menuitem("Elektronické zdroje", "eiz.htm"),
---   menuitem("Závěrečné práce", "kvalifikacni_prace.htm"),
---   -- menuitem("Průvodce", "pruvodce.html"),
---   menuitem("Nákup publikací","objednavani_liter.htm"),
---   menuitem("O knihovně", "informace.htm"),
--- }
+local altlangs = {}
 
 local mainmenu = menulib()
   mainmenu:add("Služby","sluzby.htm")
@@ -172,7 +158,6 @@ engmenu:add("Services", "services.html")
       :addchild("Ulrichsweb", "https://cuni.primo.exlibrisgroup.com/permalink/420CKIS_INST/gf08nd/alma9925591385506986")
     :addchild("Guides")
       :addchild("Electronic Resources: A Practical Guide to the ER at CU", "https://publications.cuni.cz/handle/20.500.14178/2503")
-
       -- :addchild("Electronic information resources", "eiz.htm")
       -- :addchild("Perio", "periodika.htm")
       -- :addchild("Information on the creation of theses", "kvalifikacni_prace.htm")
@@ -185,6 +170,10 @@ engmenu:add("Services", "services.html")
         :addchild("Contacts")
           :addchild("Contact address and staff",  "about.html")
           :addchild("Opening hours", "opening.html")
+        :addchild("Library documents")
+          :addchild("Excerpt of Library functional rules", "rules.html")
+          :addchild("Pricelist of Fees and Paid Services", "prices.html")
+          :addchild("Charles University Library Rules", "https://cuni.cz/UKEN-714-version1-or_4_2025.pdf")
 
 local quicklinks = {
   {title = "Poprvé v knihovně", href = "poprve.html", img = "/img/star.svg"},
@@ -282,6 +271,11 @@ local function apply_defaults(doc)
     -- table.insert(doc.styles,"css/scale.css")
     -- table.insert(doc.styles,"css/design.css")
   -- end
+  if not doc.altlang then
+    doc.altlang = altlangs[doc.relative_filepath]
+  else
+    altlangs[doc.relative_filepath] = doc.altlang
+  end
   if doc.lang == "eng" then
     doc.menuitems = engmenu
     doc.strings = engstrings
@@ -675,7 +669,7 @@ local menu_portal_builder = function(menu, lang)
     --- takže pomocí coroutiny můžeme vygenerovat extra soubory
     return coroutine.wrap(function()
       for _, submenu in ipairs(menu) do
-        local doc = {relative_filepath = submenu.href , lang = lang}
+        local doc = {relative_filepath = "/" .. submenu.href , lang = lang}
         doc = apply_defaults(doc)
         doc.contents = {
           h.h1 {submenu.title},
