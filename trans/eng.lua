@@ -158,4 +158,5 @@ return {
 ,[ "Po, St"] = "Mon, Wed"
 ,[ "Zavřeno – rekonstrukce"] = "Closed – reconstruction"
 ,[ "hledat.html"] = "search.html"
+,[ "Místnost 006 (naproti studovně)"] = "Room 006 (opposite the study room)"
  }
