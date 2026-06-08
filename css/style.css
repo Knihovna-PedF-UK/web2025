@@ -3,6 +3,7 @@
 /* ============================================ */
 :root {
   --max-width: 1200px;
+  --paragraph-max-width: 65ch;
 
   /* Barvy */
   --color-header-bg: white;
@@ -148,6 +149,20 @@ h6 { font-size: 0.875rem; }
 
 p, ul, ol, blockquote {
   margin-bottom: var(--space-m);
+}
+
+p {
+  max-width: var(--paragraph-max-width);
+}
+
+.card {
+  border: 1px solid var(--color-divider);
+  padding: var(--space-m);
+  max-width: var(--paragraph-max-width);
+
+  p:last-child {
+    margin-bottom: 0;
+  }
 }
 
 strong { font-weight: 600; }
