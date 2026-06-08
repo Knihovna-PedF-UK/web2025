@@ -773,6 +773,13 @@ footer {
   vertical-align: bottom;
 }
 
+img[src="/img/search.svg"] {
+  height: 1em;
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+}
+
 
 /* ============================================ */
 /*   Mobilní navigace (max 900px)                */
