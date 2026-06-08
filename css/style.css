@@ -8,12 +8,15 @@
   --color-header-bg: white;
   --color-body: #222;
   --color-body-bg: #fff;
-  --color-highlight: #D32E3F;
+  /* --color-highlight: #D32E3F; */
+  --color-highlight: #dd5f5e;
   --color-topmenu-bg: black;
   --color-topmenu: white;
   --color-divider: #ccc;
   --color-menu-title-bg: var(--color-highlight);
-  --color-footer-divider: #47BCCA; 
+  /* --color-footer-divider: #47BCCA; */ 
+  /* --color-footer-divider: #f4c8c1; */ 
+  --color-footer-divider: var(--color-highlight);
 
   /* Stíny */
   --shadow-card: 0 4px 12px -2px rgba(0, 0, 0, 0.15);
