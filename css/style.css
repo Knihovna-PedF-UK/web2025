@@ -278,6 +278,12 @@ mark.secondary{
     li {
       position: relative;
     }
+
+    li:last-child .submenu,
+    li:nth-last-child(2) .submenu {
+      left: auto;
+      right: 0;
+    }
   }
 
   .submenu {
@@ -285,6 +291,7 @@ mark.secondary{
     position: absolute;
     top: 100%;
     left: 0;
+    right: auto;
     background: white;
     list-style: none;
     margin: 0;
@@ -308,6 +315,7 @@ mark.secondary{
       text-align: center;
       color: white;
     }
+
   }
 
   /* Otevření submenu na desktopu hoveru / focusu */
