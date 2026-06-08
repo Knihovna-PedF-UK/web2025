@@ -259,6 +259,18 @@ mark.secondary{
     border: 1px solid black;
 }
 
+.page-with-image {
+  display: grid;
+  /* Na desktopu vedle sebe, na mobilu pod sebou */
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-l);
+  .page-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--radius-s);
+  }
+}
+
 
 /* ============================================ */
 /*   Navigační menu                              */
@@ -847,6 +859,12 @@ img[src="/img/search.svg"] {
 
     img {
       height: 1.5rem;
+    }
+  }
+  .page-with-image {
+    grid-template-columns: 1fr;
+    .page-image img {
+      display: none;
     }
   }
 }

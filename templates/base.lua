@@ -40,6 +40,14 @@ local card = building_blocks.card
 
 local tab = building_blocks.tab
 -- local boxik = building_blocks.boxik
+--
+local page = function(content, img)
+  if img then
+    return h.div{class="page-with-image", h.div{class="page-content", content}, h.div{class="page-image", h.img{src=img, alt=""}}}
+  else
+    return h.div{class="page-no-image", content}
+  end
+end
 
 
 local function mainmenu(menuitems)
@@ -245,7 +253,7 @@ local function template(data)
       -- row{
         h.main {class="main-content", id="main-content",
         obsolete(data), -- upozornění na zastaralé stránky
-        data.contents,
+        page(data.contents, data.img),
       },
     -- },
 
