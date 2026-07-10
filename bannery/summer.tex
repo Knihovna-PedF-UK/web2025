@@ -1,0 +1,107 @@
+\documentclass{article}
+\usepackage[paperwidth=1200pt,paperheight=450pt,margin=0mm]{geometry}
+\usepackage{uklogo}
+\usepackage{pedfstyles}
+\usepackage[boxwidth=0.6\paperwidth, characters=60]{responsive}
+\usepackage{fontspec}
+\usepackage{xcolor}
+\usepackage{pict2e}
+\usepackage{graphicx}
+\usepackage{l3draw}
+\usepackage{lipsum}
+\usepackage{linebreaker}
+\usepackage{microtype}
+\usepackage[latin,czech]{babel}
+\pagecolor[HTML]{F6B2B6}
+\parindent=0pt
+
+\setmainfont{Moderat Medium}
+\begin{document}
+
+% Nazdar světe, jsme otevřeni každý den od 9:00 do 18:00. Těšíme se na vás!
+
+\makeatletter
+% \logosovacolor[40pt]
+\def\sova@faculty{FACULTY OF EDUCATION}
+\def\sova@university{Charles University}
+\def\sova@library{Library}
+\makeatother
+
+
+
+
+% testovací příkaz, který nám umožní rychle zkoušet různé barvy a umístění
+\newcommand\testik[3][000000]{
+  \pagecolor[HTML]{#2}%
+  \AddToHookNext{ shipout/background } {
+    \setgridorigin{0}{0}
+    % logo pravém horním rohu
+    \putongrid{15}{1}{
+      \uklogo[0.12\textheight]
+    }
+
+    % obrázek v kroužku, s průmměrem 8 dílků gridu
+    \putongrid{-2}{2}{\circleimage[\getgridunitx{8}]{celek}}
+
+    % nastavení původu pro grid, aby se nám lépe počítalo umístění
+    \setgridorigin{7}{3}
+    % otevírací doba
+    \putongrid{0}{0}{
+      {\Huge\textcolor[HTML]{#3}{Summer Holidays}}
+    }
+      % \bigskip
+
+    \bgroup
+    \color[HTML]{#1}
+    \putongrid{0}{2}{
+      We look forward to seeing you every Tuesday in August from 9 am to 3 pm.\\ On other days we are closed.
+      % \strut Study Rooms in Rettigová\par\bigskip
+      % \begin{tabular}{@{}ll@{}}
+      %   Mon-Thu: & 8:00 - 18:00 \\
+      %   Fri: & {8:00 - 17:00}\\
+      % \end{tabular}\par
+    }
+
+    % \putongrid{6}{2}{{
+    %   % \color{white}
+    %   \strut Study Room in Celetná\par\bigskip
+    %   \begin{tabular}{@{}ll@{}}
+    %     Mon-Thu: & 9:00 - 18:00 \\
+    %     Fri: & 9:00 - 13:00\\
+    %   \end{tabular}\par
+    % }}
+    \egroup
+
+    % zobrazit aktuální barvy
+    % \putongrid{-6}{5}{
+    %   \textcolor[HTML]{000000}{{\tiny Nadpis: #3, pozadí: #2}}
+    % }
+
+    % \putongrid{9}{2}{\parbox{\getgridunitx{3}}{\selectlanguage{latin}\tiny\lipsum[1]}}
+
+  }
+  \null\newpage%
+}
+
+%\ExplSyntaxOff
+
+
+\ExplSyntaxOn
+
+% testovací barvy, abychom viděli, jak vypadají a jak vypadají na různých pozadích
+\clist_set:Nn \l_tmpa_tl {F4C8C1,A1662C,A7D5C2,EC662C,47BCCA}
+
+
+\clist_map_inline:Nn \l_tmpa_tl {
+  \clist_map_inline:Nn \l_tmpa_tl {
+    \str_if_eq:nnTF {##1} {#1} {}{
+      \testik{#1}{##1}
+      \testik[ffffff]{#1}{##1}
+    }
+  }
+}
+\ExplSyntaxOff
+a co je tady?
+
+
+\end{document}
