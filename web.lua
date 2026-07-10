@@ -184,7 +184,7 @@ engmenu:add("Services", "services.html")
           :addchild("Charles University Library Rules", "https://cuni.cz/UKEN-714-version1-or_4_2025.pdf")
 
 local quicklinks = {
-  {title = "Poprvé v knihovně", href = "poprve.html", img = "/img/star.svg"},
+  -- {title = "Poprvé v knihovně", href = "poprve.html", img = "/img/star.svg"},
   {title = "Registrace do knihovny", href = "https://knihovna.cuni.cz/e-prihlaska/", img = "/img/pencil.svg"},
   {title = "Vyhledávač UKAŽ", href = "https://ukaz.cuni.cz/", img = "/img/binoculars.svg"},
   {title = "Návrh knih k nákupu", href="objednavani_liter.htm", img = "/img/shopping-cart.svg"},
