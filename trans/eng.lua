@@ -155,6 +155,7 @@ return {
 ,["en"] = "cs"
 ,[ "Přejít k obsahu"] = "Skip to content"
 ,[ "img/oteviraci_doba-01.jpg"] = "img/opening_hours-01.jpg"
+,[ "img/leto-01.jpg"] = "img/summer-01.jpg"
 ,[ "Po, St"] = "Mon, Wed"
 ,[ "Zavřeno – rekonstrukce"] = "Closed – reconstruction"
 ,[ "hledat.html"] = "search.html"
