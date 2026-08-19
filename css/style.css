@@ -178,6 +178,10 @@ address {
   font-style: normal;
 }
 
+address ul li {
+  list-style: none;
+}
+
 
 /* ============================================ */
 /*   Layout                                      */
@@ -272,6 +276,14 @@ mark.secondary{
     max-width: 100%;
     height: auto;
     border-radius: var(--radius-s);
+  }
+}
+
+@media (min-width: 601px) {
+  .row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
   }
 }
 
