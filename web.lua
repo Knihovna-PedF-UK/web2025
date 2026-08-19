@@ -185,7 +185,7 @@ local quicklinks = {
   -- {title = "Poprvé v knihovně", href = "poprve.html", img = "/img/star.svg"},
   {title = "Registrace do knihovny", href = "https://knihovna.cuni.cz/e-prihlaska/", img = "/img/pencil.svg"},
   {title = "Vyhledávač UKAŽ", href = "https://ukaz.cuni.cz/", img = "/img/binoculars.svg"},
-  {title = "Návrh knih k nákupu", href="objednavani_liter.htm", img = "/img/shopping-cart.svg"},
+  {title = "Navrhuji koupit  do fondu", href="objednavani_liter.htm", img = "/img/shopping-cart.svg"},
   {title = "Elektronické zdroje", href = "eiz.htm", img = "/img/road-horizon.svg"}
 }
 
