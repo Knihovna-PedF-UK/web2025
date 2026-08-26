@@ -156,7 +156,7 @@ local function template(doc )
         provozni_doba( doc.prov_doba, T),
         div{class="planned_closing",  a {href=T "provozni_doba.htm", T "Plánované uzavření knihovny"}}
       },
-      h.section{ h.b {T "Nejnovější aktualizace"}, print_updates(T,doc.updates), "/",  h.a{href= T "aktualizace.html",  T "Starší"}},
+      -- h.section{ h.b {T "Nejnovější aktualizace"}, print_updates(T,doc.updates), "/",  h.a{href= T "aktualizace.html",  T "Starší"}},
     },
 
 -- h.div{class="row", h.div {class="col-sm-12 col-md-10 col-md-offset-1",

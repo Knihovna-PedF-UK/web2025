@@ -103,12 +103,12 @@ body {
 }
 
 a {
-  text-decoration: none;
-  color: #0055cc;
+  text-decoration: underline;
+  color: #1d3e86;
 }
 a:hover,
 a:focus {
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 img,
@@ -501,7 +501,7 @@ mark.secondary{
     border-radius: var(--radius-s);
     margin: var(--space-s);
     font-weight: 500;
-    text-decoration: none;
+    /* text-decoration: none; */
     color: inherit;
     transition: background-color 0.2s ease;
     vertical-align: middle;
@@ -658,6 +658,7 @@ mark.secondary{
 
       caption {
         width: fit-content;
+        text-align: left;
       }
       th {
         font-weight: normal;
