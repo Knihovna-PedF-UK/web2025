@@ -153,7 +153,7 @@ local function template(doc )
 
           h.img {
             class = "carousel-slide",
-            src = T "img/studovny-zari-25.jpg",
+            src = T "img/studovny-zari-01.jpg",
             alt = T "Studovny v Rettigové jsou až do 11. září stále uzavřeny"
           },
 
