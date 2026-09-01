@@ -137,7 +137,29 @@ local function template(doc )
     h.div {
 
       -- h.section {class="rollup", h.img {src =  T "img/oteviraci_doba-01.jpg", alt= T "Letáček s otevírací dobou knihovny, v textové formě ho najde dále na stránce"}},
-      h.section {class="rollup", h.img {src =  T "img/celetna-zari-01.jpg", alt= T "Letáček s otevírací dobou knihovny, v textové formě ho najde dále na stránce"}},
+      -- h.section {class="rollup", h.img {src =  T "img/celetna-zari-01.jpg", alt= T "Letáček s otevírací dobou knihovny, v textové formě ho najde dále na stránce"}},
+      h.section {
+        class = "carousel",
+        ["aria-label"] = T "Aktuality knihovny",
+
+        h.div {
+          class = "carousel-slides",
+
+          h.img {
+            class = "carousel-slide is-active",
+              src = T "img/celetna-zari-01.jpg",
+              alt = T "Letáček s otevírací dobou knihovny, v textové formě ho najde dále na stránce"
+          },
+
+          h.img {
+            class = "carousel-slide",
+            src = T "img/studovny-zari-25.jpg",
+            alt = T "Studovny v Rettigové jsou až do 11. září stále uzavřeny"
+          },
+
+        }
+      },
+
       h.aside {class="quick-links", quick_links(doc, T)},
 
       -- hledání musíme pořešit
@@ -166,6 +188,7 @@ local function template(doc )
 -- h.script{type="text/javascript", 'var nav = responsiveNav(".nav-collapse");'}
 h.script{src="js/opening.js", type="text/javascript", defer="defer"},
 h.script{ "window.onload = function(){ opening('".. T "/js/calendar.js" .."', '".. T("Dnes má knihovna zavřeno: ") .. "')};"},
+h.script{src="js/carousel.js", type="text/javascript", defer="defer"},
   -- Hledání v UKAŽ
   -- [[<script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.5.0/min/tiny-slider.js"></script>
   -- <!--[if (lt IE 9)]><script src="https://cdnjs.cloudflare.com/ajax/libs/tiny-slider/2.5.0/min/tiny-slider.helper.ie8.js"></script><![endif]-->

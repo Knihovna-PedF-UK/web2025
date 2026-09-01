@@ -543,6 +543,96 @@ mark.secondary{
   }
 }
 
+.carousel {
+  position: relative;
+}
+
+.carousel-slides {
+  position: relative;
+  overflow: hidden;
+}
+
+.carousel-slide {
+  display: block;
+  width: 100%;
+  height: auto;
+
+  position: absolute;
+  inset: 0;
+
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  pointer-events: none;
+}
+
+.carousel-slide.is-active {
+  position: relative;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.carousel-prev,
+.carousel-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1;
+
+  width: 2.5rem;
+  height: 2.5rem;
+  border: 0;
+  border-radius: 50%;
+
+  background: rgb(0 0 0 / 50%);
+  color: white;
+  font-size: 2rem;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+.carousel-prev {
+  left: 1rem;
+}
+
+.carousel-next {
+  right: 1rem;
+}
+
+.carousel-prev:hover,
+.carousel-next:hover {
+  background: rgb(0 0 0 / 70%);
+}
+
+.carousel-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}
+
+.carousel-indicators button {
+  width: 0.7rem;
+  height: 0.7rem;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: currentColor;
+  opacity: 0.35;
+  cursor: pointer;
+}
+
+.carousel-indicators button.is-active {
+  opacity: 1;
+}
+
+
+/* Odstranění animace pro uživatele, kteří preferují sníženou pohyblivost: */
+@media (prefers-reduced-motion: reduce) {
+  .carousel-slide {
+    transition: none;
+  }
+}
 
 /* ============================================ */
 /*   Aktuality (.news)                           */
