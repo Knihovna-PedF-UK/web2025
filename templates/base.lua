@@ -85,6 +85,35 @@ local function boxik(title, href)
   return medium(2, h.a {href=href, title})
 end
 
+-- local version of crc32, because lua doesn't have it built-in and I don't want to use external libraries
+local function crc32(str)
+  local crc = 0xFFFFFFFF
+  for i = 1, #str do
+    local byte = str:byte(i)
+    crc = crc ~ byte
+    for j = 1, 8 do
+      if crc & 1 == 1 then
+        crc = (crc >> 1) ~ 0xEDB88320
+      else
+        crc = crc >> 1
+      end
+    end
+  end
+  return string.format("%08X", ~crc)
+end
+
+local hash_cache = {}
+
+local function hash(filename)
+  if hash_cache[filename] then
+    return hash_cache[filename]
+  end
+  local f = io.open(filename, "rb")
+  local contents = f:read("*a")
+  f:close()
+  return crc32(contents)
+end
+
 local function metaifexitst(key, value, name)
   local property = name and "name" or "property"
   if value then return h.meta{[property] = key, content=value } end
@@ -192,7 +221,8 @@ local function template(data)
       -- h.link{rel="stylesheet", type="text/css", href="https://gitcdn.link/repo/Chalarangelo/mini.css/master/dist/mini-default.min.css"},
       -- '<link rel="stylesheet" href="https://code.cdn.mozilla.net/fonts/fira.css">',
      h.link {rel="alternate",  type="application/rss+xml", href= T "feed.rss"},
-      h.link{rel="stylesheet", type="text/css", href="/css/style.css"},
+    -- trik s hashem souboru, aby se prohlížeč nenačítal starý CSS soubor z cache
+      h.link{rel="stylesheet", type="text/css", href="/css/style.css?v=" .. hash("css/style.css")},
       -- h.link{rel="stylesheet", type="text/css", href="/media.css"},
       custom_styles(data),
       [[
