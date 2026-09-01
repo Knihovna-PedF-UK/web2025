@@ -33,15 +33,15 @@
   \AddToHookNext{ shipout/background } {
     \setgridorigin{0}{0}
     % logo pravém horním rohu
-    \putongrid{15}{1}{
+    \putongrid{1}{1}{
       \uklogo[0.12\textheight]
     }
 
     % obrázek v kroužku, s průmměrem 8 dílků gridu
-    \putongrid{-2}{2}{\circleimage[\getgridunitx{8}]{celek}}
+    \putongrid{15}{2}{\circleimage[\getgridunitx{8}]{celek}}
 
     % nastavení původu pro grid, aby se nám lépe počítalo umístění
-    \setgridorigin{7}{3}
+    \setgridorigin{3}{4}
     % otevírací doba
     \putongrid{0}{0}{
       {\huge\textcolor[HTML]{#3}{Studovny v Rettigové}}
