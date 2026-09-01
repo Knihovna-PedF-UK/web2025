@@ -1,7 +1,9 @@
 #!/bin/bash
+WWW_DIR="${WWW_DIR:-www}"
+
 lua web.lua
-cp -r css/ www/
-cp -r img/ www/
-cp -r js/ www/
+cp -r css/ "$WWW_DIR/"
+cp -r img/ "$WWW_DIR/"
+cp -r js/ "$WWW_DIR/"
 mkdir -p fonts
-cp -r fonts/ www/
+cp -r fonts/ "$WWW_DIR/"
