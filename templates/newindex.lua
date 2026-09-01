@@ -137,7 +137,7 @@ local function template(doc )
     h.div {
 
       -- h.section {class="rollup", h.img {src =  T "img/oteviraci_doba-01.jpg", alt= T "Letáček s otevírací dobou knihovny, v textové formě ho najde dále na stránce"}},
-      h.section {class="rollup", h.img {src =  T "img/leto-01.jpg", alt= T "Letáček s otevírací dobou knihovny, v textové formě ho najde dále na stránce"}},
+      h.section {class="rollup", h.img {src =  T "img/celetna-zari-01.jpg", alt= T "Letáček s otevírací dobou knihovny, v textové formě ho najde dále na stránce"}},
       h.aside {class="quick-links", quick_links(doc, T)},
 
       -- hledání musíme pořešit
