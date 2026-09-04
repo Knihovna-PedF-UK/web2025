@@ -655,7 +655,7 @@ local function print_submenu(submenu)
   local current_list = {}
   local function create_list(tbl)
     if #tbl > 0 then
-      table.insert(elements, h.ul(tbl))
+      table.insert(elements, h.section{class="link-grid", h.ul(tbl)})
     end
   end
   for _, item in ipairs(submenu) do
