@@ -273,7 +273,7 @@ mark.secondary{
   grid-template-columns: 1fr 1fr;
   gap: var(--space-l);
   .page-image img {
-    max-width: 100%;
+    width: 100%;
     height: auto;
     border-radius: var(--radius-s);
   }
