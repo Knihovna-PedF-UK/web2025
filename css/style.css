@@ -427,6 +427,8 @@ mark.secondary{
   outline-offset: 3px;
 }
 
+.link-grid + p {margin-top: 1rem;}
+
 
 /* ============================================ */
 /*   Top menu                                    */
