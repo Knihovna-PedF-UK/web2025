@@ -257,7 +257,7 @@ local nk_defaults = make_transformer(function(doc)
 end)
 
 local function apply_defaults(doc)
-  print("Zpracovavam", doc.relative_filepath)
+  print("Nastavuji výchozí hodnoty pro soubor:", doc.relative_filepath)
   doc.template = doc.template or "blog.tpl"
   -- don't use old styles in the documents
   doc.styles = doc.styles or {}
