@@ -162,4 +162,5 @@ return {
 ,[ "Zavřeno – rekonstrukce"] = "Closed – reconstruction"
 ,[ "hledat.html"] = "search.html"
 ,[ "Místnost 006 (naproti studovně)"] = "Room 006 (opposite the study room)"
+,[ "img/studovny-zari-01.jpg" ] = "img/study-rooms-september-01.jpg"
  }
