@@ -147,15 +147,15 @@ local function template(doc )
 
           h.img {
             class = "carousel-slide is-active",
-              src = T "img/celetna-zari-01.jpg",
+              src = T "img/oteviraci_doba-01.jpg",
               alt = T "Letáček s otevírací dobou knihovny, v textové formě ho najde dále na stránce"
           },
 
-          h.img {
-            class = "carousel-slide",
-            src = T "img/studovny-zari-01.jpg",
-            alt = T "Studovny v Rettigové jsou až do 2. října stále uzavřeny"
-          },
+          -- h.img {
+          --   class = "carousel-slide",
+          --   src = T "img/studovny-zari-01.jpg",
+          --   alt = T "Studovny v Rettigové jsou až do 2. října stále uzavřeny"
+          -- },
 
         }
       },
