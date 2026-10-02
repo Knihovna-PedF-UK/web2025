@@ -163,4 +163,6 @@ return {
 ,[ "hledat.html"] = "search.html"
 ,[ "Místnost 006 (naproti studovně)"] = "Room 006 (opposite the study room)"
 ,[ "img/studovny-zari-01.jpg" ] = "img/study-rooms-september-01.jpg"
+,[ "Velká studovna v&nbsp;Rettigové"] = "Big Study Room in&nbsp;Rettigová"
+,[ "Malá studovna v&nbsp;Rettigové"] = "Small Study Room in&nbsp;Rettigová"
  }
