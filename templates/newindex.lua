@@ -170,7 +170,7 @@ local function template(doc )
         h.h2{class="news-head", T "Aktuality" },
         close_element,
         print_actual_index(doc.items, T), 
-        div {class="archive-link", T ' (<a href="archiv.html">Další aktuality zde</a>)' 
+        div {class="archive-link rebuild", T ' (<a href="archiv.html">Další aktuality zde</a>)' 
       },
       },
       h.section{class="opening",
