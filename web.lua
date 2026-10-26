@@ -552,7 +552,7 @@ local get_news_item = function(doc)
     date_table = {year = tonumber(year), month = tonumber(month), day=tonumber(day)}
   end)
   date = os.time(date_table)
-  date = os.date("%d.%m.%Y", date)
+  date = os.date("%d. %m. %Y", date)
   return {akt_title = title, contents = contents, date = date, img = img, alt = alt}
 end
 
